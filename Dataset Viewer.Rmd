@@ -1,0 +1,11 @@
+---
+title: "Dataset viewer"
+output: html_notebook
+---
+
+```{r}
+Beaver_abundance_and_distribution <- read.csv("Elk_Island_NP_Freshwater_Beaver_Lodge_Occurrence_1959-2015_data.csv")
+Mammal_lifehistories_v2 <- read.csv("Mammal_lifehistories_v2.csv")
+Predator_and_prey_body_sizes_in_marine_food_webs_vsn4 <- read.csv("Predator_and_prey_body_sizes_in_marine_food_webs_vsn4.csv")
+```
+
