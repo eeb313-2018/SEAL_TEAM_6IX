@@ -1,0 +1,751 @@
+Seq,AOU,common_name,ORDER,Family,Genus,Species
+6,1770,Black-bellied Whistling-Duck,Anseriformes,Anatidae,Dendrocygna,autumnalis
+7,1780,Fulvous Whistling-Duck,Anseriformes,Anatidae,Dendrocygna,bicolor
+8,1760,Emperor Goose,Anseriformes,Anatidae,Anser,canagicus
+9,1690,Snow Goose,Anseriformes,Anatidae,Anser,caerulescens
+10,1691,(Blue Goose) Snow Goose,Anseriformes,Anatidae,Chen,caerulescens (blue form)
+11,1700,Ross's Goose,Anseriformes,Anatidae,Anser,rossii
+13,1710,Greater White-fronted Goose,Anseriformes,Anatidae,Anser,albifrons
+18,1730,Brant,Anseriformes,Anatidae,Branta,bernicla
+19,1740,(Black Brant) Brant,Anseriformes,Anatidae,Branta,bernicla nigricans
+21,1725,Cackling Goose,Anseriformes,Anatidae,Branta,hutchinsii
+22,1720,Canada Goose,Anseriformes,Anatidae,Branta,canadensis
+23,1782,Mute Swan,Anseriformes,Anatidae,Cygnus,olor
+24,1810,Trumpeter Swan,Anseriformes,Anatidae,Cygnus,buccinator
+25,1800,Tundra Swan,Anseriformes,Anatidae,Cygnus,columbianus
+28,10210,Muscovy Duck,Anseriformes,Anatidae,Cairina,moschata
+29,1440,Wood Duck,Anseriformes,Anatidae,Aix,sponsa
+32,1400,Blue-winged Teal,Anseriformes,Anatidae,Spatula,discors
+33,1410,Cinnamon Teal,Anseriformes,Anatidae,Spatula,cyanoptera
+34,1420,Northern Shoveler,Anseriformes,Anatidae,Spatula,clypeata
+35,1350,Gadwall,Anseriformes,Anatidae,Mareca,strepera
+37,1360,Eurasian Wigeon,Anseriformes,Anatidae,Mareca,penelope
+38,1370,American Wigeon,Anseriformes,Anatidae,Mareca,americana
+40,1320,Mallard,Anseriformes,Anatidae,Anas,platyrhynchos
+41,1331,(Mexican Duck) Mallard,Anseriformes,Anatidae,Anas,platyrhynchos diazi
+42,1330,American Black Duck,Anseriformes,Anatidae,Anas,rubripes
+43,1340,Mottled Duck,Anseriformes,Anatidae,Anas,fulvigula
+44,1326,hybrid Mallard x Black Duck or Mottled Duck,Anseriformes,Anatidae,Anas,platyrhynchos x rubripes or fulvigula
+46,1430,Northern Pintail,Anseriformes,Anatidae,Anas,acuta
+47,1390,Green-winged Teal,Anseriformes,Anatidae,Anas,crecca
+48,1470,Canvasback,Anseriformes,Anatidae,Aythya,valisineria
+49,1460,Redhead,Anseriformes,Anatidae,Aythya,americana
+51,1500,Ring-necked Duck,Anseriformes,Anatidae,Aythya,collaris
+52,1491,Tufted Duck,Anseriformes,Anatidae,Aythya,fuligula
+53,1480,Greater Scaup,Anseriformes,Anatidae,Aythya,marila
+54,1490,Lesser Scaup,Anseriformes,Anatidae,Aythya,affinis
+55,1489,unid. Greater Scaup / Lesser Scaup,Anseriformes,Anatidae,Aythya,marila / affinis
+58,1620,King Eider,Anseriformes,Anatidae,Somateria,spectabilis
+59,1590,Common Eider,Anseriformes,Anatidae,Somateria,mollissima
+60,1550,Harlequin Duck,Anseriformes,Anatidae,Histrionicus,histrionicus
+61,1660,Surf Scoter,Anseriformes,Anatidae,Melanitta,perspicillata
+62,1650,White-winged Scoter,Anseriformes,Anatidae,Melanitta,fusca
+64,1630,Black Scoter,Anseriformes,Anatidae,Melanitta,americana
+65,1657,unid. scoter,Anseriformes,Anatidae,Melanitta,perspicillata / fusca / americana
+66,1540,Long-tailed Duck,Anseriformes,Anatidae,Clangula,hyemalis
+67,1530,Bufflehead,Anseriformes,Anatidae,Bucephala,albeola
+68,1510,Common Goldeneye,Anseriformes,Anatidae,Bucephala,clangula
+69,1520,Barrow's Goldeneye,Anseriformes,Anatidae,Bucephala,islandica
+70,1512,unid. Common Goldeneye / Barrow's Goldeneye,Anseriformes,Anatidae,Bucephala,clangula / islandica
+72,1310,Hooded Merganser,Anseriformes,Anatidae,Lophodytes,cucullatus
+73,1290,Common Merganser,Anseriformes,Anatidae,Mergus,merganser
+74,1300,Red-breasted Merganser,Anseriformes,Anatidae,Mergus,serrator
+76,1670,Ruddy Duck,Anseriformes,Anatidae,Oxyura,jamaicensis
+77,3110,Plain Chachalaca,Galliformes,Cracidae,Ortalis,vetula
+85,2920,Mountain Quail,Galliformes,Odontophoridae,Oreortyx,pictus
+90,2890,Northern Bobwhite,Galliformes,Odontophoridae,Colinus,virginianus
+92,2930,Scaled Quail,Galliformes,Odontophoridae,Callipepla,squamata
+94,2940,California Quail,Galliformes,Odontophoridae,Callipepla,californica
+95,2950,Gambel's Quail,Galliformes,Odontophoridae,Callipepla,gambelii
+96,2960,Montezuma Quail,Galliformes,Odontophoridae,Cyrtonyx,montezumae
+100,2882,Chukar,Galliformes,Phasianidae,Alectoris,chukar
+103,2881,Gray Partridge,Galliformes,Phasianidae,Perdix,perdix
+104,3091,Ring-necked Pheasant,Galliformes,Phasianidae,Phasianus,colchicus
+105,3095,Indian Peafowl,Galliformes,Phasianidae,Pavo,cristatus
+106,3000,Ruffed Grouse,Galliformes,Phasianidae,Bonasa,umbellus
+107,3090,Greater Sage-Grouse,Galliformes,Phasianidae,Centrocercus,urophasianus
+108,3089,Gunnison Sage-Grouse,Galliformes,Phasianidae,Centrocercus,minimus
+109,2980,Spruce Grouse,Galliformes,Phasianidae,Falcipennis,canadensis
+110,3010,Willow Ptarmigan,Galliformes,Phasianidae,Lagopus,lagopus
+111,3020,Rock Ptarmigan,Galliformes,Phasianidae,Lagopus,muta
+112,3040,White-tailed Ptarmigan,Galliformes,Phasianidae,Lagopus,leucura
+113,2970,Dusky Grouse,Galliformes,Phasianidae,Dendragapus,obscurus
+114,2971,Sooty Grouse,Galliformes,Phasianidae,Dendragapus,fuliginosus
+115,2973,unid. Dusky Grouse / Sooty Grouse,Galliformes,Phasianidae,Dendragapus,obscurus / fuliginosus
+116,3080,Sharp-tailed Grouse,Galliformes,Phasianidae,Tympanuchus,phasianellus
+117,3050,Greater Prairie-Chicken,Galliformes,Phasianidae,Tympanuchus,cupido
+118,3070,Lesser Prairie-Chicken,Galliformes,Phasianidae,Tympanuchus,pallidicinctus
+119,3100,Wild Turkey,Galliformes,Phasianidae,Meleagris,gallopavo
+122,50,Least Grebe,Podicipediformes,Podicipedidae,Tachybaptus,dominicus
+123,60,Pied-billed Grebe,Podicipediformes,Podicipedidae,Podilymbus,podiceps
+124,30,Horned Grebe,Podicipediformes,Podicipedidae,Podiceps,auritus
+125,20,Red-necked Grebe,Podicipediformes,Podicipedidae,Podiceps,grisegena
+126,40,Eared Grebe,Podicipediformes,Podicipedidae,Podiceps,nigricollis
+127,10,Western Grebe,Podicipediformes,Podicipedidae,Aechmophorus,occidentalis
+128,11,Clark's Grebe,Podicipediformes,Podicipedidae,Aechmophorus,clarkii
+129,12,unid. Western Grebe / Clark's Grebe,Podicipediformes,Podicipedidae,Aechmophorus,occidentalis / clarkii
+130,3131,Rock Pigeon,Columbiformes,Columbidae,Columba,livia
+134,3140,White-crowned Pigeon,Columbiformes,Columbidae,Patagioenas,leucocephala
+135,3130,Red-billed Pigeon,Columbiformes,Columbidae,Patagioenas,flavirostris
+136,3120,Band-tailed Pigeon,Columbiformes,Columbidae,Patagioenas,fasciata
+139,3152,African Collared-Dove (a.k.a. Ringed Turtle-Dove),Columbiformes,Columbidae,Streptopelia,roseogrisea
+141,22860,Eurasian Collared-Dove,Columbiformes,Columbidae,Streptopelia,decaocto
+142,3151,Spotted Dove,Columbiformes,Columbidae,Streptopelia,chinensis
+143,3210,Inca Dove,Columbiformes,Columbidae,Columbina,inca
+144,3200,Common Ground-Dove,Columbiformes,Columbidae,Columbina,passerina
+146,3201,Ruddy Ground-Dove,Columbiformes,Columbidae,Columbina,talpacoti
+151,3180,White-tipped Dove,Columbiformes,Columbidae,Leptotila,verreauxi
+157,3190,White-winged Dove,Columbiformes,Columbidae,Zenaida,asiatica
+159,3160,Mourning Dove,Columbiformes,Columbidae,Zenaida,macroura
+165,3870,Yellow-billed Cuckoo,Cuculiformes,Cuculidae,Coccyzus,americanus
+166,3860,Mangrove Cuckoo,Cuculiformes,Cuculidae,Coccyzus,minor
+167,3880,Black-billed Cuckoo,Cuculiformes,Cuculidae,Coccyzus,erythropthalmus
+168,3875,unid. Yellow-billed Cuckoo / Black-billed Cuckoo,Cuculiformes,Cuculidae,Coccyzus,americanus / erythropthalmus
+173,3850,Greater Roadrunner,Cuculiformes,Cuculidae,Geococcyx,californianus
+174,3830,Smooth-billed Ani,Cuculiformes,Cuculidae,Crotophaga,ani
+175,3840,Groove-billed Ani,Cuculiformes,Cuculidae,Crotophaga,sulcirostris
+177,4210,Lesser Nighthawk,Caprimulgiformes,Caprimulgidae,Chordeiles,acutipennis
+178,4200,Common Nighthawk,Caprimulgiformes,Caprimulgidae,Chordeiles,minor
+179,4201,Antillean Nighthawk,Caprimulgiformes,Caprimulgidae,Chordeiles,gundlachii
+180,4205,unid. Lesser Nighthawk / Common Nighthawk,Caprimulgiformes,Caprimulgidae,Chordeiles,acutipennis / minor
+181,4206,unid. Common Nighthawk / Antillean Nighthawk,Caprimulgiformes,Caprimulgidae,Chordeiles,minor / gundlachii
+182,4190,Common Pauraque,Caprimulgiformes,Caprimulgidae,Nyctidromus,albicollis
+183,4180,Common Poorwill,Caprimulgiformes,Caprimulgidae,Phalaenoptilus,nuttallii
+186,4160,Chuck-will's-widow,Caprimulgiformes,Caprimulgidae,Antrostomus,carolinensis
+190,4171,Eastern Whip-poor-will,Caprimulgiformes,Caprimulgidae,Antrostomus,vociferus
+191,4172,Mexican Whip-poor-will,Caprimulgiformes,Caprimulgidae,Antrostomus,arizonae
+196,4220,Black Swift,Apodiformes,Apodidae,Cypseloides,niger
+201,4230,Chimney Swift,Apodiformes,Apodidae,Chaetura,pelagica
+202,4240,Vaux's Swift,Apodiformes,Apodidae,Chaetura,vauxi
+206,4250,White-throated Swift,Apodiformes,Apodidae,Aeronautes,saxatalis
+219,4260,Rivoli's Hummingbird,Apodiformes,Trochilidae,Eugenes,fulgens
+224,4270,Blue-throated Hummingbird,Apodiformes,Trochilidae,Lampornis,clemenciae
+230,4370,Lucifer Hummingbird,Apodiformes,Trochilidae,Calothorax,lucifer
+232,4280,Ruby-throated Hummingbird,Apodiformes,Trochilidae,Archilochus,colubris
+233,4290,Black-chinned Hummingbird,Apodiformes,Trochilidae,Archilochus,alexandri
+234,4295,unid. Ruby-throated / Black-chinned Hummingbird,Apodiformes,Trochilidae,Archilochus,colubris / alexandri
+235,4310,Anna's Hummingbird,Apodiformes,Trochilidae,Calypte,anna
+236,4300,Costa's Hummingbird,Apodiformes,Trochilidae,Calypte,costae
+239,4320,Broad-tailed Hummingbird,Apodiformes,Trochilidae,Selasphorus,platycercus
+240,4330,Rufous Hummingbird,Apodiformes,Trochilidae,Selasphorus,rufus
+241,4340,Allen's Hummingbird,Apodiformes,Trochilidae,Selasphorus,sasin
+242,4335,unid. Rufous Hummingbird / Allen's Hummingbird,Apodiformes,Trochilidae,Selasphorus,rufus / sasin
+243,4402,unid. hummingbird,Apodiformes,Trochilidae,Trochilid,sp.
+244,4360,Calliope Hummingbird,Apodiformes,Trochilidae,Selasphorus,calliope
+249,4410,Broad-billed Hummingbird,Apodiformes,Trochilidae,Cynanthus,latirostris
+265,4390,Buff-bellied Hummingbird,Apodiformes,Trochilidae,Amazilia,yucatanensis
+267,4391,Violet-crowned Hummingbird,Apodiformes,Trochilidae,Amazilia,violiceps
+272,2150,Yellow Rail,Gruiformes,Rallidae,Coturnicops,noveboracensis
+275,2160,Black Rail,Gruiformes,Rallidae,Laterallus,jamaicensis
+277,2111,Ridgway's Rail,Gruiformes,Rallidae,Rallus,obsoletus
+278,2110,Clapper Rail,Gruiformes,Rallidae,Rallus,crepitans
+280,2080,King Rail,Gruiformes,Rallidae,Rallus,elegans
+281,2090,unid. Clapper / King Rail,Gruiformes,Rallidae,Rallus,crepitans / elegans
+282,2120,Virginia Rail,Gruiformes,Rallidae,Rallus,limicola
+286,2140,Sora,Gruiformes,Rallidae,Porzana,carolina
+290,2180,Purple Gallinule,Gruiformes,Rallidae,Porphyrio,martinicus
+291,21930,Purple Swamphen,Gruiformes,Rallidae,Porphyrio,porphyrio
+292,2190,Common Gallinule,Gruiformes,Rallidae,Gallinula,galeata
+295,2210,American Coot,Gruiformes,Rallidae,Fulica,americana
+297,2070,Limpkin,Gruiformes,Aramidae,Aramus,guarauna
+298,2060,Sandhill Crane,Gruiformes,Gruidae,Antigone,canadensis
+300,2040,Whooping Crane,Gruiformes,Gruidae,Grus,americana
+303,2260,Black-necked Stilt,Charadriiformes,Recurvirostridae,Himantopus,mexicanus
+304,2250,American Avocet,Charadriiformes,Recurvirostridae,Recurvirostra,americana
+306,2860,American Oystercatcher,Charadriiformes,Haematopodidae,Haematopus,palliatus
+307,2870,Black Oystercatcher,Charadriiformes,Haematopodidae,Haematopus,bachmani
+310,2700,Black-bellied Plover,Charadriiformes,Charadriidae,Pluvialis,squatarola
+312,2720,American Golden-Plover,Charadriiformes,Charadriidae,Pluvialis,dominica
+313,2721,Pacific Golden-Plover,Charadriiformes,Charadriidae,Pluvialis,fulva
+317,2780,Snowy Plover,Charadriiformes,Charadriidae,Charadrius,nivosus
+318,2800,Wilson's Plover,Charadriiformes,Charadriidae,Charadrius,wilsonia
+319,2750,Common Ringed Plover,Charadriiformes,Charadriidae,Charadrius,hiaticula
+320,2740,Semipalmated Plover,Charadriiformes,Charadriidae,Charadrius,semipalmatus
+321,2770,Piping Plover,Charadriiformes,Charadriidae,Charadrius,melodus
+323,2730,Killdeer,Charadriiformes,Charadriidae,Charadrius,vociferus
+324,2810,Mountain Plover,Charadriiformes,Charadriidae,Charadrius,montanus
+327,2610,Upland Sandpiper,Charadriiformes,Scolopacidae,Bartramia,longicauda
+328,2680,Bristle-thighed Curlew,Charadriiformes,Scolopacidae,Numenius,tahitiensis
+329,2650,Whimbrel,Charadriiformes,Scolopacidae,Numenius,phaeopus
+331,2640,Long-billed Curlew,Charadriiformes,Scolopacidae,Numenius,americanus
+335,2500,Bar-tailed Godwit,Charadriiformes,Scolopacidae,Limosa,lapponica
+337,2510,Hudsonian Godwit,Charadriiformes,Scolopacidae,Limosa,haemastica
+338,2490,Marbled Godwit,Charadriiformes,Scolopacidae,Limosa,fedoa
+339,2830,Ruddy Turnstone,Charadriiformes,Scolopacidae,Arenaria,interpres
+340,2840,Black Turnstone,Charadriiformes,Scolopacidae,Arenaria,melanocephala
+342,2340,Red Knot,Charadriiformes,Scolopacidae,Calidris,canutus
+343,2820,Surfbird,Charadriiformes,Scolopacidae,Calidris,virgata
+346,2380,Sharp-tailed Sandpiper,Charadriiformes,Scolopacidae,Calidris,acuminata
+347,2330,Stilt Sandpiper,Charadriiformes,Scolopacidae,Calidris,himantopus
+352,2422,Red-necked Stint,Charadriiformes,Scolopacidae,Calidris,ruficollis
+353,2480,Sanderling,Charadriiformes,Scolopacidae,Calidris,alba
+354,2430,Dunlin,Charadriiformes,Scolopacidae,Calidris,alpina
+355,2356,Rock Sandpiper,Charadriiformes,Scolopacidae,Calidris,ptilocnemis
+356,2350,Purple Sandpiper,Charadriiformes,Scolopacidae,Calidris,maritima
+357,2410,Baird's Sandpiper,Charadriiformes,Scolopacidae,Calidris,bairdii
+359,2420,Least Sandpiper,Charadriiformes,Scolopacidae,Calidris,minutilla
+360,2400,White-rumped Sandpiper,Charadriiformes,Scolopacidae,Calidris,fuscicollis
+361,2620,Buff-breasted Sandpiper,Charadriiformes,Scolopacidae,Calidris,subruficollis
+362,2390,Pectoral Sandpiper,Charadriiformes,Scolopacidae,Calidris,melanotos
+363,2460,Semipalmated Sandpiper,Charadriiformes,Scolopacidae,Calidris,pusilla
+364,2470,Western Sandpiper,Charadriiformes,Scolopacidae,Calidris,mauri
+365,2429,unid. small ''peep'' sandpiper,Charadriiformes,Scolopacidae,Calidris,sp.
+366,2310,Short-billed Dowitcher,Charadriiformes,Scolopacidae,Limnodromus,griseus
+367,2320,Long-billed Dowitcher,Charadriiformes,Scolopacidae,Limnodromus,scolopaceus
+368,2327,unid. Short-billed / Long-billed Dowitcher,Charadriiformes,Scolopacidae,Limnodromus,griseus / scolopaceus
+371,2280,American Woodcock,Charadriiformes,Scolopacidae,Scolopax,minor
+375,2300,Wilson's Snipe,Charadriiformes,Scolopacidae,Gallinago,delicata
+377,2631,Common Sandpiper,Charadriiformes,Scolopacidae,Actitis,hypoleucos
+378,2630,Spotted Sandpiper,Charadriiformes,Scolopacidae,Actitis,macularius
+380,2560,Solitary Sandpiper,Charadriiformes,Scolopacidae,Tringa,solitaria
+382,2590,Wandering Tattler,Charadriiformes,Scolopacidae,Tringa,incana
+383,2550,Lesser Yellowlegs,Charadriiformes,Scolopacidae,Tringa,flavipes
+384,2555,unid. Greater Yellowlegs / Lesser Yellowlegs,Charadriiformes,Scolopacidae,Tringa,melanoleuca / flavipes
+385,2580,Willet,Charadriiformes,Scolopacidae,Tringa,semipalmata
+387,2530,Common Greenshank,Charadriiformes,Scolopacidae,Tringa,nebularia
+388,2540,Greater Yellowlegs,Charadriiformes,Scolopacidae,Tringa,melanoleuca
+392,2240,Wilson's Phalarope,Charadriiformes,Scolopacidae,Phalaropus,tricolor
+393,2230,Red-necked Phalarope,Charadriiformes,Scolopacidae,Phalaropus,lobatus
+398,360,Pomarine Jaeger,Charadriiformes,Stercorariidae,Stercorarius,pomarinus
+399,370,Parasitic Jaeger,Charadriiformes,Stercorariidae,Stercorarius,parasiticus
+400,380,Long-tailed Jaeger,Charadriiformes,Stercorariidae,Stercorarius,longicaudus
+402,300,Common Murre,Charadriiformes,Alcidae,Uria,aalge
+403,310,Thick-billed Murre,Charadriiformes,Alcidae,Uria,lomvia
+404,315,unid. Common Murre / Thick-billed Murre,Charadriiformes,Laridae,Uria,aalge / lomvia
+405,320,Razorbill,Charadriiformes,Alcidae,Alca,torda
+406,270,Black Guillemot,Charadriiformes,Alcidae,Cepphus,grylle
+407,290,Pigeon Guillemot,Charadriiformes,Alcidae,Cepphus,columba
+409,230,Marbled Murrelet,Charadriiformes,Alcidae,Brachyramphus,marmoratus
+410,240,Kittlitz's Murrelet,Charadriiformes,Alcidae,Brachyramphus,brevirostris
+414,210,Ancient Murrelet,Charadriiformes,Alcidae,Synthliboramphus,antiquus
+415,160,Cassin's Auklet,Charadriiformes,Alcidae,Ptychoramphus,aleuticus
+420,150,Rhinoceros Auklet,Charadriiformes,Alcidae,Cerorhinca,monocerata
+422,140,Horned Puffin,Charadriiformes,Alcidae,Fratercula,corniculata
+423,120,Tufted Puffin,Charadriiformes,Alcidae,Fratercula,cirrhata
+425,400,Black-legged Kittiwake,Charadriiformes,Laridae,Rissa,tridactyla
+428,620,Sabine's Gull,Charadriiformes,Laridae,Xema,sabini
+429,600,Bonaparte's Gull,Charadriiformes,Laridae,Chroicocephalus,philadelphia
+431,551,Black-headed Gull,Charadriiformes,Laridae,Chroicocephalus,ridibundus
+432,601,Little Gull,Charadriiformes,Laridae,Hydrocoloeus,minutus
+433,610,Ross's Gull,Charadriiformes,Laridae,Rhodostethia,rosea
+435,580,Laughing Gull,Charadriiformes,Laridae,Leucophaeus,atricilla
+436,590,Franklin's Gull,Charadriiformes,Laridae,Leucophaeus,pipixcan
+439,570,Heermann's Gull,Charadriiformes,Laridae,Larus,heermanni
+440,550,Mew Gull,Charadriiformes,Laridae,Larus,canus
+441,540,Ring-billed Gull,Charadriiformes,Laridae,Larus,delawarensis
+442,490,Western Gull,Charadriiformes,Laridae,Larus,occidentalis
+444,530,California Gull,Charadriiformes,Laridae,Larus,californicus
+445,510,Herring Gull,Charadriiformes,Laridae,Larus,argentatus
+447,430,Iceland Gull,Charadriiformes,Laridae,Larus,glaucoides
+448,500,Lesser Black-backed Gull,Charadriiformes,Laridae,Larus,fuscus
+449,480,Slaty-backed Gull,Charadriiformes,Laridae,Larus,schistisagus
+450,440,Glaucous-winged Gull,Charadriiformes,Laridae,Larus,glaucescens
+451,495,hybrid Western Gull x Glaucous-winged Gull,Charadriiformes,Laridae,Larus,occidentalis x glaucescens
+452,420,Glaucous Gull,Charadriiformes,Laridae,Larus,hyperboreus
+453,470,Great Black-backed Gull,Charadriiformes,Laridae,Larus,marinus
+455,534,unid. gull,Charadriiformes,Laridae,Gull,sp.
+462,730,Aleutian Tern,Charadriiformes,Laridae,Onychoprion,aleuticus
+463,740,Least Tern,Charadriiformes,Laridae,Sternula,antillarum
+465,630,Gull-billed Tern,Charadriiformes,Laridae,Gelochelidon,nilotica
+466,640,Caspian Tern,Charadriiformes,Laridae,Hydroprogne,caspia
+467,770,Black Tern,Charadriiformes,Laridae,Chlidonias,niger
+470,720,Roseate Tern,Charadriiformes,Laridae,Sterna,dougallii
+471,700,Common Tern,Charadriiformes,Laridae,Sterna,hirundo
+472,710,Arctic Tern,Charadriiformes,Laridae,Sterna,paradisaea
+473,690,Forster's Tern,Charadriiformes,Laridae,Sterna,forsteri
+474,650,Royal Tern,Charadriiformes,Laridae,Thalasseus,maximus
+475,670,Sandwich Tern,Charadriiformes,Laridae,Thalasseus,sandvicensis
+476,660,Elegant Tern,Charadriiformes,Laridae,Thalasseus,elegans
+477,634,unid. tern,Charadriiformes,Laridae,Tern,sp.
+478,800,Black Skimmer,Charadriiformes,Laridae,Rynchops,niger
+483,110,Red-throated Loon,Gaviiformes,Gaviidae,Gavia,stellata
+484,90,Arctic Loon,Gaviiformes,Gaviidae,Gavia,arctica
+485,100,Pacific Loon,Gaviiformes,Gaviidae,Gavia,pacifica
+486,70,Common Loon,Gaviiformes,Gaviidae,Gavia,immer
+487,80,Yellow-billed Loon,Gaviiformes,Gaviidae,Gavia,adamsii
+488,77,unid. loon,Gaviiformes,Gaviidae,Gavia,sp.
+499,860,Northern Fulmar,Procellariiformes,Procellariidae,Fulmarus,glacialis
+522,880,Cory's Shearwater,Procellariiformes,Procellariidae,Calonectris,diomedea
+533,900,Manx Shearwater,Procellariiformes,Procellariidae,Puffinus,puffinus
+545,1060,Leach's Storm-Petrel,Procellariiformes,Hydrobatidae,Oceanodroma,leucorhoa
+556,1880,Wood Stork,Ciconiiformes,Ciconiidae,Mycteria,americana
+557,1280,Magnificent Frigatebird,Suliformes,Fregatidae,Fregata,magnificens
+560,1140,Masked Booby,Suliformes,Sulidae,Sula,dactylatra
+562,1141,Blue-footed Booby,Suliformes,Sulidae,Sula,nebouxii
+563,1150,Brown Booby,Suliformes,Sulidae,Sula,leucogaster
+565,1170,Northern Gannet,Suliformes,Sulidae,Morus,bassanus
+566,1220,Brandt's Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,penicillatus
+567,1210,Neotropic Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,brasilianus
+568,1200,Double-crested Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,auritus
+569,1206,unid. Double-crested Cormorant / Great Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,auritus / carbo
+570,1190,Great Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,carbo
+571,1205,unid. Neotropic / Double-crested Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,brasilianus / auritus
+573,1230,Pelagic Cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,pelagicus
+574,1207,unid. west coast cormorant,Suliformes,Phalacrocoracidae,Phalacrocorax,sp.
+575,1180,Anhinga,Suliformes,Anhingidae,Anhinga,anhinga
+576,1250,American White Pelican,Pelecaniformes,Pelecanidae,Pelecanus,erythrorhynchos
+577,1260,Brown Pelican,Pelecaniformes,Pelecanidae,Pelecanus,occidentalis
+579,1900,American Bittern,Pelecaniformes,Ardeidae,Botaurus,lentiginosus
+581,1910,Least Bittern,Pelecaniformes,Ardeidae,Ixobrychus,exilis
+583,1940,Great Blue Heron,Pelecaniformes,Ardeidae,Ardea,herodias
+584,1920,(Great White Heron) Great Blue Heron,Pelecaniformes,Ardeidae,Ardea,herodias occidentalis
+586,1960,Great Egret,Pelecaniformes,Ardeidae,Ardea,alba
+589,1961,Little Egret,Pelecaniformes,Ardeidae,Egretta,garzetta
+591,1970,Snowy Egret,Pelecaniformes,Ardeidae,Egretta,thula
+592,2000,Little Blue Heron,Pelecaniformes,Ardeidae,Egretta,caerulea
+593,1990,Tricolored Heron,Pelecaniformes,Ardeidae,Egretta,tricolor
+594,1980,Reddish Egret,Pelecaniformes,Ardeidae,Egretta,rufescens
+595,2001,Cattle Egret,Pelecaniformes,Ardeidae,Bubulcus,ibis
+597,2010,Green Heron,Pelecaniformes,Ardeidae,Butorides,virescens
+600,2020,Black-crowned Night-Heron,Pelecaniformes,Ardeidae,Nycticorax,nycticorax
+601,2030,Yellow-crowned Night-Heron,Pelecaniformes,Ardeidae,Nyctanassa,violacea
+602,2035,unid Black-crowned / Yellow-crowned Night-Heron,Pelecaniformes,Ardeidae,Nycticorax / Nyctanassa,nycticorax / violacea
+604,1945,unid. heron / egret,Pelecaniformes,Ardeidae,Ardeid,sp.
+605,1840,White Ibis,Pelecaniformes,Threskiornithidae,Eudocimus,albus
+607,1860,Glossy Ibis,Pelecaniformes,Threskiornithidae,Plegadis,falcinellus
+608,1870,White-faced Ibis,Pelecaniformes,Threskiornithidae,Plegadis,chihi
+609,1861,unid. Glossy Ibis / White-faced Ibis,Pelecaniformes,Threskiornithidae,Plegadis,falcinellus / chihi
+610,1830,Roseate Spoonbill,Pelecaniformes,Threskiornithidae,Platalea,ajaja
+611,3260,Black Vulture,Cathartiformes,Cathartidae,Coragyps,atratus
+612,3250,Turkey Vulture,Cathartiformes,Cathartidae,Cathartes,aura
+614,3255,unid. Black Vulture / Turkey Vulture,Accipitriformes,Cathartidae,Coragyps / Cathartes,atratus / aura
+615,3240,California Condor,Cathartiformes,Cathartidae,Gymnogyps,californianus
+617,3640,Osprey,Accipitriformes,Pandionidae,Pandion,haliaetus
+619,3271,Hook-billed Kite,Accipitriformes,Accipitridae,Chondrohierax,uncinatus
+620,3270,Swallow-tailed Kite,Accipitriformes,Accipitridae,Elanoides,forficatus
+621,3280,White-tailed Kite,Accipitriformes,Accipitridae,Elanus,leucurus
+622,3300,Snail Kite,Accipitriformes,Accipitridae,Rostrhamus,sociabilis
+624,3290,Mississippi Kite,Accipitriformes,Accipitridae,Ictinia,mississippiensis
+627,3520,Bald Eagle,Accipitriformes,Accipitridae,Haliaeetus,leucocephalus
+631,3310,Northern Harrier,Accipitriformes,Accipitridae,Circus,hudsonius
+633,3320,Sharp-shinned Hawk,Accipitriformes,Accipitridae,Accipiter,striatus
+634,3330,Cooper's Hawk,Accipitriformes,Accipitridae,Accipiter,cooperii
+636,3340,Northern Goshawk,Accipitriformes,Accipitridae,Accipiter,gentilis
+637,3333,unid. Accipiter hawk,Accipitriformes,Accipitridae,Accipiter,sp.
+639,3450,Common Black Hawk,Accipitriformes,Accipitridae,Buteogallus,anthracinus
+643,3350,Harris's Hawk,Accipitriformes,Accipitridae,Parabuteo,unicinctus
+644,3410,White-tailed Hawk,Accipitriformes,Accipitridae,Geranoaetus,albicaudatus
+646,3460,Gray Hawk,Accipitriformes,Accipitridae,Buteo,plagiatus
+647,3390,Red-shouldered Hawk,Accipitriformes,Accipitridae,Buteo,lineatus
+648,3430,Broad-winged Hawk,Accipitriformes,Accipitridae,Buteo,platypterus
+649,3440,Short-tailed Hawk,Accipitriformes,Accipitridae,Buteo,brachyurus
+650,3420,Swainson's Hawk,Accipitriformes,Accipitridae,Buteo,swainsoni
+651,3400,Zone-tailed Hawk,Accipitriformes,Accipitridae,Buteo,albonotatus
+652,3370,Red-tailed Hawk,Accipitriformes,Accipitridae,Buteo,jamaicensis
+653,3380,(Harlan's Hawk) Red-tailed Hawk,Accipitriformes,Accipitridae,Buteo,jamaicensis harlani
+654,3470,Rough-legged Hawk,Accipitriformes,Accipitridae,Buteo,lagopus
+655,3480,Ferruginous Hawk,Accipitriformes,Accipitridae,Buteo,regalis
+656,3451,unid. Buteo hawk,Accipitriformes,Accipitridae,Buteo,sp.
+659,3490,Golden Eagle,Accipitriformes,Accipitridae,Aquila,chrysaetos
+663,3650,Barn Owl,Strigiformes,Tytonidae,Tyto,alba
+665,3740,Flammulated Owl,Strigiformes,Strigidae,Psiloscops,flammeolus
+666,3732,Western Screech-Owl,Strigiformes,Strigidae,Megascops,kennicottii
+667,3730,Eastern Screech-Owl,Strigiformes,Strigidae,Megascops,asio
+670,3731,Whiskered Screech-Owl,Strigiformes,Strigidae,Megascops,trichopsis
+675,3750,Great Horned Owl,Strigiformes,Strigidae,Bubo,virginianus
+676,3760,Snowy Owl,Strigiformes,Strigidae,Bubo,scandiacus
+677,3770,Northern Hawk Owl,Strigiformes,Strigidae,Surnia,ulula
+678,3790,Northern Pygmy-Owl,Strigiformes,Strigidae,Glaucidium,gnoma
+682,3800,Ferruginous Pygmy-Owl,Strigiformes,Strigidae,Glaucidium,brasilianum
+683,3810,Elf Owl,Strigiformes,Strigidae,Micrathene,whitneyi
+684,3780,Burrowing Owl,Strigiformes,Strigidae,Athene,cunicularia
+687,3690,Spotted Owl,Strigiformes,Strigidae,Strix,occidentalis
+688,3680,Barred Owl,Strigiformes,Strigidae,Strix,varia
+690,3700,Great Gray Owl,Strigiformes,Strigidae,Strix,nebulosa
+691,3660,Long-eared Owl,Strigiformes,Strigidae,Asio,otus
+693,3670,Short-eared Owl,Strigiformes,Strigidae,Asio,flammeus
+695,3710,Boreal Owl,Strigiformes,Strigidae,Aegolius,funereus
+696,3720,Northern Saw-whet Owl,Strigiformes,Strigidae,Aegolius,acadicus
+703,3890,Elegant Trogon,Trogoniformes,Trogonidae,Trogon,elegans
+716,3901,Ringed Kingfisher,Coraciiformes,Alcedinidae,Megaceryle,torquata
+717,3900,Belted Kingfisher,Coraciiformes,Alcedinidae,Megaceryle,alcyon
+719,3910,Green Kingfisher,Coraciiformes,Alcedinidae,Chloroceryle,americana
+728,4080,Lewis's Woodpecker,Piciformes,Picidae,Melanerpes,lewis
+729,4060,Red-headed Woodpecker,Piciformes,Picidae,Melanerpes,erythrocephalus
+730,4070,Acorn Woodpecker,Piciformes,Picidae,Melanerpes,formicivorus
+735,4110,Gila Woodpecker,Piciformes,Picidae,Melanerpes,uropygialis
+736,4100,Golden-fronted Woodpecker,Piciformes,Picidae,Melanerpes,aurifrons
+737,4090,Red-bellied Woodpecker,Piciformes,Picidae,Melanerpes,carolinus
+738,4040,Williamson's Sapsucker,Piciformes,Picidae,Sphyrapicus,thyroideus
+739,4020,Yellow-bellied Sapsucker,Piciformes,Picidae,Sphyrapicus,varius
+740,4021,Red-naped Sapsucker,Piciformes,Picidae,Sphyrapicus,nuchalis
+741,4030,Red-breasted Sapsucker,Piciformes,Picidae,Sphyrapicus,ruber
+742,4022,unid. sapsucker,Piciformes,Picidae,Sphyrapicus,sp.
+744,3960,Ladder-backed Woodpecker,Piciformes,Picidae,Picoides,scalaris
+745,3970,Nuttall's Woodpecker,Piciformes,Picidae,Picoides,nuttallii
+746,3940,Downy Woodpecker,Piciformes,Picidae,Picoides,pubescens
+748,3930,Hairy Woodpecker,Piciformes,Picidae,Picoides,villosus
+749,3975,Arizona Woodpecker,Piciformes,Picidae,Picoides,arizonae
+751,3950,Red-cockaded Woodpecker,Piciformes,Picidae,Picoides,borealis
+752,3990,White-headed Woodpecker,Piciformes,Picidae,Picoides,albolarvatus
+753,4010,American Three-toed Woodpecker,Piciformes,Picidae,Picoides,dorsalis
+754,4000,Black-backed Woodpecker,Piciformes,Picidae,Picoides,arcticus
+757,4123,(unid. Red/Yellow Shafted) Northern Flicker,Piciformes,Picidae,Colaptes,auratus
+758,4120,(Yellow-shafted Flicker) Northern Flicker,Piciformes,Picidae,Colaptes,auratus auratus
+759,4130,(Red-shafted Flicker) Northern Flicker,Piciformes,Picidae,Colaptes,auratus cafer
+760,4125,hybrid Northern Flicker (Red x Yellow-shafted),Piciformes,Picidae,Colaptes,auratus auratus x auratus cafer
+761,4140,Gilded Flicker,Piciformes,Picidae,Colaptes,chrysoides
+764,4050,Pileated Woodpecker,Piciformes,Picidae,Dryocopus,pileatus
+765,3920,unid. woodpecker,Piciformes,Picidae,Woodpecker,sp.
+771,3620,Crested Caracara,Falconiformes,Falconidae,Caracara,cheriway
+773,3600,American Kestrel,Falconiformes,Falconidae,Falco,sparverius
+775,3570,Merlin,Falconiformes,Falconidae,Falco,columbarius
+777,3590,Aplomado Falcon,Falconiformes,Falconidae,Falco,femoralis
+780,3540,Gyrfalcon,Falconiformes,Falconidae,Falco,rusticolus
+781,3560,Peregrine Falcon,Falconiformes,Falconidae,Falco,peregrinus
+782,3550,Prairie Falcon,Falconiformes,Falconidae,Falco,mexicanus
+783,3824,Monk Parakeet,Psittaciformes,Psittacidae,Myiopsitta,monachus
+786,51830,Nanday Parakeet,Psittaciformes,Psittacidae,Aratinga,nenday
+800,52021,Yellow-chevroned Parakeet,Psittaciformes,Psittacidae,Brotogeris,chiriri
+801,3827,unid. White-winged / Yellow-chevroned Parakeet,Psittaciformes,Psittacidae,Brotogeris,versicolurus / chiriri
+806,3826,Red-crowned Parrot,Psittaciformes,Psittacidae,Amazona,viridigenalis
+813,3823,Rose-ringed Parakeet,Psittaciformes,Psittaculidae,Psittacula,krameri
+815,3822,Budgerigar,Psittaciformes,Psittaculidae,Melopsittacus,undulatus
+848,4720,Northern Beardless-Tyrannulet,Passeriformes,Tyrannidae,Camptostoma,imberbe
+869,4590,Olive-sided Flycatcher,Passeriformes,Tyrannidae,Contopus,cooperi
+870,4600,Greater Pewee,Passeriformes,Tyrannidae,Contopus,pertinax
+871,4620,Western Wood-Pewee,Passeriformes,Tyrannidae,Contopus,sordidulus
+872,4610,Eastern Wood-Pewee,Passeriformes,Tyrannidae,Contopus,virens
+875,4630,Yellow-bellied Flycatcher,Passeriformes,Tyrannidae,Empidonax,flaviventris
+876,4650,Acadian Flycatcher,Passeriformes,Tyrannidae,Empidonax,virescens
+877,4661,Alder Flycatcher,Passeriformes,Tyrannidae,Empidonax,alnorum
+878,4660,Willow Flycatcher,Passeriformes,Tyrannidae,Empidonax,traillii
+879,4665,unid. Alder Flycatcher / Willow Flycatcher,Passeriformes,Tyrannidae,Empidonax,alnorum / traillii
+881,4670,Least Flycatcher,Passeriformes,Tyrannidae,Empidonax,minimus
+882,4680,Hammond's Flycatcher,Passeriformes,Tyrannidae,Empidonax,hammondii
+883,4691,Gray Flycatcher,Passeriformes,Tyrannidae,Empidonax,wrightii
+884,4690,Dusky Flycatcher,Passeriformes,Tyrannidae,Empidonax,oberholseri
+885,4689,unid. Hammond's Flycatcher / Dusky Flycatcher,Passeriformes,Tyrannidae,Empidonax,hammondii / oberholseri
+887,4641,Pacific-slope Flycatcher,Passeriformes,Tyrannidae,Empidonax,difficilis
+888,4640,Cordilleran Flycatcher,Passeriformes,Tyrannidae,Empidonax,occidentalis
+889,4642,unid. Cordilleran / Pacific-slope Flycatcher,Passeriformes,Tyrannidae,Empidonax,difficilis / occidentalis
+891,4700,Buff-breasted Flycatcher,Passeriformes,Tyrannidae,Empidonax,fulvifrons
+892,4679,unid. Empidonax flycatcher,Passeriformes,Tyrannidae,Empidonax,sp.
+893,4580,Black Phoebe,Passeriformes,Tyrannidae,Sayornis,nigricans
+894,4560,Eastern Phoebe,Passeriformes,Tyrannidae,Sayornis,phoebe
+895,4570,Say's Phoebe,Passeriformes,Tyrannidae,Sayornis,saya
+896,4710,Vermilion Flycatcher,Passeriformes,Tyrannidae,Pyrocephalus,rubinus
+900,4550,Dusky-capped Flycatcher,Passeriformes,Tyrannidae,Myiarchus,tuberculifer
+901,4540,Ash-throated Flycatcher,Passeriformes,Tyrannidae,Myiarchus,cinerascens
+903,4520,Great Crested Flycatcher,Passeriformes,Tyrannidae,Myiarchus,crinitus
+904,4530,Brown-crested Flycatcher,Passeriformes,Tyrannidae,Myiarchus,tyrannulus
+907,4490,Great Kiskadee,Passeriformes,Tyrannidae,Pitangus,sulphuratus
+911,4510,Sulphur-bellied Flycatcher,Passeriformes,Tyrannidae,Myiodynastes,luteiventris
+915,4460,Tropical Kingbird,Passeriformes,Tyrannidae,Tyrannus,melancholicus
+916,4461,Couch's Kingbird,Passeriformes,Tyrannidae,Tyrannus,couchii
+917,4462,unid. Tropical Kingbird / Couch's Kingbird,Passeriformes,Tyrannidae,Tyrannus,melancholicus / couchii
+918,4480,Cassin's Kingbird,Passeriformes,Tyrannidae,Tyrannus,vociferans
+919,4451,Thick-billed Kingbird,Passeriformes,Tyrannidae,Tyrannus,crassirostris
+920,4470,Western Kingbird,Passeriformes,Tyrannidae,Tyrannus,verticalis
+921,4447,unid. Cassin's Kingbird / Western Kingbird,Passeriformes,Tyrannidae,Tyrannus,vociferans / verticalis
+922,4440,Eastern Kingbird,Passeriformes,Tyrannidae,Tyrannus,tyrannus
+923,4450,Gray Kingbird,Passeriformes,Tyrannidae,Tyrannus,dominicensis
+925,4430,Scissor-tailed Flycatcher,Passeriformes,Tyrannidae,Tyrannus,forficatus
+926,4420,Fork-tailed Flycatcher,Passeriformes,Tyrannidae,Tyrannus,savana
+941,6220,Loggerhead Shrike,Passeriformes,Laniidae,Lanius,ludovicianus
+942,6210,Northern Shrike,Passeriformes,Laniidae,Lanius,borealis
+950,6300,Black-capped Vireo,Passeriformes,Vireonidae,Vireo,atricapilla
+952,6310,White-eyed Vireo,Passeriformes,Vireonidae,Vireo,griseus
+957,6330,Bell's Vireo,Passeriformes,Vireonidae,Vireo,bellii
+958,6340,Gray Vireo,Passeriformes,Vireonidae,Vireo,vicinior
+959,6320,Hutton's Vireo,Passeriformes,Vireonidae,Vireo,huttoni
+960,6280,Yellow-throated Vireo,Passeriformes,Vireonidae,Vireo,flavifrons
+961,6291,Cassin's Vireo,Passeriformes,Vireonidae,Vireo,cassinii
+962,6290,Blue-headed Vireo,Passeriformes,Vireonidae,Vireo,solitarius
+963,6295,unid. Cassin's Vireo / Blue-headed Vireo,Passeriformes,Vireonidae,Vireo,cassinii / solitarius
+964,6292,Plumbeous Vireo,Passeriformes,Vireonidae,Vireo,plumbeus
+965,6296,unid. Plumbeous Vireo / Cassin's Vireo,Passeriformes,Vireonidae,Vireo,plumbeus / cassinii
+966,6260,Philadelphia Vireo,Passeriformes,Vireonidae,Vireo,philadelphicus
+967,6270,Warbling Vireo,Passeriformes,Vireonidae,Vireo,gilvus
+969,6240,Red-eyed Vireo,Passeriformes,Vireonidae,Vireo,olivaceus
+971,6230,Black-whiskered Vireo,Passeriformes,Vireonidae,Vireo,altiloquus
+973,4840,Gray Jay,Passeriformes,Corvidae,Perisoreus,canadensis
+982,4830,Green Jay,Passeriformes,Corvidae,Cyanocorax,yncas
+986,4920,Pinyon Jay,Passeriformes,Corvidae,Gymnorhinus,cyanocephalus
+987,4780,Steller's Jay,Passeriformes,Corvidae,Cyanocitta,stelleri
+988,4770,Blue Jay,Passeriformes,Corvidae,Cyanocitta,cristata
+989,4790,Florida Scrub-Jay,Passeriformes,Corvidae,Aphelocoma,coerulescens
+990,4811,Island Scrub-Jay,Passeriformes,Corvidae,Aphelocoma,insularis
+991,4812,California Scrub-Jay,Passeriformes,Corvidae,Aphelocoma,californica
+992,4813,Woodhouse's Scrub-Jay,Passeriformes,Corvidae,Aphelocoma,woodhouseii
+993,4810,unid. California Scrub-Jay / Woodhouse's Scrub-Jay,Passeriformes,Corvidae,Aphelocoma,californica / woodhouseii
+995,4820,Mexican Jay,Passeriformes,Corvidae,Aphelocoma,wollweberi
+997,4910,Clark's Nutcracker,Passeriformes,Corvidae,Nucifraga,columbiana
+998,4750,Black-billed Magpie,Passeriformes,Corvidae,Pica,hudsonia
+999,4760,Yellow-billed Magpie,Passeriformes,Corvidae,Pica,nuttalli
+1001,4880,American Crow,Passeriformes,Corvidae,Corvus,brachyrhynchos
+1002,4890,Northwestern Crow,Passeriformes,Corvidae,Corvus,caurinus
+1005,4900,Fish Crow,Passeriformes,Corvidae,Corvus,ossifragus
+1006,4881,unid. American Crow / Fish Crow,Passeriformes,Corvidae,Corvus,brachyrhynchos / ossifragus
+1007,4882,unid. American Crow / Northwestern Crow,Passeriformes,Corvidae,Corvus,brachyrhynchos / caurinus
+1008,4870,Chihuahuan Raven,Passeriformes,Corvidae,Corvus,cryptoleucus
+1009,4860,Common Raven,Passeriformes,Corvidae,Corvus,corax
+1010,4865,unid. Chihuahuan Raven / Common Raven,Passeriformes,Corvidae,Corvus,cryptoleucus / corax
+1011,4730,Eurasian Skylark,Passeriformes,Alaudidae,Alauda,arvensis
+1012,4740,Horned Lark,Passeriformes,Alaudidae,Eremophila,alpestris
+1013,6110,Purple Martin,Passeriformes,Hirundinidae,Progne,subis
+1019,6140,Tree Swallow,Passeriformes,Hirundinidae,Tachycineta,bicolor
+1021,6150,Violet-green Swallow,Passeriformes,Hirundinidae,Tachycineta,thalassina
+1025,6170,Northern Rough-winged Swallow,Passeriformes,Hirundinidae,Stelgidopteryx,serripennis
+1027,6160,Bank Swallow,Passeriformes,Hirundinidae,Riparia,riparia
+1028,6120,Cliff Swallow,Passeriformes,Hirundinidae,Petrochelidon,pyrrhonota
+1029,6121,Cave Swallow,Passeriformes,Hirundinidae,Petrochelidon,fulva
+1030,6122,unid. Cave Swallow / Cliff Swallow,Passeriformes,Hirundinidae,Petrochelidon,pyrrhonota / fulva
+1031,6130,Barn Swallow,Passeriformes,Hirundinidae,Hirundo,rustica
+1033,7360,Carolina Chickadee,Passeriformes,Paridae,Poecile,carolinensis
+1034,7350,Black-capped Chickadee,Passeriformes,Paridae,Poecile,atricapillus
+1035,7380,Mountain Chickadee,Passeriformes,Paridae,Poecile,gambeli
+1036,7370,Mexican Chickadee,Passeriformes,Paridae,Poecile,sclateri
+1037,7410,Chestnut-backed Chickadee,Passeriformes,Paridae,Poecile,rufescens
+1038,7400,Boreal Chickadee,Passeriformes,Paridae,Poecile,hudsonicus
+1040,7352,unid. Carolina Chickadee / Black-capped Chickadee,Passeriformes,Paridae,Poecile,carolinensis / atricapillus
+1041,7353,unid. Black-capped Chickadee / Mountain Chickadee,Passeriformes,Paridae,Poecile,atricapillus / gambeli
+1042,7354,unid. Black-capped Chickadee / Boreal Chickadee,Passeriformes,Paridae,Poecile,atricapillus / hudsonicus
+1043,7351,unid. western chickadee species,Passeriformes,Paridae,Poecile,sp.
+1044,7340,Bridled Titmouse,Passeriformes,Paridae,Baeolophus,wollweberi
+1045,7330,Oak Titmouse,Passeriformes,Paridae,Baeolophus,inornatus
+1046,7331,Juniper Titmouse,Passeriformes,Paridae,Baeolophus,ridgwayi
+1047,7332,unid. Oak Titmouse / Juniper Titmouse,Passeriformes,Paridae,Baeolophus,inornatus / ridgwayi
+1048,7310,Tufted Titmouse,Passeriformes,Paridae,Baeolophus,bicolor
+1049,7320,Black-crested Titmouse,Passeriformes,Paridae,Baeolophus,atricristatus
+1050,7315,unid. Tufted Titmouse / Black-crested Titmouse,Passeriformes,Paridae,Baeolophus,bicolor / atricristatus
+1051,7460,Verdin,Passeriformes,Remizidae,Auriparus,flaviceps
+1052,7430,Bushtit,Passeriformes,Aegithalidae,Psaltriparus,minimus
+1053,7280,Red-breasted Nuthatch,Passeriformes,Sittidae,Sitta,canadensis
+1054,7270,White-breasted Nuthatch,Passeriformes,Sittidae,Sitta,carolinensis
+1055,7300,Pygmy Nuthatch,Passeriformes,Sittidae,Sitta,pygmaea
+1056,7290,Brown-headed Nuthatch,Passeriformes,Sittidae,Sitta,pusilla
+1057,7260,Brown Creeper,Passeriformes,Certhiidae,Certhia,americana
+1058,7150,Rock Wren,Passeriformes,Troglodytidae,Salpinctes,obsoletus
+1060,7170,Canyon Wren,Passeriformes,Troglodytidae,Catherpes,mexicanus
+1063,7210,House Wren,Passeriformes,Troglodytidae,Troglodytes,aedon
+1067,7221,Pacific Wren,Passeriformes,Troglodytidae,Troglodytes,pacificus
+1068,7222,Winter Wren,Passeriformes,Troglodytidae,Troglodytes,hiemalis
+1069,7220,unid. Pacific Wren / Winter Wren,Passeriformes,Troglodytidae,Troglodytes,pacificus / hiemalis
+1070,7240,Sedge Wren,Passeriformes,Troglodytidae,Cistothorus,platensis
+1071,7250,Marsh Wren,Passeriformes,Troglodytidae,Cistothorus,palustris
+1072,7180,Carolina Wren,Passeriformes,Troglodytidae,Thryothorus,ludovicianus
+1073,7190,Bewick's Wren,Passeriformes,Troglodytidae,Thryomanes,bewickii
+1081,7130,Cactus Wren,Passeriformes,Troglodytidae,Campylorhynchus,brunneicapillus
+1085,16600,Sinaloa Wren,Passeriformes,Troglodytidae,Thryophilus,sinaloa
+1092,7510,Blue-gray Gnatcatcher,Passeriformes,Polioptilidae,Polioptila,caerulea
+1093,7530,California Gnatcatcher,Passeriformes,Polioptilidae,Polioptila,californica
+1094,7520,Black-tailed Gnatcatcher,Passeriformes,Polioptilidae,Polioptila,melanura
+1095,7539,unid. Blue-gray / Black-tailed Gnatcatcher,Passeriformes,Polioptilidae,Polioptila,caerulea / melanura
+1099,7010,American Dipper,Passeriformes,Cinclidae,Cinclus,mexicanus
+1102,7480,Golden-crowned Kinglet,Passeriformes,Regulidae,Regulus,satrapa
+1103,7490,Ruby-crowned Kinglet,Passeriformes,Regulidae,Regulus,calendula
+1110,7470,Arctic Warbler,Passeriformes,Phylloscopidae,Phylloscopus,borealis
+1113,7420,Wrentit,Passeriformes,Sylviidae,Chamaea,fasciata
+1124,7640,Bluethroat,Passeriformes,Muscicapidae,Luscinia,svecica
+1132,7650,Northern Wheatear,Passeriformes,Muscicapidae,Oenanthe,oenanthe
+1133,7660,Eastern Bluebird,Passeriformes,Turdidae,Sialia,sialis
+1134,7670,Western Bluebird,Passeriformes,Turdidae,Sialia,mexicana
+1135,7680,Mountain Bluebird,Passeriformes,Turdidae,Sialia,currucoides
+1136,7540,Townsend's Solitaire,Passeriformes,Turdidae,Myadestes,townsendi
+1144,7560,Veery,Passeriformes,Turdidae,Catharus,fuscescens
+1145,7570,Gray-cheeked Thrush,Passeriformes,Turdidae,Catharus,minimus
+1146,7571,Bicknell's Thrush,Passeriformes,Turdidae,Catharus,bicknelli
+1147,7580,Swainson's Thrush,Passeriformes,Turdidae,Catharus,ustulatus
+1148,7590,Hermit Thrush,Passeriformes,Turdidae,Catharus,guttatus
+1149,7550,Wood Thrush,Passeriformes,Turdidae,Hylocichla,mustelina
+1162,7610,American Robin,Passeriformes,Turdidae,Turdus,migratorius
+1164,7630,Varied Thrush,Passeriformes,Turdidae,Ixoreus,naevius
+1169,7040,Gray Catbird,Passeriformes,Mimidae,Dumetella,carolinensis
+1170,7070,Curve-billed Thrasher,Passeriformes,Mimidae,Toxostoma,curvirostre
+1172,7050,Brown Thrasher,Passeriformes,Mimidae,Toxostoma,rufum
+1173,7060,Long-billed Thrasher,Passeriformes,Mimidae,Toxostoma,longirostre
+1175,7080,Bendire's Thrasher,Passeriformes,Mimidae,Toxostoma,bendirei
+1177,7100,California Thrasher,Passeriformes,Mimidae,Toxostoma,redivivum
+1178,7110,LeConte's Thrasher,Passeriformes,Mimidae,Toxostoma,lecontei
+1179,7120,Crissal Thrasher,Passeriformes,Mimidae,Toxostoma,crissale
+1180,7020,Sage Thrasher,Passeriformes,Mimidae,Oreoscoptes,montanus
+1181,7031,Bahama Mockingbird,Passeriformes,Mimidae,Mimus,gundlachii
+1184,7030,Northern Mockingbird,Passeriformes,Mimidae,Mimus,polyglottos
+1185,4930,European Starling,Passeriformes,Sturnidae,Sturnus,vulgaris
+1186,4932,Common Myna,Passeriformes,Sturnidae,Acridotheres,tristis
+1188,6180,Bohemian Waxwing,Passeriformes,Bombycillidae,Bombycilla,garrulus
+1189,6190,Cedar Waxwing,Passeriformes,Bombycillidae,Bombycilla,cedrorum
+1190,6185,unid. Cedar Waxwing / Bohemian Waxwing,Passeriformes,Bombycillidae,Bombycilla,garrulus / cedrorum
+1192,6200,Phainopepla,Passeriformes,Ptiliogonatidae,Phainopepla,nitens
+1193,6510,Olive Warbler,Passeriformes,Peucedramidae,Peucedramus,taeniatus
+1195,19500,Northern Red Bishop,Passeriformes,Ploceidae,Euplectes,franciscanus
+1199,6882,House Sparrow,Passeriformes,Passeridae,Passer,domesticus
+1200,6883,Eurasian Tree Sparrow,Passeriformes,Passeridae,Passer,montanus
+1201,6960,Eastern Yellow Wagtail,Passeriformes,Motacillidae,Motacilla,tschutschensis
+1204,6940,White Wagtail,Passeriformes,Motacillidae,Motacilla,alba
+1208,6990,Red-throated Pipit,Passeriformes,Motacillidae,Anthus,cervinus
+1209,6970,American Pipit,Passeriformes,Motacillidae,Anthus,rubescens
+1210,7000,Sprague's Pipit,Passeriformes,Motacillidae,Anthus,spragueii
+1220,5140,Evening Grosbeak,Passeriformes,Fringillidae,Coccothraustes,vespertinus
+1223,5150,Pine Grosbeak,Passeriformes,Fringillidae,Pinicola,enucleator
+1226,5240,Gray-crowned Rosy-Finch,Passeriformes,Fringillidae,Leucosticte,tephrocotis
+1227,5250,Black Rosy-Finch,Passeriformes,Fringillidae,Leucosticte,atrata
+1228,5260,Brown-capped Rosy-Finch,Passeriformes,Fringillidae,Leucosticte,australis
+1229,5190,House Finch,Passeriformes,Fringillidae,Haemorhous,mexicanus
+1230,5170,Purple Finch,Passeriformes,Fringillidae,Haemorhous,purpureus
+1231,5180,Cassin's Finch,Passeriformes,Fringillidae,Haemorhous,cassinii
+1232,5195,unid. Purple Finch / Cassin's Finch / House Finch,Passeriformes,Fringillidae,Carpodacus,purpureus / cassinii / mexicanus
+1235,5280,Common Redpoll,Passeriformes,Fringillidae,Acanthis,flammea
+1236,5270,Hoary Redpoll,Passeriformes,Fringillidae,Acanthis,hornemanni
+1237,5275,unid. Common Redpoll / Hoary Redpoll,Passeriformes,Fringillidae,Carduelis,flammea / hornemanni
+1238,5210,Red Crossbill,Passeriformes,Fringillidae,Loxia,curvirostra
+1240,5212,Unid. Red Crossbill / Cassia Crossbill,Passeriformes,Fringillidae,Loxia,curvirostra / sinesciuris
+1241,5220,White-winged Crossbill,Passeriformes,Fringillidae,Loxia,leucoptera
+1242,5225,unid. Red Crossbill / White-winged Crossbill,Passeriformes,Fringillidae,Loxia,curvirostra / leucoptera
+1245,5330,Pine Siskin,Passeriformes,Fringillidae,Spinus,pinus
+1248,5300,Lesser Goldfinch,Passeriformes,Fringillidae,Spinus,psaltria
+1249,5310,Lawrence's Goldfinch,Passeriformes,Fringillidae,Spinus,lawrencei
+1250,5290,American Goldfinch,Passeriformes,Fringillidae,Spinus,tristis
+1251,5360,Lapland Longspur,Passeriformes,Calcariidae,Calcarius,lapponicus
+1252,5380,Chestnut-collared Longspur,Passeriformes,Calcariidae,Calcarius,ornatus
+1253,5370,Smith's Longspur,Passeriformes,Calcariidae,Calcarius,pictus
+1254,5390,McCown's Longspur,Passeriformes,Calcariidae,Rhynchophanes,mccownii
+1255,5340,Snow Bunting,Passeriformes,Calcariidae,Plectrophenax,nivalis
+1270,5860,Olive Sparrow,Passeriformes,Passerellidae,Arremonops,rufivirgatus
+1275,5900,Green-tailed Towhee,Passeriformes,Passerellidae,Pipilo,chlorurus
+1276,5880,Spotted Towhee,Passeriformes,Passerellidae,Pipilo,maculatus
+1277,5870,Eastern Towhee,Passeriformes,Passerellidae,Pipilo,erythrophthalmus
+1278,5871,unid. Spotted Towhee / Eastern Towhee,Passeriformes,Emberizidae,Pipilo,maculatus / erythrophthalmus
+1280,5800,Rufous-crowned Sparrow,Passeriformes,Passerellidae,Aimophila,ruficeps
+1285,5910,Canyon Towhee,Passeriformes,Passerellidae,Melozone,fusca
+1287,5911,California Towhee,Passeriformes,Passerellidae,Melozone,crissalis
+1288,5920,Abert's Towhee,Passeriformes,Passerellidae,Melozone,aberti
+1290,5790,Rufous-winged Sparrow,Passeriformes,Passerellidae,Peucaea,carpalis
+1294,5760,Botteri's Sparrow,Passeriformes,Passerellidae,Peucaea,botterii
+1295,5780,Cassin's Sparrow,Passeriformes,Passerellidae,Peucaea,cassinii
+1296,5750,Bachman's Sparrow,Passeriformes,Passerellidae,Peucaea,aestivalis
+1298,5590,American Tree Sparrow,Passeriformes,Passerellidae,Spizelloides,arborea
+1299,5600,Chipping Sparrow,Passeriformes,Passerellidae,Spizella,passerina
+1300,5610,Clay-colored Sparrow,Passeriformes,Passerellidae,Spizella,pallida
+1301,5620,Brewer's Sparrow,Passeriformes,Passerellidae,Spizella,breweri
+1302,5630,Field Sparrow,Passeriformes,Passerellidae,Spizella,pusilla
+1304,5650,Black-chinned Sparrow,Passeriformes,Passerellidae,Spizella,atrogularis
+1305,5400,Vesper Sparrow,Passeriformes,Passerellidae,Pooecetes,gramineus
+1306,5520,Lark Sparrow,Passeriformes,Passerellidae,Chondestes,grammacus
+1308,5730,Black-throated Sparrow,Passeriformes,Passerellidae,Amphispiza,bilineata
+1309,5738,Sagebrush Sparrow,Passeriformes,Passerellidae,Artemisiospiza,nevadensis
+1310,5739,Bell's Sparrow,Passeriformes,Passerellidae,Artemisiospiza,belli
+1311,5740,unid. Sagebrush Sparrow / Bell's Sparrow,Passeriformes,Emberizidae,Artemisiospiza,nevadensis / belli
+1312,6050,Lark Bunting,Passeriformes,Passerellidae,Calamospiza,melanocorys
+1313,5420,Savannah Sparrow,Passeriformes,Passerellidae,Passerculus,sandwichensis
+1314,5460,Grasshopper Sparrow,Passeriformes,Passerellidae,Ammodramus,savannarum
+1315,5450,Baird's Sparrow,Passeriformes,Passerellidae,Ammodramus,bairdii
+1316,5470,Henslow's Sparrow,Passeriformes,Passerellidae,Ammodramus,henslowii
+1317,5480,LeConte's Sparrow,Passeriformes,Passerellidae,Ammodramus,leconteii
+1318,5491,Nelson's Sparrow,Passeriformes,Passerellidae,Ammodramus,nelsoni
+1319,5490,Saltmarsh Sparrow,Passeriformes,Passerellidae,Ammodramus,caudacutus
+1320,5500,Seaside Sparrow,Passeriformes,Passerellidae,Ammodramus,maritimus
+1322,5850,Fox Sparrow,Passeriformes,Passerellidae,Passerella,iliaca
+1323,5810,Song Sparrow,Passeriformes,Passerellidae,Melospiza,melodia
+1324,5830,Lincoln's Sparrow,Passeriformes,Passerellidae,Melospiza,lincolnii
+1325,5840,Swamp Sparrow,Passeriformes,Passerellidae,Melospiza,georgiana
+1327,5580,White-throated Sparrow,Passeriformes,Passerellidae,Zonotrichia,albicollis
+1328,5530,Harris's Sparrow,Passeriformes,Passerellidae,Zonotrichia,querula
+1329,5540,White-crowned Sparrow,Passeriformes,Passerellidae,Zonotrichia,leucophrys
+1330,5570,Golden-crowned Sparrow,Passeriformes,Passerellidae,Zonotrichia,atricapilla
+1331,5670,(Slate-colored Junco) Dark-eyed Junco,Passeriformes,Emberizidae,Junco,hyemalis hyemalis
+1332,5671,(Oregon Junco) Dark-eyed Junco,Passeriformes,Emberizidae,Junco,hyemalis oreganus
+1333,5680,(Pink-sided Junco) Dark-eyed Junco,Passeriformes,Emberizidae,Junco,hyemalis mearnsi
+1334,5660,(White-winged Junco) Dark-eyed Junco,Passeriformes,Emberizidae,Junco,hyemalis aikeni
+1335,5690,(Gray-headed Junco) Dark-eyed Junco,Passeriformes,Emberizidae,Junco,hyemalis caniceps
+1336,5677,(unid. race) Dark-eyed Junco,Passeriformes,Passerellidae,Junco,hyemalis
+1338,5700,Yellow-eyed Junco,Passeriformes,Passerellidae,Junco,phaeonotus
+1342,6830,Yellow-breasted Chat,Passeriformes,Icteriidae,Icteria,virens
+1343,4970,Yellow-headed Blackbird,Passeriformes,Icteridae,Xanthocephalus,xanthocephalus
+1344,4940,Bobolink,Passeriformes,Icteridae,Dolichonyx,oryzivorus
+1345,5010,Eastern Meadowlark,Passeriformes,Icteridae,Sturnella,magna
+1346,5011,Western Meadowlark,Passeriformes,Icteridae,Sturnella,neglecta
+1347,5012,unid. Eastern Meadowlark / Western Meadowlark,Passeriformes,Icteridae,Sturnella,magna / neglecta
+1355,5060,Orchard Oriole,Passeriformes,Icteridae,Icterus,spurius
+1356,5050,Hooded Oriole,Passeriformes,Icteridae,Icterus,cucullatus
+1360,5080,Bullock's Oriole,Passeriformes,Icteridae,Icterus,bullockii
+1362,5032,Spot-breasted Oriole,Passeriformes,Icteridae,Icterus,pectoralis
+1363,5031,Altamira Oriole,Passeriformes,Icteridae,Icterus,gularis
+1364,5030,Audubon's Oriole,Passeriformes,Icteridae,Icterus,graduacauda
+1365,5070,Baltimore Oriole,Passeriformes,Icteridae,Icterus,galbula
+1366,5078,hybrid Bullock's Oriole x Baltimore Oriole,Passeriformes,Icteridae,Icterus,bullockii x galbula
+1367,5077,unid. Bullock's Oriole / Baltimore Oriole,Passeriformes,Icteridae,Icterus,bullockii / galbula
+1369,5040,Scott's Oriole,Passeriformes,Icteridae,Icterus,parisorum
+1370,4980,Red-winged Blackbird,Passeriformes,Icteridae,Agelaius,phoeniceus
+1371,5000,Tricolored Blackbird,Passeriformes,Icteridae,Agelaius,tricolor
+1373,4961,Shiny Cowbird,Passeriformes,Icteridae,Molothrus,bonariensis
+1374,4960,Bronzed Cowbird,Passeriformes,Icteridae,Molothrus,aeneus
+1375,4950,Brown-headed Cowbird,Passeriformes,Icteridae,Molothrus,ater
+1377,4955,unid. Bronzed Cowbird / Brown-headed Cowbird,Passeriformes,Icteridae,Molothrus,aeneus / ater
+1379,5090,Rusty Blackbird,Passeriformes,Icteridae,Euphagus,carolinus
+1380,5100,Brewer's Blackbird,Passeriformes,Icteridae,Euphagus,cyanocephalus
+1381,5110,Common Grackle,Passeriformes,Icteridae,Quiscalus,quiscula
+1382,5130,Boat-tailed Grackle,Passeriformes,Icteridae,Quiscalus,major
+1383,5120,Great-tailed Grackle,Passeriformes,Icteridae,Quiscalus,mexicanus
+1384,5135,unid. Boat-tailed Grackle / Great-tailed Grackle,Passeriformes,Icteridae,Quiscalus,major / mexicanus
+1385,6740,Ovenbird,Passeriformes,Parulidae,Seiurus,aurocapilla
+1386,6390,Worm-eating Warbler,Passeriformes,Parulidae,Helmitheros,vermivorum
+1387,6760,Louisiana Waterthrush,Passeriformes,Parulidae,Parkesia,motacilla
+1388,6750,Northern Waterthrush,Passeriformes,Parulidae,Parkesia,noveboracensis
+1389,6420,Golden-winged Warbler,Passeriformes,Parulidae,Vermivora,chrysoptera
+1390,6410,Blue-winged Warbler,Passeriformes,Parulidae,Vermivora,cyanoptera
+1391,6412,Brewster's Warbler (Golden-winged x Blue-winged),Passeriformes,Parulidae,Vermivora,cyanoptera x chrysoptera
+1392,6413,Lawrence's Warbler (Golden-winged x Blue-winged),Passeriformes,Parulidae,Vermivora,chrysoptera x cyanoptera
+1393,6360,Black-and-white Warbler,Passeriformes,Parulidae,Mniotilta,varia
+1394,6370,Prothonotary Warbler,Passeriformes,Parulidae,Protonotaria,citrea
+1395,6380,Swainson's Warbler,Passeriformes,Parulidae,Limnothlypis,swainsonii
+1397,6470,Tennessee Warbler,Passeriformes,Parulidae,Oreothlypis,peregrina
+1398,6460,Orange-crowned Warbler,Passeriformes,Parulidae,Oreothlypis,celata
+1400,6430,Lucy's Warbler,Passeriformes,Parulidae,Oreothlypis,luciae
+1401,6450,Nashville Warbler,Passeriformes,Parulidae,Oreothlypis,ruficapilla
+1402,6440,Virginia's Warbler,Passeriformes,Parulidae,Oreothlypis,virginiae
+1403,6780,Connecticut Warbler,Passeriformes,Parulidae,Oporornis,agilis
+1405,6800,MacGillivray's Warbler,Passeriformes,Parulidae,Geothlypis,tolmiei
+1406,6790,Mourning Warbler,Passeriformes,Parulidae,Geothlypis,philadelphia
+1407,6770,Kentucky Warbler,Passeriformes,Parulidae,Geothlypis,formosa
+1411,6810,Common Yellowthroat,Passeriformes,Parulidae,Geothlypis,trichas
+1413,6840,Hooded Warbler,Passeriformes,Parulidae,Setophaga,citrina
+1414,6870,American Redstart,Passeriformes,Parulidae,Setophaga,ruticilla
+1415,6700,Kirtland's Warbler,Passeriformes,Parulidae,Setophaga,kirtlandii
+1416,6500,Cape May Warbler,Passeriformes,Parulidae,Setophaga,tigrina
+1417,6580,Cerulean Warbler,Passeriformes,Parulidae,Setophaga,cerulea
+1418,6480,Northern Parula,Passeriformes,Parulidae,Setophaga,americana
+1419,6490,Tropical Parula,Passeriformes,Parulidae,Setophaga,pitiayumi
+1420,6570,Magnolia Warbler,Passeriformes,Parulidae,Setophaga,magnolia
+1421,6600,Bay-breasted Warbler,Passeriformes,Parulidae,Setophaga,castanea
+1422,6620,Blackburnian Warbler,Passeriformes,Parulidae,Setophaga,fusca
+1423,6520,Yellow Warbler,Passeriformes,Parulidae,Setophaga,petechia
+1424,6590,Chestnut-sided Warbler,Passeriformes,Parulidae,Setophaga,pensylvanica
+1425,6610,Blackpoll Warbler,Passeriformes,Parulidae,Setophaga,striata
+1426,6540,Black-throated Blue Warbler,Passeriformes,Parulidae,Setophaga,caerulescens
+1427,6720,Palm Warbler,Passeriformes,Parulidae,Setophaga,palmarum
+1428,6710,Pine Warbler,Passeriformes,Parulidae,Setophaga,pinus
+1429,6550,(Myrtle Warbler) Yellow-rumped Warbler,Passeriformes,Parulidae,Setophaga,coronata coronata
+1430,6560,(Audubon's Warbler) Yellow-rumped Warbler,Passeriformes,Parulidae,Setophaga,coronata audoboni
+1431,6556,(unid. Myrtle/Audubon's) Yellow-rumped Warbler,Passeriformes,Parulidae,Setophaga,coronata
+1432,6630,Yellow-throated Warbler,Passeriformes,Parulidae,Setophaga,dominica
+1433,6730,Prairie Warbler,Passeriformes,Parulidae,Setophaga,discolor
+1434,6640,Grace's Warbler,Passeriformes,Parulidae,Setophaga,graciae
+1435,6650,Black-throated Gray Warbler,Passeriformes,Parulidae,Setophaga,nigrescens
+1436,6680,Townsend's Warbler,Passeriformes,Parulidae,Setophaga,townsendi
+1437,6690,Hermit Warbler,Passeriformes,Parulidae,Setophaga,occidentalis
+1438,6686,hybrid Townsend's Warbler x Hermit Warbler,Passeriformes,Icteridae,Icterus,townsendi x occidentalis
+1439,6685,unid. Townsend's Warbler / Hermit Warbler,Passeriformes,Parulidae,Setophaga,townsendi / occidentalis
+1440,6660,Golden-cheeked Warbler,Passeriformes,Parulidae,Setophaga,chrysoparia
+1441,6670,Black-throated Green Warbler,Passeriformes,Parulidae,Setophaga,virens
+1446,6860,Canada Warbler,Passeriformes,Parulidae,Cardellina,canadensis
+1447,6850,Wilson's Warbler,Passeriformes,Parulidae,Cardellina,pusilla
+1448,6900,Red-faced Warbler,Passeriformes,Parulidae,Cardellina,rubrifrons
+1451,6880,Painted Redstart,Passeriformes,Parulidae,Myioborus,pictus
+1454,6090,Hepatic Tanager,Passeriformes,Cardinalidae,Piranga,flava
+1455,6100,Summer Tanager,Passeriformes,Cardinalidae,Piranga,rubra
+1456,6080,Scarlet Tanager,Passeriformes,Cardinalidae,Piranga,olivacea
+1457,6070,Western Tanager,Passeriformes,Cardinalidae,Piranga,ludoviciana
+1465,5930,Northern Cardinal,Passeriformes,Cardinalidae,Cardinalis,cardinalis
+1466,5940,Pyrrhuloxia,Passeriformes,Cardinalidae,Cardinalis,sinuatus
+1467,5935,unid. Northern Cardinal / Pyrrhuloxia,Passeriformes,Cardinalidae,Cardinalis,cardinalis / sinuatus
+1469,5950,Rose-breasted Grosbeak,Passeriformes,Cardinalidae,Pheucticus,ludovicianus
+1470,5960,Black-headed Grosbeak,Passeriformes,Cardinalidae,Pheucticus,melanocephalus
+1476,5970,Blue Grosbeak,Passeriformes,Cardinalidae,Passerina,caerulea
+1477,5990,Lazuli Bunting,Passeriformes,Cardinalidae,Passerina,amoena
+1478,5980,Indigo Bunting,Passeriformes,Cardinalidae,Passerina,cyanea
+1479,5986,hybrid Lazuli Bunting x Indigo Bunting,Passeriformes,Cardinalidae,Passerina,amoena x cyanea
+1482,6000,Varied Bunting,Passeriformes,Cardinalidae,Passerina,versicolor
+1483,6010,Painted Bunting,Passeriformes,Cardinalidae,Passerina,ciris
+1484,6040,Dickcissel,Passeriformes,Cardinalidae,Spiza,americana

@@ -1,0 +1,127 @@
+---
+title: "exploratory analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Let's try the breeding bird dataset
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+birds <- read.csv("Ontario.csv")
+checklist <- read.csv("checklist.csv")
+```
+
+##See how total abundance changes year by year
+```{r}
+birds$family <- checklist$Family[match(birds$AOU, checklist$AOU)]
+birds$genus <- checklist$Genus[match(birds$AOU, checklist$AOU)]
+birds$species <- checklist$common_name[match(birds$AOU, checklist$AOU)]
+birds$seq <- checklist$Seq[match(birds$AOU, checklist$AOU)]
+
+yearly <- birds %>%
+  group_by(seq, family, genus, species, Year) %>% 
+  summarize(annual_spp_abundance = mean(SpeciesTotal)) %>% 
+  arrange(seq)
+```
+
+##Plot!
+
+Waterfowl population
+```{r}
+yearly %>% 
+  filter(family == "Anatidae") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance, colour = genus)) + geom_point() +
+  geom_smooth()
+#huge increase in geese!
+```
+
+Just out of curiosity, let's look at individual species (and some species at risk)
+
+```{r}
+yearly %>% 
+  filter(family == "Hirundinidae") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance, colour = species)) + geom_point() +
+  geom_smooth()
+```
+
+```{r}
+yearly %>% 
+  filter(species == "Bobolink") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance)) + geom_point() +
+  geom_smooth()
+```
+
+##Questions
+
+It would be interesting to look at regional differences in population dynamics. 
+Are bird populations increasing/decreasing across their full range or regionally? Any range shifts?
+
+There are also files with environmental and weather conditions. Can noise/level of human activity/weather explain these perceived changes in abundance?
+
+Use multiple datasets to study dynamics of a focal species/group?
+
+# Let's try another dataset: Marine predator and prey body sizes
+
+```{r}
+marine <- read.csv("Marine.csv")
+glimpse(marine)
+str(marine)
+```
+
+Rich dataset! Can ask lots of questions. But this will need lots of cleaning. 
+
+```{r}
+marine %>% 
+  ggplot(aes(x = Prey.mass), colour = Predator) + geom_histogram()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
