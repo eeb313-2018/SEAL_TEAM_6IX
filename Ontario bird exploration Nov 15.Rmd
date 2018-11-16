@@ -1,0 +1,133 @@
+---
+title: "Ontariobird exploration"
+author: "Richard"
+date: "November 15, 2018"
+output: html_document
+---
+
+# Setup (copied from exploration.Rmd)
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+birds <- read.csv("Ontario.csv")
+checklist <- read.csv("checklist.csv")
+vehicle <- read.csv("VehicleData.csv")
+```
+
+# Create a mega .csv file for all the potential data we need
+
+```{r eval=FALSE, echo=FALSE}
+# Experimental code chunk, don't need to run it
+
+vehicle1 <- vehicle %>% 
+  filter(CountryNum == 124, StateNum == 68) %>% 
+  select(-RPID, -RecordedCar)
+
+vehicle2 <- vehicle1[,1:55]
+for (row in c(1:nrow(vehicle2))){
+  vehicle2[row, 56] <- sum(vehicle2[row,6:15])
+}
+
+View(vehicle2)
+```
+
+## Clean up vehicle data
+
+```{r}
+# Create new columns that contain total number of cars per 10 routes -- to be matching with Ontario.csv
+# names(vehicle)
+
+vehicle1 <- vehicle %>%
+  filter(CountryNum == 124, StateNum == 68) # Looking at data in Ontario
+  # group_by(Route, Year) %>% 
+
+# Calculate sum of cars by every 10 stops
+for (row in c(1:nrow(vehicle1))){
+    vehicle1[row, 108] <- sum(vehicle1[row,8:17])
+    vehicle1[row, 109] <- sum(vehicle1[row,18:27])
+    vehicle1[row, 110] <- sum(vehicle1[row,28:37])
+    vehicle1[row, 111] <- sum(vehicle1[row,38:47])
+    vehicle1[row, 112] <- sum(vehicle1[row,48:57])
+}
+
+# Change column names of the new columns
+colnames(vehicle1)[colnames(vehicle1)=="V108"] <- "Car1_10"
+colnames(vehicle1)[colnames(vehicle1)=="V109"] <- "Car11_20"
+colnames(vehicle1)[colnames(vehicle1)=="V110"] <- "Car21_30"
+colnames(vehicle1)[colnames(vehicle1)=="V111"] <- "Car31_40"
+colnames(vehicle1)[colnames(vehicle1)=="V112"] <- "Car41_50"
+
+# Reorder the new columns to front of the dataframe for easy visualization
+vehicle1 <- vehicle1[, c(1:7, 108:112, 8:107)]
+
+# A new column for matching purposes
+vehicle1 <- mutate(vehicle1, RouteYear = Route * 10000 + Year)
+
+head(vehicle1)
+# write.csv(vehicle1, "vehicle1.csv")
+```
+
+## Clean up bird abundance data
+
+```{r}
+birds$family <- checklist$Family[match(birds$AOU, checklist$AOU)]
+birds$genus <- checklist$Genus[match(birds$AOU, checklist$AOU)]
+birds$species <- checklist$common_name[match(birds$AOU, checklist$AOU)]
+birds$seq <- checklist$Seq[match(birds$AOU, checklist$AOU)]
+
+# Only include Hirundinidae (swallow) family
+birds1 <- birds %>% 
+  filter(family == "Hirundinidae")
+
+# Reorder for easy visualization
+birds1 <- birds1[, c(1:7, 18, 15:17, 8:14)]
+
+# A new column for matching purposes
+birds1 <- mutate(birds1, RouteYear = Route * 10000 + Year)
+head(birds1)
+write.csv(birds1, "birds1.csv")
+```
+
+## Combine datasets 
+???
+```{r}
+expanded_df <- birds1
+
+for (col in c(7:ncol(vehicle1))){
+    col1 <- col + 12
+    
+    for (row in c(1:nrow(expanded_df))){
+       if (match(expanded_df[row,"RouteYear"], vehicle1[,"RouteYear"])) {
+            expanded_df[row, col1] <- vehicle1[row, col]
+        }
+    }
+    
+    colnames(expanded_df)[col1] <- colnames(vehicle1)[col]
+}
+
+
+
+names(expanded_df)
+```
+
+## Output expanded .csv file
+
+```{r}
+write.csv(expanded_df, "Ontario Bird Data Expanded.csv")
+```
+
+
+
+```{r}
+birds1 <- birds %>% 
+  filter(family == "Hirundinidae") %>% 
+  select(Route, Year, StopTotal, SpeciesTotal, family, genus, species)
+```
+
+```{r}
+birds2 <- birds %>% 
+  filter(family == "Hirundinidae") %>% 
+  select(Route, Year, StopTotal, SpeciesTotal, family, genus, species)
+
+View(birds2)
+```
+
