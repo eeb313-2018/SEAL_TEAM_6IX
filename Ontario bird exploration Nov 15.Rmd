@@ -12,6 +12,7 @@ birds <- read.csv("Ontario.csv")
 checklist <- read.csv("checklist.csv")
 vehicle <- read.csv("VehicleData.csv")
 weather <- read.csv("weather.csv")
+
 ```
 
 # Create a mega .csv file for all the potential data we need
@@ -75,16 +76,19 @@ birds$genus <- checklist$Genus[match(birds$AOU, checklist$AOU)]
 birds$species <- checklist$common_name[match(birds$AOU, checklist$AOU)]
 birds$seq <- checklist$Seq[match(birds$AOU, checklist$AOU)]
 
-# # Only include Hirundinidae (swallow) family
-# birds1 <- birds %>% 
-#   filter(family == "Hirundinidae")
+
+# Only include Hirundinidae (swallow) family
+birds1 <- birds %>% 
+  filter(family == "Hirundinidae")
 
 # Reorder for easy visualization
-birds1 <- birds[, c(1:7, 18, 15:17, 8:14)]
+birds1 <- birds1[, c(1:7, 18, 15:17, 8:14)]
+
 
 # A new column for matching purposes
 birds1 <- mutate(birds1, RouteYear = Route * 10000 + Year)
 head(birds1)
+
 #write.csv(birds1, "birds1.csv")
 ```
 
@@ -120,11 +124,10 @@ expanded_df <- expanded_df %>%
 # 
 # 
 # names(expanded_df)
-```
+```{r}
 
 ## Output expanded .csv file
 
 ```{r}
 write.csv(expanded_df, "Ontario Bird Data Expanded.csv")
 ```
-

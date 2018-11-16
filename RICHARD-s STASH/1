@@ -1,9 +1,0 @@
-birds$Route <- as.factor(birds$Route)
-table1 <- birds %>% 
-  group_by(Year, Route) %>% 
-  count(Year, Route) %>% 
-  select(Year, Route)
-table1 <- table1 %>% 
-  group_by(Year) %>% 
-  tally()
-ggplot(table1, aes(x = Year, y = n)) + geom_point()
