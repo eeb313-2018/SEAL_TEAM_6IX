@@ -1,5 +1,5 @@
 ---
-title: "Ontariobird exploration"
+title: "Ontario bird exploration"
 author: "Richard"
 date: "November 15, 2018"
 output: html_document
@@ -8,11 +8,11 @@ output: html_document
 # Setup (copied from exploration.Rmd)
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
-birds <- read.csv("Ontario.csv")
-checklist <- read.csv("checklist.csv")
-vehicle <- read.csv("VehicleData.csv")
-weather <- read.csv("weather.csv")
-routes <- read.csv("routes.csv")
+birds <- read_csv("Ontario.csv")
+checklist <- read_csv("checklist.csv")
+vehicle <- read_csv("VehicleData.csv")
+weather <- read_csv("weather.csv")
+routes <- read_csv("routes.csv")
 ```
 
 # Create a mega .csv file for all the potential data we need
@@ -112,13 +112,13 @@ expanded_df <- expanded_df %>%
 ## Output expanded .csv file
 
 ```{r}
-write.csv(expanded_df, "Ontario Bird Data Expanded.csv")
+write_csv(expanded_df, "Ontario Bird Data Expanded.csv")
 ```
 
 ```{r}
 expanded_df2 <- expanded_df %>% 
   filter(family == "Hirundinidae")
 
-write.csv(expanded_df2, "Swallows only - Ontario Bird Data Expanded.csv")
+write_csv(expanded_df2, "Swallows only - Ontario Bird Data Expanded.csv")
 ```
 
