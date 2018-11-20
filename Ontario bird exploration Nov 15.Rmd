@@ -11,6 +11,8 @@ library(tidyverse)
 birds <- read.csv("Ontario.csv")
 checklist <- read.csv("checklist.csv")
 vehicle <- read.csv("VehicleData.csv")
+weather <- read.csv("weather.csv")
+
 ```
 
 # Create a mega .csv file for all the potential data we need
@@ -74,6 +76,7 @@ birds$genus <- checklist$Genus[match(birds$AOU, checklist$AOU)]
 birds$species <- checklist$common_name[match(birds$AOU, checklist$AOU)]
 birds$seq <- checklist$Seq[match(birds$AOU, checklist$AOU)]
 
+
 # Only include Hirundinidae (swallow) family
 birds1 <- birds %>% 
   filter(family == "Hirundinidae")
@@ -81,32 +84,46 @@ birds1 <- birds %>%
 # Reorder for easy visualization
 birds1 <- birds1[, c(1:7, 18, 15:17, 8:14)]
 
+
 # A new column for matching purposes
 birds1 <- mutate(birds1, RouteYear = Route * 10000 + Year)
 head(birds1)
-write.csv(birds1, "birds1.csv")
+
+#write.csv(birds1, "birds1.csv")
 ```
 
-## Combine datasets 
-???
+## Clean up weather data
+
 ```{r}
-expanded_df <- birds1
-
-for (col in c(7:ncol(vehicle1))){
-    col1 <- col + 12
-    
-    for (row in c(1:nrow(expanded_df))){
-       if (match(expanded_df[row,"RouteYear"], vehicle1[,"RouteYear"])) {
-            expanded_df[row, col1] <- vehicle1[row, col]
-        }
-    }
-    
-    colnames(expanded_df)[col1] <- colnames(vehicle1)[col]
-}
+weather1 <- weather %>%
+  filter(CountryNum == 124, StateNum == 68) # Looking at data in Ontario
+weather1 <- mutate(weather1, RouteYear = Route * 10000 + Year)
+```
 
 
+## Combine 3 datasets 
 
-names(expanded_df)
+```{r}
+expanded_df <- merge(birds1, vehicle1, by = c("RouteYear", "RouteDataID", "CountryNum", "StateNum", "Route", "RPID", "Year"), all = TRUE)
+expanded_df <- merge(expanded_df, weather1, by = c("RouteYear", "RouteDataID", "CountryNum", "StateNum", "Route", "RPID", "Year"), all = TRUE)
+expanded_df <- expanded_df %>% 
+  arrange(Year)
+
+# for (col in c(7:ncol(vehicle1))){
+#     col1 <- col + 12
+#     
+#     for (row in c(1:nrow(expanded_df))){
+#        if (match(expanded_df[row,"RouteYear"], vehicle1[,"RouteYear"])) {
+#             expanded_df[row, col1] <- vehicle1[row, col]
+#         }
+#     }
+#     
+#     colnames(expanded_df)[col1] <- colnames(vehicle1)[col]
+# }
+# 
+# 
+# 
+# names(expanded_df)
 ```
 
 ## Output expanded .csv file
@@ -114,20 +131,3 @@ names(expanded_df)
 ```{r}
 write.csv(expanded_df, "Ontario Bird Data Expanded.csv")
 ```
-
-
-
-```{r}
-birds1 <- birds %>% 
-  filter(family == "Hirundinidae") %>% 
-  select(Route, Year, StopTotal, SpeciesTotal, family, genus, species)
-```
-
-```{r}
-birds2 <- birds %>% 
-  filter(family == "Hirundinidae") %>% 
-  select(Route, Year, StopTotal, SpeciesTotal, family, genus, species)
-
-View(birds2)
-```
-
