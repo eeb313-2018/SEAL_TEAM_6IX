@@ -19,11 +19,11 @@ output: html_document
 
 # Meeting Minutes
 
-1. Discussing about filtering out non-swallow birds from the dataset.
+1. Discussing about filtering out non-swallow birds (any birds that are not part of Hirundinidae family) from the dataset.
 
 2. Merge the latitude and longitude of routes into the mega dataset
 
-3. Converting Fahrenheit temperature to celcius temperature
+3. Converting Fahrenheit temperature to Celsius temperature
 
 # Homeworks
 
