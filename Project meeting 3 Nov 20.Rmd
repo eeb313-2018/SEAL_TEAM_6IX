@@ -1,0 +1,34 @@
+---
+title: "Project Meeting 3 Nov 20"
+author: "Richard"
+date: "November 20, 2018"
+output: html_document
+---
+
+# Update from last time
+
+1. Richard cleaned the vehicle data (on "Ontario bird exploration Nov 15.rmd")
+
+2. Richard tried to merge the vehicle and abundance datasets but encountered some bugs
+
+3. Alex worked on weather data
+
+4. Caroline cleaned up the weather data
+
+5. Caroline helped with merging
+
+# Meeting Minutes
+
+1. Discussing about filtering out non-swallow birds (any birds that are not part of Hirundinidae family) from the dataset.
+
+2. Merge the latitude and longitude of routes into the mega dataset
+
+3. Converting Fahrenheit temperature to Celsius temperature
+
+# Homeworks
+
+Richard: solve bug in the temperature file
+
+Alex: plot qplots of start and end temperatures to "species total"
+
+Caroline: plot qplots of Car numbers to route segment bird numbers
