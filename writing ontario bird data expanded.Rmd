@@ -111,13 +111,28 @@ routes1 <- routes %>%
   filter(CountryNum == 124, StateNum == 68) # Looking at data in Ontario
 ```
 
+## Add count of routes in each year
 
-## Combine 4 datasets: bird abundance, vehicle data, weather, and route details
+```{r}
+# These are just Caroline's codes, some figure
+birds$Route <- as.factor(birds$Route)
+table1 <- birds1 %>% 
+  group_by(Year, Route) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table1 <- table1 %>% 
+  group_by(Year) %>% 
+  tally()
+ggplot(table1, aes(x = Year, y = n)) + geom_point()
+```
+
+## Combine 4+1 datasets: bird abundance, vehicle data, weather, and route details + table 1 (Caroline's code)
 
 ```{r}
 expanded_df <- merge(birds1, vehicle2, by = c("RouteYear", "RouteDataID", "CountryNum", "StateNum", "Route", "RPID", "Year"), all = TRUE)
 expanded_df <- merge(expanded_df, weather1, by = c("RouteYear", "RouteDataID", "CountryNum", "StateNum", "Route", "RPID", "Year"), all = TRUE)
 expanded_df <- merge(expanded_df, routes1, by = c("CountryNum", "StateNum", "Route"), all = TRUE)
+expanded_df <- merge(expanded_df, table1, by = "Year")
 
 expanded_df <- expanded_df %>% 
   arrange(Year)
@@ -125,7 +140,10 @@ expanded_df <- expanded_df %>%
 # head(expanded_df)
 
 # Reorder columns to make life easier
-expanded_df1 <- expanded_df[, c(4, 8, 9:10, 20:21, 127:150, 11:15, 22:126, 1:3, 5:7, 16:19)]
+expanded_df1 <- expanded_df[, c(4, 8, 9:10, 20:21, 127:151, 11:15, 22:126, 1:3, 5:7, 16:19)]
+
+# Rename "n"
+colnames(expanded_df1)[colnames(expanded_df1)=="n"] <- "NoOfRouteInYear"
 head(expanded_df1)
 ```
 
