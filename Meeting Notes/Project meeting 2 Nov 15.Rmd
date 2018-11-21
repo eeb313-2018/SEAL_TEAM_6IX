@@ -5,14 +5,14 @@ date: "November 15, 2018"
 output: html_document
 ---
 
-# Hirudindae species names
+# Hirundinidae species names
 
 
 # Meeting Minutes
 
 1. Delete some old files in github
 
-2. Exploring the Hirudindae abundance over the years using "exploration.Rmd"
+2. Exploring the Hirundinidae abundance over the years using "exploration.Rmd"
 
 3. Try to clean up the "Ontario.csv" -- This takes a vast majority of time as I try to figure out way to clean up a huge dataset and not knowing how to merge.
 
