@@ -1,0 +1,79 @@
+---
+title: "Data manipulation Nov 20"
+author: "Richard"
+date: "November 20, 2018"
+output: html_document
+---
+
+# Setup
+
+```{r}
+library(tidyverse)
+```
+
+# Delete redundant columns of weather (only when we had the problem)
+
+```{r}
+# names(swallows)
+# swallows <- swallows[, 1:142]
+# 
+# names(swallows)
+```
+
+
+# Convert all Fahrenheit to Celcius
+
+```{r}
+# str(swallows[, 127:150])
+swallows <- read_csv("Swallows only - Ontario Bird Data Expanded.csv", col_types = cols(TempScale = "c"))
+
+swallows$StartTemp <- as.numeric(swallows$StartTemp)
+swallows$EndTemp <- as.numeric(swallows$EndTemp)
+swallows$TempScale <- as.character(swallows$TempScale)
+
+# str(swallows)
+unique(swallows$TempScale)
+
+swallows_modified <- swallows %>% 
+  mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp))
+
+write_csv(swallows_modified, "temp.csv")
+
+# # invisible(
+# for (row in c(1:nrow(swallows))) {
+#   
+#   # Only change if TempScale is F or NULL
+#   if(as.character(swallows[row, "TempScale"]) == "F") {
+#     
+#     
+#     if(!is.na(swallows[row, "StartTemp"])) {
+#       swallows[row, "StartTemp"] <- ((swallows[row, "StartTemp"] - 32) / 1.8)
+#     }
+#     
+#     
+#     # if(!is.na(swallows[row, "EndTemp"])) {
+#     #   swallows[row, "EndTemp"] <- ((swallows[row, "EndTemp"]) - 32) / 1.8
+#     # }
+#   }
+# }
+# # )
+
+
+```
+
+## Delete the confounding column of "TempScale"
+
+```{r}
+swallows <- swallows %>% 
+  select(-TempScale) 
+  # filter(RouteTypeID == 1) %>% 
+  # filter(RouteTypeDetailID == 1)
+```
+
+
+
+## Output expanded .csv file
+
+```{r}
+write.csv(swallows, "temp.csv")
+```
