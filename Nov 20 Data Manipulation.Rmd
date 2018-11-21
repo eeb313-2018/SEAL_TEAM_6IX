@@ -14,7 +14,7 @@ swallows <- read_csv("Swallows only - Ontario Bird Data Expanded.csv", col_types
 ```
 
 
-# Convert all Fahrenheit to Celcius
+# Convert all Fahrenheit to Celsius
 
 ```{r}
 swallows$StartTemp <- as.numeric(swallows$StartTemp)
