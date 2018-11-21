@@ -137,10 +137,10 @@ expanded_df <- merge(expanded_df, table1, by = "Year")
 expanded_df <- expanded_df %>% 
   arrange(Year)
 
-# head(expanded_df)
+head(expanded_df)
 
 # Reorder columns to make life easier
-expanded_df1 <- expanded_df[, c(4, 8, 9:10, 20:21, 127:151, 11:15, 22:126, 1:3, 5:7, 16:19)]
+expanded_df1 <- expanded_df[, c(5, 8, 9:10, 20:21, 127:151, 11:15, 22:126, 1:4, 6:7, 16:19)]
 
 # Rename "n"
 colnames(expanded_df1)[colnames(expanded_df1)=="n"] <- "NoOfRouteInYear"
