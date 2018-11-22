@@ -1,0 +1,104 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+birds <- read_csv("Swallows Data Expanded.csv")
+View(birds)
+```
+
+#Q Plots for Swallow Total vs Temps 
+```{r}
+qplot(SpeciesTotal, StartTemp, data = birds)
+```
+
+```{r}
+qplot(SpeciesTotal, EndTemp, data = birds)
+```
+
+#Q Plots for Bird Species Total vs Temps
+```{r}
+qplot(TotalSpp, StartTemp, data = birds)
+```
+
+```{r}
+qplot(TotalSpp, EndTemp, data = birds)
+```
+
+#Compiled ggplots of the above qplots
+```{r}
+ggplot(birds, aes(SpeciesTotal))+
+  geom_point(aes(y = StartTemp), colour = "orange")+
+  geom_point(aes(y = EndTemp), colour = "blue", alpha = 0.25)+
+  ylab("Temp")
+```
+
+```{r}
+ggplot(birds, aes(TotalSpp))+
+  geom_point(aes(y = StartTemp), colour = "purple")+
+  geom_point(aes(y = EndTemp), colour = "pink", alpha = 0.25)+
+  ylab("Temp")
+```
+
+#Plot for each Swallow species based on Latitude/Longitude
+```{r}
+ggplot(birds, aes(x = Latitude, y = Longitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+#Plot for Swallows vs Sky Conditions
+```{r}
+ggplot(birds, aes(TotalSpp))+
+  geom_point(aes(y = StartSky), colour = "blue4")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(TotalSpp))+
+  geom_point(aes(y = EndSky), colour = "cornflowerblue")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(TotalSpp))+
+  geom_point(aes(y = StartSky), colour = "blue4")+
+  geom_point(aes(y = EndSky), colour = "cornflowerblue", alpha = 0.25)+
+  ylab("Sky Conditions")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(TotalSpp))+
+  geom_point(aes(y = StartWind), colour = "greenyellow")+
+  geom_point(aes(y = EndWind), colour = "honeydew4", alpha = 0.25)+
+  ylab("Wind Conditions")+
+  facet_wrap(~species)
+```
+
+#Just some messing around with some graphs
+```{r}
+birds$Car_Total <- as.numeric(birds$Car_Total)
+
+qplot(Car_Total, SpeciesTotal, data = birds)+
+  geom_point()
+```
+```{r}
+ggplot(birds, aes(Car_Total))+
+  geom_point(aes(y = TotalSpp), colour = "hotpink")+
+  geom_point(aes(y = SpeciesTotal), colour = "hotpink4", alpha = 0.25)+
+  facet_wrap(~species)
+```
+
+
+
+
+
+
+
