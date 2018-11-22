@@ -1,0 +1,63 @@
+---
+title: "ebird-data-open"
+output: html_document
+---
+
+family of interest: Hirundinidae
+
+Progne subis (PUMA)
+Tachycineta bicolor (TRES)
+Stelgidopteryx serripennis (NRWS)
+Riparia riparia (BANS)
+Petrochelidon pyrrhonota (CLSW)
+Hirundo rustica (BARS)
+
+```{r}
+install.packages("data.table")
+install.packages("tidyverse")
+library(tidyverse)
+library(data.table)
+```
+
+#Reading the checklist file
+```{r}
+ebird_2003 <- fread("C:/Temp/ERD2002SS/2003/checklists.csv", select = c("SAMPLING_EVENT_ID", "LOC_ID", "LATITUDE", "LONGITUDE", "YEAR", "MONTH", "DAY", "TIME",
+                                                                   "COUNTRY", "STATE_PROVINCE", "COUNTY", "COUNT_TYPE", "EFFORT_HRS", "EFFORT_DISTANCE_KM", 
+                                                                   "EFFORT_AREA_HA", "OBSERVER_ID", "NUMBER_OBSERVERS", "GROUP_ID", "PRIMARY_CHECKLIST_FLAG", 
+                                                                   "Progne_subis", "Tachycineta_bicolor", "Stelgidopteryx_serripennis", "Riparia_riparia", 
+                                                                   "Petrochelidon_pyrrhonota", "Hirundo_rustica"))
+```
+
+To confirm it's the correct number of rows, check the number of rows in the csv file (without opening it). Open the command line prompt and type 
+`find /c /v "A String that is extremely unlikely to occur" filename`. Checks out!
+
+#Subsetting
+```{r}
+ebird_2003 <- ebird_2003[!(ebird_2003$Progne_subis == 0 & ebird_2003$Tachycineta_bicolor == 0 & ebird_2003$Stelgidopteryx_serripennis == 0 & 
+                             ebird_2003$Riparia_riparia == 0 & ebird_2003$Petrochelidon_pyrrhonota == 0 & ebird_2003$Hirundo_rustica == 0)]
+```
+
+#Write into new csv
+```{r}
+fwrite(ebird_2003, "ebird_2003_small.csv")
+```
+
+#Try for the rest of the checklist files
+
+```{r}
+ebird_2002 <- fread("C:/Temp/ERD2016SS/2002/checklists.csv", select = c("SAMPLING_EVENT_ID", "LOC_ID", "LATITUDE", "LONGITUDE", "YEAR", "MONTH", "DAY", "TIME",
+                                                                   "COUNTRY", "STATE_PROVINCE", "COUNTY", "COUNT_TYPE", "EFFORT_HRS", "EFFORT_DISTANCE_KM", 
+                                                                   "EFFORT_AREA_HA", "OBSERVER_ID", "NUMBER_OBSERVERS", "GROUP_ID", "PRIMARY_CHECKLIST_FLAG", 
+                                                                   "Progne_subis", "Tachycineta_bicolor", "Stelgidopteryx_serripennis", "Riparia_riparia", 
+                                                                   "Petrochelidon_pyrrhonota", "Hirundo_rustica"))
+ebird_2002 <- ebird_2002[!(ebird_2002$Progne_subis == 0 & ebird_2002$Tachycineta_bicolor == 0 & ebird_2002$Stelgidopteryx_serripennis == 0 & 
+                             ebird_2002$Riparia_riparia == 0 & ebird_2002$Petrochelidon_pyrrhonota == 0 & ebird_2002$Hirundo_rustica == 0)]
+fwrite(ebird_2002, "ebird_2002_small.csv")
+```
+
+fread() for 2000-six + 2000-nine onwards had a weird output. did something go wrong? these files all had many rows (>100 000). files seem ok though
+
+|--------------------------------------------------|
+|==================================================|
+
+

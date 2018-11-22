@@ -1,0 +1,94 @@
+---
+title: "Data manipulation Nov 20"
+author: "Richard"
+date: "November 20, 2018"
+output: html_document
+---
+
+# Setup
+
+```{r}
+library(tidyverse)
+
+swallows <- read_csv("Swallows only - Ontario Bird Data Expanded.csv", col_types = cols(TempScale = "c"))
+```
+
+
+# Convert all Fahrenheit to Celsius
+
+```{r}
+swallows$StartTemp <- as.numeric(swallows$StartTemp)
+swallows$EndTemp <- as.numeric(swallows$EndTemp)
+
+# str(swallows$TempScale)
+unique(swallows$TempScale)
+
+# Actual TempScale containts: "F", "C", "NULL" and "NA"
+# "NA"s do not have any temperature recordings (displayed as 0, I will change them to NA)
+# There are two cases of "NULL"s, one has temperatures in Fahrenheit [will change to Celcius] 
+# and the other has "NULL" [will change to NA]
+
+swallows_modified <- swallows %>% 
+  # Convert F to C
+  mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp)) %>%
+  mutate(EndT = ifelse(TempScale == "F", (EndTemp - 32) / 1.8, EndTemp)) %>% 
+  
+  # Convert NA temps to "NA"
+  mutate(StartT1 = ifelse(TempScale == "NA", NA, StartT)) %>%
+  mutate(EndT1 = ifelse(TempScale == "NA", NA, EndT)) %>%
+
+  # Convert NULL temps to F or NA
+  mutate(StartT2 = ifelse(TempScale == "NULL" & !is.na(StartTemp), (StartTemp - 32) / 1.8, StartT1)) %>%
+  mutate(EndT2 = ifelse(TempScale == "NULL" & !is.na(EndTemp), (EndTemp - 32) / 1.8, EndT1)) %>% 
+  mutate(StartT3 = ifelse(TempScale == "NULL" & is.na(StartTemp), NA, StartT2)) %>%
+  mutate(EndT3 = ifelse(TempScale == "NULL" & is.na(EndTemp), NA, EndT2)) %>% 
+
+  # There are some cases with errorneous recordings, or only have one of the 2 temps, will replace both temps as NA
+  mutate(StartT4 = ifelse(abs(StartT3 - EndT3) > 50, NA, StartT3)) %>%
+  mutate(EndT4 = ifelse(abs(StartT3 - EndT3) > 50, NA, EndT3))
+
+# swallows_modified <- arrange(swallows_modified, desc(TempScale))
+write_csv(swallows_modified, "temp.csv")
+
+```
+
+## Delete confounding columns and rename new start and end temps
+
+```{r}
+# head(swallows_modified)
+
+swallows_modified1 <- swallows_modified[,c(1:10, 13, 160:161, 14:151)]
+# head(swallows_modified1)
+
+colnames(swallows_modified1)[colnames(swallows_modified1) == "StartT4"] <- "StartTemp"
+colnames(swallows_modified1)[colnames(swallows_modified1) == "EndT4"] <- "EndTemp"
+# head(swallows_modified1)
+
+# Remove TempScale column
+swallows_modified1 <- swallows_modified1 %>% 
+  select(-TempScale)
+# head(swallows_modified1)
+
+# write_csv(swallows_modified1, "temp.csv")
+```
+
+# Select columns with RouteTypeDetailID as 1 (most complete routes) or NA as most are NA
+
+```{r}
+swallows_modified2 <- swallows_modified1 %>% 
+  filter(RouteTypeDetailID == 1 | is.na(RouteTypeDetailID))
+
+# RouteTypeID and RouteTypeDetailID are now either 1 or NA, no longer relevant
+# So they will be moved to the back of dataset
+
+# head(swallows_modified2)
+swallows_modified2 <- swallows_modified2[,c(1:27, 30:150, 28:29)]
+# head(swallows_modified2)
+```
+
+
+## Output expanded .csv file
+
+```{r}
+write_csv(swallows_modified2, "Swallows Data Expanded.csv")
+```
