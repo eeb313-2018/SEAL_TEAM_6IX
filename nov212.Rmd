@@ -1,0 +1,118 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+birds <- read.csv("Swallows Data Expanded.csv")
+library(tidyverse)
+```
+
+#plot swallow abundance vs traffic 
+Sum up total number of cars for each route 
+
+```{r}
+birds %>% 
+  filter(!is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5) + coord_cartesian(ylim = c(0, 200))
+#why are some rows with missing values removed when I filtered out the NAs? Note: some observations in grpah are cutoff
+```
+
+```{r}
+birds %>% 
+  filter(!is.na(SpeciesTotal)) %>% 
+  mutate(proportion_of_stops = StopTotal/50) %>% 
+  ggplot(., aes(x = Car_Total, y = proportion_of_stops)) + geom_point(alpha = 0.5)
+#Proportion of stops is probably not a good reflection of swallow abundance
+```
+
+```{r}
+#Tree Swallow
+birds %>% 
+  filter(species == "Tree Swallow" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5) + coord_cartesian(ylim = c(0, 100))
+#Note: this plot is zoomed in and excludes some extreme observations
+```
+
+```{r}
+#Barn Swallow
+birds %>% 
+  filter(species == "Barn Swallow" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5)
+```
+
+```{r}
+#Bank Swallow
+birds %>% 
+  filter(species == "Bank Swallow" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5) + coord_cartesian(ylim = c(0, 100))
+#consistently less common than Barn and Tree. Note: some observations in graph are cut-off
+```
+
+```{r}
+#Northern Rough-winged Swallow
+birds %>% 
+  filter(species == "Northern Rough-winged Swallow" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5)
+```
+
+```{r}
+#Cliff Swallow
+birds %>% 
+  filter(species == "Cliff Swallow" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5) #+ coord_cartesian(ylim = c(0, 100))
+```
+
+```{r}
+#Purple Martin
+birds %>% 
+  filter(species == "Purple Martin" & !is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal)) + geom_point(alpha = 0.5) #+ coord_cartesian(ylim = c(0, 100))
+```
+
+
+Note: It will be difficult to test if traffic significantly affects swallow numbers - the assumption of homoscedasticity is violated (few observations with really high traffic values). Also, would it be better to test this with swallows as a group or individually by species? Is there a reason why some swallow populations would respond to traffic differently/would be more tolerant to traffic than others? 
+
+Another question: what about routes where swallows are NOT seen? Is this because of high-traffic (and therefore something we wouldn't see in this graph)? --> get full data set and plot histogram showing frequency of routes against traffic level (and where swallows are seen on that histogram)
+
+```{r}
+all_birds <- read.csv("Ontario Bird Data Expanded.csv")
+```
+
+```{r}
+all_birds %>% 
+  group_by(Route) %>% 
+  ggplot(., aes(x = Car_Total)) + geom_freqpoly()
+all_birds %>% 
+  filter(family == "Hirundinidae") %>% 
+  group_by(Route) %>% 
+  ggplot(., aes(x = Car_Total)) + geom_freqpoly()
+#how to overlay these two histograms?
+#it would be so cool to split this up by species!! and see if some species are more/less tolerant to traffic
+```
+
+The first shows a histogram of the frequency of routes (for all years) at each traffic interval. The second shows a histogram of only the routes with swallows. The shape and spread of these two histograms are very similar. The routes where swallows are seen probably have little to do with the amount of traffic on that route. If traffic did affect swallow abundance, then the distribution in our second swallow-only histogram would be shifted much further to the left. However, it would still be really interesting to split this up by species.
+
+
+#Do swallow populations decline?
+
+```{r}
+ggplot(birds, )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
