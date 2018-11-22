@@ -1,0 +1,23 @@
+---
+title: "Project Meeting 2 Nov 15"
+author: "Richard"
+date: "November 15, 2018"
+output: html_document
+---
+
+# Hirundinidae species names
+
+
+# Meeting Minutes
+
+1. Delete some old files in github
+
+2. Exploring the Hirundinidae abundance over the years using "exploration.Rmd"
+
+3. Try to clean up the "Ontario.csv" -- This takes a vast majority of time as I try to figure out way to clean up a huge dataset and not knowing how to merge.
+
+# Assign work
+
+Richard: generate a merge dataset of "exploration" and "vehicle"
+Caroline: help with merge.
+Alex: clean up on weather data.
