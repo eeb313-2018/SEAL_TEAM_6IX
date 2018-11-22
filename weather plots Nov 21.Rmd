@@ -5,11 +5,9 @@ output: html_notebook
 
 ```{r}
 library(tidyverse)
-library(dplyr)
-library(ggplot2)
 
 birds <- read_csv("Swallows Data Expanded.csv")
-View(birds)
+#View(birds)
 ```
 
 #Q Plots for Swallow Total vs Temps 
