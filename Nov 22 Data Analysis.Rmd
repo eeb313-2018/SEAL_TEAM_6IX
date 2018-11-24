@@ -29,23 +29,46 @@ ggplot(birds, aes(x = Longitude, y = Latitude))+
 
 ## Swallows Distribution by years
 
-Note: More data have been observed since 1994
+Note: More data have been observed since 1994.
+
+(Which one?)
 
 ```{r}
+
+# mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp)) %>%
+
 swallows_1994 <- swallows %>%
-  filter(Year == 1994)
+  filter(Year == 2011, species == "Tree Swallow")
 
 ggplot(swallows_1994, aes(x = Longitude, y = Latitude)) +
   geom_point(aes(color = SpeciesTotal)) +
   facet_wrap(~species) +
-  theme_classic() +
-  scale_color_gradient(low="yellow", high="red") +
-  # scale_color_manual(
-  #   labels = c("SpeciesTotal" = "Bird observation")) +
-  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+  theme_light() +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1)) +
+  scale_color_gradientn(limits = c(0,600),
+                       # low = "yellow", high = "red",
+                       colours = rainbow(5),
+                       name = "Birds Observed at Route")
+  
 ```
 
+```{r}
 
+# mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp)) %>%
+
+swallows_1994 <- swallows %>%
+  filter(Year == 2008, species == "Tree Swallow")
+
+ggplot(swallows_1994, aes(x = Longitude, y = Latitude)) +
+  geom_point(aes(color = SpeciesTotal)) +
+  facet_wrap(~species) +
+  theme_light() +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1)) +
+  scale_color_gradient(limits = c(0,100),
+                       low = "yellow", high = "red",
+                       # colours = rainbow(5),
+                       name = "Birds Observed at Route")
+```
 
 ```{r}
 # str(birds$Year)
