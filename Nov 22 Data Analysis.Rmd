@@ -1,0 +1,71 @@
+---
+title: "Nov 22 Data Analysis"
+author: "Richard"
+date: "November 22, 2018"
+output: html_document
+---
+
+# Load Data
+
+```{r}
+library(tidyverse)
+
+swallows <- read_csv("Swallows Data Expanded.csv")
+
+swallows <- swallows[,c(139, 1:138, 140:150)]
+head(swallows)
+```
+
+# Make heatmap -- distribution to year
+
+## Initial exploration (Alex's code)
+
+```{r}
+ggplot(birds, aes(x = Longitude, y = Latitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+## Swallows Distribution by years
+
+Note: More data have been observed since 1994
+
+```{r}
+swallows_1994 <- swallows %>%
+  filter(Year == 1994)
+
+ggplot(swallows_1994, aes(x = Longitude, y = Latitude)) +
+  geom_point(aes(color = SpeciesTotal)) +
+  facet_wrap(~species) +
+  theme_classic() +
+  scale_color_gradient(low="yellow", high="red") +
+  # scale_color_manual(
+  #   labels = c("SpeciesTotal" = "Bird observation")) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+
+
+```{r}
+# str(birds$Year)
+
+swallows_1995 <- birds %>% 
+  filter(Year == 1995)
+
+swallows_2005 <- birds %>% 
+  filter(Year == 2005)
+
+ggplot(swallow_1995, aes(x = Longitude, y = Latitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+
+ggplot(birds_2005, aes(x = Longitude, y = Latitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+# IDEA to self: gganimate by years
+# IDEA: check geom_grid
