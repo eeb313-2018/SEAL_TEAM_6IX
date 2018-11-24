@@ -1,0 +1,127 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+
+birds <- read_csv("Swallows Data Expanded.csv")
+#View(birds)
+```
+
+#Q Plots for Swallow Total vs Temps 
+```{r}
+qplot(StartTemp, SpeciesTotal, data = birds)
+```
+
+```{r}
+qplot(EndTemp, SpeciesTotal, data = birds)
+```
+
+#Q Plots for Bird Species Total vs Temps
+```{r}
+qplot(StartTemp, TotalSpp, data = birds)
+```
+
+```{r}
+qplot(EndTemp, TotalSpp, data = birds)
+```
+
+#Compiled ggplots of the above qplots
+```{r}
+ggplot(birds, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartTemp), colour = "orange")+
+  geom_point(aes(x = EndTemp), colour = "blue", alpha = 0.25)+
+  xlab("Temp")
+```
+
+```{r}
+ggplot(birds, aes(y = TotalSpp))+
+  geom_point(aes(x = StartTemp), colour = "purple")+
+  geom_point(aes(x = EndTemp), colour = "pink", alpha = 0.25)+
+  xlab("Temp")
+```
+
+#Plot for each Swallow species based on Latitude/Longitude
+This graph has potential for making a heat map! Since you can basically almost see the outline of Southern Ontario!
+```{r}
+ggplot(birds, aes(x = Longitude, y = Latitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+#Plot for Swallows vs Sky Conditions
+```{r}
+ggplot(birds, aes(StartSky))+
+  geom_point(aes(y = SpeciesTotal), colour = "blue4")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(EndSky))+
+  geom_point(aes(y = SpeciesTotal), colour = "cornflowerblue")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartSky), colour = "blue4")+
+  geom_point(aes(x = EndSky), colour = "cornflowerblue", alpha = 0.25)+
+  xlab("Sky Conditions")+
+  facet_wrap(~species)
+```
+
+
+#Plot for All birds vs Sky Conditions
+```{r}
+ggplot(birds, aes(StartSky))+
+  geom_point(aes(y = TotalSpp), colour = "blue4")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(EndSky))+
+  geom_point(aes(y = TotalSpp), colour = "cornflowerblue")+
+  facet_wrap(~species)
+```
+
+```{r}
+ggplot(birds, aes(y = TotalSpp))+
+  geom_point(aes(x = StartSky), colour = "blue4")+
+  geom_point(aes(x = EndSky), colour = "cornflowerblue", alpha = 0.25)+
+  xlab("Sky Conditions")+
+  facet_wrap(~species)
+```
+
+#Plot for Swallows vs Wind Conditions
+```{r}
+ggplot(birds, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartWind), colour = "greenyellow")+
+  geom_point(aes(x = EndWind), colour = "honeydew4", alpha = 0.25)+
+  xlab("Wind Conditions")+
+  facet_wrap(~species)
+```
+
+#Just some messing around with some graphs
+```{r}
+birds$Car_Total <- as.numeric(birds$Car_Total)
+
+qplot(SpeciesTotal, Car_Total, data = birds)+
+  geom_point()
+```
+
+```{r}
+ggplot(birds, aes(Car_Total))+
+  geom_point(aes(y = TotalSpp), colour = "hotpink")+
+  geom_point(aes(y = SpeciesTotal), colour = "hotpink4", alpha = 0.25)+
+  facet_wrap(~species)
+```
+
+
+
+
+
+
+
