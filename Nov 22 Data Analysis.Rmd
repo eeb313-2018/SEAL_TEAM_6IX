@@ -9,6 +9,7 @@ output: html_document
 
 
 ```{r}
+#install.packages("tidyverse")
 library(tidyverse)
 
 swallows <- read_csv("Swallows Data Expanded.csv")
@@ -22,101 +23,119 @@ swallows1 <- swallows %>%
 swallows1 <- swallows1[, c(1, 151, 2:150)]
 head(swallows1)
 
-write_csv(swallows1, "temp.csv")
+# write_csv(swallows1, "temp.csv")
 ```
 
 # Make heatmap -- distribution to year
 
-## Prepare to draw map of Ontario
+## Draw map of Ontario
+
+Region of observations: Longitude between -95 and -74, Latitude between 42 and 53
 
 ```{r}
-# install.packages("rworldmap")
-library(rworldmap)
-area_map <- getMap(resolution = "low")
-plot(area_map, xlim = c(-141,-53), ylim = c(40,85), asp = 1)
-
-# install.packages("ggmap")
-# library(ggmap)
-# map <- get_map(location = c(lon = -84, lat = 47), zoom = 12)
-# 
-# ggmap(map)
-   
-install.packages("maps")
-install.packages("mapdata")
+# install.packages("maps")
+# install.packages("mapdata")
 library(maps)
 library(mapdata)
 
-ontario_map1 <- map("world",
-    xlim = c(-100, -70),
-    ylim = c(40, 60),
-    fill = FALSE) %>% 
-  head()
+# Map of the part of Ontario we are interested in
+ontario_map1 <- map_data("world", regions = "Canada") %>% 
+  filter(long > -95 & long < -74) %>% 
+  filter(lat > 42 & lat < 60)
 
-ggplot() + 
-  geom_polygon(data = world_map1, aes(x = long, y = lat, group = group),
-               xlim = c(-141,-53), ylim = c(40,85),
-               fill = NA, color = "black") + 
+area_map <- ggplot() + 
+  geom_polygon(data = ontario_map1, aes(x = long, y = lat, group = group),
+               fill = "#F5F5F5", color = "black") + 
   coord_fixed(1.3) 
 
-```
+# Some major Ontario cities
+ont_cities <- canada.cities %>% 
+  filter(long > -95 & long < -74) %>% 
+  filter(lat > 42 & lat < 60) %>% 
+  filter(pop > 200000)
 
+ont_cities
+```
 
 ## Swallows Distribution by years
 
-Note: More routes have been observed between 2014-2015 (i.e. >=75).
-
-(Which one?)
-(Probably not this)
-```{r}
-
-# mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp)) %>%
-
-swallows_1994 <- swallows %>%
-  filter(Year == 2011, species == "Tree Swallow")
-
-ggplot(swallows_1994, aes(x = Longitude, y = Latitude)) +
-  geom_point(aes(color = SpeciesTotal)) +
-  facet_wrap(~species) +
-  theme_light() +
-  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1)) +
-  scale_color_gradientn(limits = c(0,600),
-                       # low = "yellow", high = "red",
-                       colours = rainbow(5),
-                       name = "Birds Observed at Route")
-  
-```
-
-Use this one
+Note: More routes have been observed between 1994-2015 (i.e. >=75).
 
 ```{r}
-
-# mutate(StartT = ifelse(TempScale == "F", (StartTemp - 32) / 1.8, StartTemp)) %>%
-
 Swallows_temp <- swallows1 %>%
   filter(Year == 1994, species == "Tree Swallow")
 
-# plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1) +
-  
-# plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1)
-ggplot() +
-  # geom_polygon(newmap) +
+# Generate plot title
+Plot_Title <- paste(unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+area_map +
+  # Add bird distribution data
   geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
-                                size = SpeciesTotal1
-                 # , color = SpeciesTotal1
-                 )) +
-  # facet_wrap(~species) +
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat)) + 
+  # Themes
   theme_classic() +
-  ggtitle("Tree Swallow Distribution: 1994") +
-  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
-        plot.title = element_text(hjust = 0.5)) +
-  # scale_color_gradient(limits = c(0,100),
-  #                      low = "blue", high = "red",
-  #                      # colours = rainbow(5),
-  #                      name = "Birds Observed at Route") +
+  scale_color_gradient(limits = c(0,100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds Observed at Route"
+                       ) +
   scale_size_continuous(limits = c(0, 100), # Range of number observed
-                        range = c(1, 4), # Range of size of dots
-                        name = "Birds Observed at Route")+
-  xlim(-95, -74) + ylim(42, 53)
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 9),
+        NULL) +
+  NULL
+```
+
+```{r}
+for (YearNo in c(1994:2015)) {
+  
+  Swallows_temp <- swallows1 %>%
+  filter(Year == YearNo, species == "Tree Swallow")
+
+  # Generate plot title
+  Plot_Title <- paste(unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+  
+  # Generate plot 
+  plot_temp <- area_map +
+    # Add bird distribution data
+    geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                         size = SpeciesTotal1,
+                                         color = SpeciesTotal1,
+                                         NULL)) +
+    # Add some points (black) for cities
+    geom_point(data = ont_cities, aes(x = long, y = lat)) + 
+    # Themes
+    theme_classic() +
+    scale_color_gradient(limits = c(0,100),
+                         low = "#FFF15A", high = "Red",
+                         name = "Birds Observed at Route"
+                         ) +
+    scale_size_continuous(limits = c(0, 100), # Range of number observed
+                          range = c(1, 3), # Range of size of dots
+                          name = "Birds Observed at Route",
+                          guide = "none") +
+  
+    labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+    theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+          plot.title = element_text(hjust = 0.5),
+          # legend.key.size = unit(0.5, "cm"),
+          legend.title = element_text(size = 9),
+          NULL) +
+    NULL
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+}
+
 ```
 
 # IDEA to self: gganimate by years
