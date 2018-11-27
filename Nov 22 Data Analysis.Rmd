@@ -31,21 +31,33 @@ write_csv(swallows1, "temp.csv")
 
 ```{r}
 # install.packages("rworldmap")
-# library(rworldmap)
-newmap <- getMap(resolution = "low")
-plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1)
+library(rworldmap)
+area_map <- getMap(resolution = "low")
+plot(area_map, xlim = c(-141,-53), ylim = c(40,85), asp = 1)
 
 # install.packages("ggmap")
 # library(ggmap)
-# map <- get_map(location = c(lat = 47, lon = -84), zoom = 12)
+# map <- get_map(location = c(lon = -84, lat = 47), zoom = 12)
 # 
 # ggmap(map)
    
-# install.packages("maps")
-usa <- map_data("canada")
+install.packages("maps")
+install.packages("mapdata")
+library(maps)
+library(mapdata)
+
+ontario_map1 <- map("world",
+    xlim = c(-100, -70),
+    ylim = c(40, 60),
+    fill = FALSE) %>% 
+  head()
+
 ggplot() + 
-  geom_polygon(data = usa, aes(x=long, y = lat, group = group), fill = NA, color = "black") + 
-  coord_fixed(1.3)     
+  geom_polygon(data = world_map1, aes(x = long, y = lat, group = group),
+               xlim = c(-141,-53), ylim = c(40,85),
+               fill = NA, color = "black") + 
+  coord_fixed(1.3) 
+
 ```
 
 
@@ -85,7 +97,7 @@ Swallows_temp <- swallows1 %>%
 
 # plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1) +
   
-plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1)
+# plot(newmap, xlim = c(-100, -70), ylim = c(40, 60), asp = 1)
 ggplot() +
   # geom_polygon(newmap) +
   geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,

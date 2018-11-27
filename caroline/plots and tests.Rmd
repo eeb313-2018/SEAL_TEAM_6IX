@@ -6,8 +6,396 @@ output: html_document
 ```{r}
 library(tidyverse)
 library(car)
+library(Hmisc) # for plotting with stat_summary(fun.data = mean_cl_normal)
+library(pracma) # to get nthroot() function
 birds <- read_csv("Swallows Data Expanded.csv", col_types = cols(Car_Total = "i", SpeciesTotal = "i"))
 ```
+
+###############################################################################################################################################################
+###############################################################################################################################################################
+###############################################################################################################################################################
+
+
+#Do swallow populations decline?
+
+Plot average number per year across years.
+
+```{r}
+ggplot(birds, aes(Year, SpeciesTotal)) + geom_smooth(method = 'lm') + geom_point() + theme_classic() 
+#Raw data with a regression line for lm(SpeciesTotal ~ Year). For all 6 swallow species. Lots of extreme observations
+```
+
+```{r}
+birds %>% 
+  #filter(species == "Barn Swallow") %>% 
+  group_by(Year, species) %>% 
+  mutate(avg = mean(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Year, y = avg, colour = species)) + geom_point() + geom_line() + theme_classic()
+```
+
+
+```{r}
+birds %>% 
+  #filter(species == "Barn Swallow") %>% 
+  group_by(Year) %>% 
+  mutate(avg = mean(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Year, y = avg)) + geom_point() + theme_classic()
+#Average number of swallows seen per route across years. Lots of noise early on, the relationship tightens up in more recent years, probably due to more stringent/standardized protocol
+```
+
+```{r}
+ggplot(birds, aes(Year, SpeciesTotal)) + stat_summary(fun.data = mean_cl_normal) + geom_smooth(method = 'lm') + theme_classic()
+#regression line for lm(SpeciesTotal ~ Year). For all 6 swallow species.
+```
+
+```{r}
+birds %>% 
+  filter(species == "Barn Swallow") %>% 
+  group_by(Year) %>% 
+  mutate(avg = mean(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Year, y = avg)) + geom_point() + theme_classic()
+```
+
+
+##Check assumptions - all swallows
+
+```{r}
+#For all swallows
+swallow_year_lm <- lm(SpeciesTotal ~ Year, data = birds)
+summary(swallow_year_lm)
+par(mfrow = c(2,2))
+plot(swallow_year_lm)
+```
+
+We seem to have homogeneity of variance, but the Q-Q plot suggests non-normality. So does the histogram below. I won't try transforming the data - I'll just try analyzing the data for each species separately. **What's Residuals vs Leverage?**
+
+##Outliers
+
+```{r}
+histogram(~ SpeciesTotal, data = birds)
+# right-skewed data. let's look at the extreme observations
+```
+
+```{r}
+histogram(~ SpeciesTotal, data = subset(birds, species == "Barn Swallow"))
+histogram(~ SpeciesTotal, data = subset(birds, species == "Tree Swallow"))
+histogram(~ SpeciesTotal, data = subset(birds, species == "Bank Swallow"))
+histogram(~ SpeciesTotal, data = subset(birds, species == "Northern Rough-winged Swallow"))
+histogram(~ SpeciesTotal, data = subset(birds, species == "Cliff Swallow"))
+histogram(~ SpeciesTotal, data = subset(birds, species == "Purple Martin"))
+```
+
+All right-skewed, but ANOVA is quite robust to departures from normality at high sample sizes (due to Central Limit Therorem), so we should be ok to proceed. 
+
+##Check assumptions and ANOVAs - by species
+
+###Barn Swallow (BARS)
+
+```{r}
+BARS_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Barn Swallow"))
+summary(BARS_year_lm)
+par(mfrow = c(2,2))
+plot(BARS_year_lm)
+```
+
+```{r}
+BARS_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Barn Swallow"), family = "poisson")
+summary(BARS_year_glm)
+par(mfrow = c(2,2))
+plot(BARS_year_glm)
+```
+
+```{r}
+BARS_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Barn Swallow"))
+summary(BARS_year_lm)
+par(mfrow = c(2,2))
+plot(BARS_year_lm)
+```
+
+```{r}
+Anova(BARS_year_lm_log, type = 3)
+```
+
+There was a significant decline in Barn Swallows. Let's plot it
+
+```{r}
+#Does it make sense to run an ANOVA on the raw data or the yearly averages? The yearly averages woulf give us a nicer line ... :) but what is statistically right?
+
+birds %>% 
+  filter(species == "Barn Swallow") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) # how can this standard error possibly be correct?? 
+
+birds %>%
+  filter(species == "Barn Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Barn Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.28819, intercept = 596.29621) 
+# plot CI band?
+```
+
+
+###Tree Swallow (TRES)
+
+```{r}
+TRES_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Tree Swallow"))
+summary(TRES_year_lm)
+par(mfrow = c(2,2))
+plot(TRES_year_lm)
+```
+
+```{r}
+TRES_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Tree Swallow"), family = "poisson")
+summary(TRES_year_glm)
+par(mfrow = c(2,2))
+plot(TRES_year_glm)
+```
+
+```{r}
+TRES_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Tree Swallow"))
+summary(TRES_year_lm_log)
+par(mfrow = c(2,2))
+plot(TRES_year_lm_log)
+```
+
+```{r}
+Anova(TRES_year_lm, type = 3)
+```
+
+```{r}
+#Does it make sense to run an ANOVA on the raw data or the yearly averages? The yearly averages woulf give us a nicer line ... :) but what is statistically right?
+
+birds %>% 
+  filter(species == "Tree Swallow") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) 
+
+birds %>%
+  filter(species == "Tree Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Tree Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.12171, intercept = 255.07002) 
+# plot CI band?
+#doesn't look linear!!
+```
+
+
+###Bank Swallow (BANS)
+
+
+```{r}
+BANS_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Bank Swallow"))
+summary(BANS_year_lm)
+par(mfrow = c(2,2))
+plot(BANS_year_lm)
+```
+
+```{r}
+BANS_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Bank Swallow"), family = "poisson")
+summary(BANS_year_glm)
+par(mfrow = c(2,2))
+plot(BANS_year_glm)
+```
+
+```{r}
+BANS_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Bank Swallow"))
+summary(BANS_year_lm_log)
+par(mfrow = c(2,2))
+plot(BANS_year_lm_log)
+```
+
+```{r}
+Anova(BANS_year_lm, type = 3)
+```
+
+```{r}
+birds %>% 
+  filter(species == "Bank Swallow") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) 
+
+birds %>%
+  filter(species == "Bank Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Bank Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.5261, intercept = 1068.2785) 
+# plot CI band?
+```
+
+###Northern Rough-winged Swalllow (NRWS)
+
+```{r}
+NRWS_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Northern Rough-winged Swallow"))
+summary(NRWS_year_lm)
+par(mfrow = c(2,2))
+plot(NRWS_year_lm)
+```
+
+```{r}
+NRWS_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Northern Rough-winged Swallow"), family = "poisson")
+summary(NRWS_year_glm)
+par(mfrow = c(2,2))
+plot(NRWS_year_glm)
+```
+
+```{r}
+NRWS_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Northern Rough-winged Swallow"))
+summary(NRWS_year_lm_log)
+par(mfrow = c(2,2))
+plot(NRWS_year_lm_log)
+```
+
+```{r}
+Anova(NRWS_year_lm, type = 3)
+```
+
+```{r}
+birds %>% 
+  filter(species == "Northern Rough-winged Swallow") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) 
+
+birds %>%
+  filter(species == "Northern Rough-winged Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Northern Rough-winged Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.015155, intercept = 33.282552) 
+# plot CI band?
+```
+
+###Cliff Swallow (CLSW)
+
+```{r}
+CLSW_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Cliff Swallow"))
+summary(CLSW_year_lm)
+par(mfrow = c(2,2))
+plot(CLSW_year_lm)
+```
+
+```{r}
+CLSW_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Cliff Swallow"), family = "poisson")
+summary(CLSW_year_glm)
+par(mfrow = c(2,2))
+plot(CLSW_year_glm)
+```
+
+```{r}
+CLSW_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Cliff Swallow"))
+summary(CLSW_year_lm_log)
+par(mfrow = c(2,2))
+plot(CLSW_year_lm_log)
+```
+
+```{r}
+Anova(CLSW_year_lm, type = 3)
+```
+
+```{r}
+birds %>% 
+  filter(species == "Cliff Swallow") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) 
+
+birds %>%
+  filter(species == "Cliff Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Cliff Swallow") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.09192, intercept = 190.99807) 
+# plot CI band?
+```
+
+
+###Purple Martin (PUMA)
+
+
+```{r}
+PUMA_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Purple Martin"))
+summary(PUMA_year_lm)
+par(mfrow = c(2,2))
+plot(PUMA_year_lm)
+```
+
+```{r}
+PUMA_year_glm <- glm(SpeciesTotal ~ Year, data = subset(birds, species == "Purple Martin"), family = "poisson")
+summary(PUMA_year_glm)
+par(mfrow = c(2,2))
+plot(PUMA_year_glm)
+```
+
+```{r}
+PUMA_year_lm_log <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Purple Martin"))
+summary(PUMA_year_lm_log)
+par(mfrow = c(2,2))
+plot(PUMA_year_lm_log)
+```
+
+```{r}
+Anova(PUMA_year_lm, type = 3)
+```
+
+```{r}
+birds %>% 
+  filter(species == "Purple Martin") %>% 
+  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) 
+
+birds %>%
+  filter(species == "Purple Martin") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_errorbar(aes(ymax = mean + se, ymin = mean - se, width = 0.1))
+
+birds %>%
+  filter(species == "Purple Martin") %>% 
+  group_by(Year) %>% 
+  dplyr::summarize(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean)) + theme_classic() + geom_point() + geom_abline(slope = -0.20589, intercept = 419.29818) 
+# plot CI band?
+```
+
+
+###############################################################################################################################################################
+###############################################################################################################################################################
+###############################################################################################################################################################
+
+#Does traffic affect swallow abundance? 
+
+##check assumptions
+
+```{r}
+histogram(~ Car_Total, data = birds)
+ggplot(birds, aes(x = Year, y = Car_Total)) + geom_point() # doesn't appear to change much year to year from 2001 so this will probably be a flop
+
+car_lm <- lm(SpeciesTotal ~ Car_Total, data = birds)
+summary(car_lm)
+par(mfrow = c(2,2))
+plot(car_lm)
+```
+
 
 #plot swallow abundance vs traffic 
 Sum up total number of cars for each route 
@@ -72,10 +460,9 @@ birds %>%
 ```
 
 
-Note: It will be difficult to test if traffic significantly affects swallow numbers - the assumption of homoscedasticity is violated (few observations with really high traffic values). Also, would it be better to test this with swallows as a group or individually by species? Is there a reason why some swallow populations would respond to traffic differently/would be more tolerant to traffic than others? 
+Note: It will be difficult to test if traffic significantly affects swallow numbers - the assumption of equal variances is violated (few observations with really high traffic values). Also, would it be better to test this with swallows as a group or individually by species? Is there a reason why some swallow populations would respond to traffic differently/would be more tolerant to traffic than others? 
 
 Another question: what about routes where swallows are NOT seen? Is this because of high-traffic (and therefore something we wouldn't see in this graph)? --> get full data set and plot histogram showing frequency of routes against traffic level (and where swallows are seen on that histogram)
-
 
 
 ```{r}
@@ -97,186 +484,6 @@ all_birds %>%
 ```
 
 The first shows a histogram of the frequency of routes (for all years) at each traffic interval. The second shows a histogram of only the routes with swallows. The shape and spread of these two histograms are very similar. The routes where swallows are seen probably have little to do with the amount of traffic on that route. If traffic did affect swallow abundance, then the distribution in our second swallow-only histogram would be shifted much further to the left. However, it would still be really interesting to split this up by species.
-
-
-#Do swallow populations decline?
-
-Plot average number per year across years.
-
-```{r}
-ggplot(birds, aes(Year, SpeciesTotal)) + geom_smooth(method = 'lm') + geom_point() + theme_classic()
-#Raw data with a regression line for lm(SpeciesTotal ~ Year). For all 6 swallow species. Lots of extreme observations
-```
-
-```{r}
-birds %>% 
-  #filter(species == "Barn Swallow") %>% 
-  group_by(Year, species) %>% 
-  mutate(avg = mean(SpeciesTotal)) %>% 
-  ggplot(., aes(x = Year, y = avg, colour = species)) + geom_point() + geom_line() + theme_classic()
-```
-
-
-```{r}
-birds %>% 
-  #filter(species == "Barn Swallow") %>% 
-  group_by(Year) %>% 
-  mutate(avg = mean(SpeciesTotal)) %>% 
-  ggplot(., aes(x = Year, y = avg)) + geom_point() + theme_classic()
-#Average number of swallows seen per route across years. Lots of noise early on, the relationship tightens up in more recent years, probably due to more stringent/standardized protocol
-```
-
-```{r}
-#install.packages("Hmisc")
-library(Hmisc)
-ggplot(birds, aes(Year, SpeciesTotal)) + stat_summary(fun.data = mean_cl_normal) + geom_smooth(method = 'lm') + theme_classic()
-#regression line for lm(SpeciesTotal ~ Year). For all 6 swallow species.
-```
-
-```{r}
-birds %>% 
-  filter(species == "Barn Swallow") %>% 
-  group_by(Year) %>% 
-  mutate(avg = mean(SpeciesTotal)) %>% 
-  ggplot(., aes(x = Year, y = avg)) + geom_point() + theme_classic()
-```
-
-
-##Check assumptions - all swallows
-
-```{r}
-#For all swallows
-swallow_year_lm <- lm(SpeciesTotal ~ Year, data = birds)
-summary(swallow_year_lm)
-par(mfrow = c(2,2))
-plot(swallow_year_lm)
-```
-
-We seem to have homogeneity of variance, but the Q-Q plot suggests non-normality. Let's try log-transforming the data to see if that helps. What's Residuals vs Leverage?
-
-```{r}
-log_swallow_year_lm <- lm(log(SpeciesTotal) ~ Year, data = birds)
-summary(log_swallow_year_lm)
-par(mfrow = c(2,2))
-plot(log_swallow_year_lm)
-```
-
-The QQ plot is better, but we're still in violation or normality. Let's try sqrt
-
-```{r}
-sqrt_swallow_year_lm <- lm(sqrt(SpeciesTotal) ~ Year, data = birds)
-summary(sqrt_swallow_year_lm)
-par(mfrow = c(2,2))
-plot(sqrt_swallow_year_lm)
-```
-
-```{r}
-install.packages("pracma")
-library(pracma)
-thirdroot_swallow_year_lm <- lm(nthroot(SpeciesTotal, 3) ~ Year, data = birds)
-summary(thirdroot_swallow_year_lm)
-par(mfrow = c(2,2))
-plot(thirdroot_swallow_year_lm)
-```
-
-Log-transforming seems like an improvement, but our QQplot still doesn't look great - we still may be in violation of normality. 
-
-##Check assumptions and ANOVAs - by species
-
-###Barn Swallow (BARS)
-
-```{r}
-BARS_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Barn Swallow"))
-summary(BARS_year_lm)
-par(mfrow = c(2,2))
-plot(BARS_year_lm)
-```
-
-```{r}
-BARS_year_lm <- lm(sqrt(SpeciesTotal) ~ Year, data = subset(birds, species == "Barn Swallow"))
-summary(BARS_year_lm)
-par(mfrow = c(2,2))
-plot(BARS_year_lm)
-```
-
-```{r}
-BARS_year_lm <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Barn Swallow"))
-summary(BARS_year_lm)
-par(mfrow = c(2,2))
-plot(BARS_year_lm)
-```
-
-Use log-transformed data
-
-```{r}
-Anova(BARS_year_lm, type = 3)
-```
-
-There was a significant decline in Barn Swallows. Let's plot it
-
-```{r}
-#Does it make sense to run an ANOVA on the raw data or the yearly averages? The yearly averages woulf give us a nicer line ... :) but what is statistically right?
-
-birds %>% 
-  filter(species == "Barn Swallow") %>% 
-  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) # how can this standard error possibly be correct?? 
-```
-
-
-###Tree Swallow (TRES)
-
-```{r}
-TRES_year_lm <- lm(SpeciesTotal ~ Year, data = subset(birds, species == "Tree Swallow"))
-summary(TRES_year_lm)
-par(mfrow = c(2,2))
-plot(TRES_year_lm)
-```
-
-```{r}
-BARS_year_lm <- lm(sqrt(SpeciesTotal) ~ Year, data = subset(birds, species == "Barn Swallow"))
-summary(BARS_year_lm)
-par(mfrow = c(2,2))
-plot(BARS_year_lm)
-```
-
-```{r}
-TRES_year_lm <- lm(log(SpeciesTotal) ~ Year, data = subset(birds, species == "Tree Swallow"))
-summary(TRES_year_lm)
-par(mfrow = c(2,2))
-plot(TRES_year_lm)
-```
-
-Use log-transformed data
-
-```{r}
-Anova(BARS_year_lm, type = 3)
-```
-
-There was a significant decline in Barn Swallows. Let's plot it
-
-```{r}
-#Does it make sense to run an ANOVA on the raw data or the yearly averages? The yearly averages woulf give us a nicer line ... :) but what is statistically right?
-
-birds %>% 
-  filter(species == "Barn Swallow") %>% 
-  ggplot(., aes(x = Year, y = SpeciesTotal)) + geom_point() + theme_classic() + geom_smooth(method = "lm", se = FALSE) # how can this standard error possibly be correct?? 
-```
-
-
-###Bank Swallow (BANS)
-
-###Northern Rough-winged Swalllow (NRWS)
-
-###Cliff Swallow (CLSW)
-
-###Purple Martin (PUMA)
-
-
-
-
-
-
-
 
 
 

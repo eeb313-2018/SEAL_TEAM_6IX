@@ -1,0 +1,105 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+swallows <- read_csv("Swallows Data Expanded.csv")
+```
+
+Mutating the columns so that I have average values for Temp and Wind
+```{r}
+#TEMP
+swallows$StartTemp <- as.numeric(swallows$StartTemp)
+swallows$EndTemp <- as.numeric(swallows$EndTemp)
+
+swallows <- swallows %>% 
+  mutate(AvgTemp = ((StartTemp + EndTemp)/2))
+
+qplot(AvgTemp, SpeciesTotal, data = swallows)
+```
+```{r}
+#WIND
+swallows$StartWind <- as.numeric(swallows$StartWind)
+swallows$EndWind <- as.numeric(swallows$EndWind)
+
+swallows <- swallows %>% 
+  mutate(AvgWind = ((StartWind + EndWind)/2))
+
+qplot(AvgWind, SpeciesTotal, data = swallows)
+```
+
+Linear models for Swallows and AvgTemp/Wind
+```{r}
+#TEMP
+swallows_temp_model <- lm(SpeciesTotal ~ AvgTemp, data = swallows)
+summary(swallows_temp_model)
+```
+
+```{r}
+plot(swallows_temp_model)
+```
+
+```{r}
+#WIND
+swallows_wind_model <- lm(SpeciesTotal ~ AvgWind, data = swallows)
+summary(swallows_wind_model)
+```
+
+```{r}
+plot(swallows_wind_model)
+```
+
+#ANOVA
+To test the linear models of temp and wind
+```{r}
+#TEMP
+anova(swallows_temp_model)
+```
+
+```{r}
+#WIND
+anova(swallows_wind_model)
+```
+
+Sky isn't necessarily a super important variable that we want to look at but I will do a linear model and ANOVA for it out of curiosity to see how it impacts swallows. 
+```{r}
+#SKY
+swallows$StartSky <- as.numeric(swallows$StartSky)
+swallows$EndSky <- as.numeric(swallows$EndSky)
+
+swallows <- swallows %>% 
+  mutate(AvgSky = ((StartSky + EndSky)/2))
+
+qplot(AvgSky, SpeciesTotal, data = swallows)
+```
+
+```{r}
+swallows_sky_model <- lm(SpeciesTotal ~ AvgSky, data = swallows)
+summary(swallows_sky_model)
+```
+
+```{r}
+anova(swallows_sky_model)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
