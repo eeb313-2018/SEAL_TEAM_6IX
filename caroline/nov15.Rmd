@@ -1,0 +1,260 @@
+---
+title: "exploratory analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Exploratory Analysis - October
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lattice)
+
+
+birds <- read.csv("Ontario.csv")
+checklist <- read.csv("checklist.csv")
+cars <- read.csv("VehicleData.csv")
+weather <- read.csv("weather.csv")
+big_bird <- read.csv("Swallows only - Ontario Bird Data Expanded.csv")
+
+birds$family <- checklist$Family[match(birds$AOU, checklist$AOU)]
+birds$genus <- checklist$Genus[match(birds$AOU, checklist$AOU)]
+birds$species <- checklist$common_name[match(birds$AOU, checklist$AOU)]
+birds$seq <- checklist$Seq[match(birds$AOU, checklist$AOU)]
+
+cars$sum_cars <- rowSums(cars[,8:57])
+cars$sum_noise <- rowSums(cars[,58:107])
+```
+
+##See how total abundance changes year by year
+```{r}
+yearly <- birds %>%
+  group_by(seq, family, genus, species, Year) %>% 
+  summarize(annual_spp_abundance = mean(SpeciesTotal)) %>% 
+  arrange(seq)
+```
+
+##Plot!
+
+Waterfowl population
+```{r}
+yearly %>% 
+  filter(family == "Anatidae") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance, colour = genus)) + geom_point() +
+  geom_smooth()
+#huge increase in geese!
+```
+
+Just out of curiosity, let's look at individual species (and some species at risk)
+
+```{r}
+yearly %>% 
+  filter(family == "Hirundinidae") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance, colour = species)) + geom_point() +
+  geom_smooth()
+```
+
+```{r}
+yearly %>% 
+  filter(species == "Bobolink") %>% 
+  ggplot(aes(x = Year, y = annual_spp_abundance)) + geom_point() +
+  geom_smooth()
+```
+
+##Questions
+
+It would be interesting to look at regional differences in population dynamics. 
+Are bird populations increasing/decreasing across their full range or regionally? Any range shifts?
+
+There are also files with environmental and weather conditions. Can noise/level of human activity/weather explain these perceived changes in abundance?
+
+Use multiple datasets to study dynamics of a focal species/group?
+
+
+
+###################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+# November 15 and 16
+
+## How many routes in Ontario actually include vehicle and weather data?
+
+```{r}
+cars_summary <- cars %>% 
+  filter(CountryNum == "124", StateNum == "68") %>% 
+  select(., -starts_with("Car"), -starts_with("Noise"))
+
+weather_summary <- weather %>%
+  filter(CountryNum == "124", StateNum == "68")
+```
+
+```{r}
+length(unique(birds$Route)) #Total Number of routes surveyed
+length(unique(cars_summary$Route)) #Total Number of routes for which we have traffic data
+length(unique(weather_summary$Route)) #Total Number of routes for which we have weather data
+```
+
+```{r}
+birds$Route <- as.factor(birds$Route)
+table1 <- birds %>% 
+  group_by(Year, Route) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table1 <- table1 %>% 
+  group_by(Year) %>% 
+  tally()
+
+cars_summary$Route <- as.factor(cars_summary$Route)
+table2 <- cars_summary %>% 
+  group_by(Year, Route) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table2 <- table2 %>% 
+  group_by(Year) %>% 
+  tally()
+
+weather_summary$Route <- as.factor(weather_summary$Route)
+table3 <- weather_summary %>% 
+  group_by(Year, Route) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table3 <- table3 %>% 
+  group_by(Year) %>% 
+  tally()
+```
+
+
+```{r}
+ggplot() + geom_line(data=table1, aes(x = Year, y = n), colour= "red") + 
+  geom_line(data=table2, aes(x = Year, y = n), colour = "blue") + 
+  #geom_line(data=table3, aes(x = Year, y = n), colour = "green") +
+  geom_point(data=table1, aes(x = Year, y = n), colour= "red") +
+  geom_point(data=table2, aes(x = Year, y = n), colour = "blue")
+  #+ geom_point(data=table3, aes(x = Year, y = n), colour = "green")
+```
+
+We have full coverage with weather data. Only starting in 2001 do we get vehicle data for all of the survey routes. This gives us a 16-year time span for analyses. 
+**If we want more complete information about traffic/anthropogenic impact, we could try looking for yet another data set that might cover all the years/locations for the routes. Do we want to go that way?**
+
+
+**Next steps:**
++ consult with Alex and Richard about findings/questions above
++ merge longitude/latitude/route data with the big extended csv file
++ get ready to work on linear mixed models next class
+
+
+###################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+# November 21
+
+## How often are swallows reported on the Breeding Bird Surveys?
+
+Only 4% of routes include swallow observations. 
+**This begs the question if we want to look beyond Ontario and include data from all of North America. This would involve some tedious work (downloading and cleaning and merging all the state/provincial data sets), but we could do this easily by just recycling some of our old code. Plus, this would give us a much more comprehensive look at swallows and substantially increase our sample size. However, it might easily become overwhelming...**
+```{r}
+length(which(birds$family == "Hirundinidae"))/nrow(birds)
+```
+
+## Is there a lot of variation in noise and traffic between stops within routes? --> by year, all routes
+
+```{r}
+big_bird_mini <- big_bird %>% 
+  select(1, 142, 42:91) %>% 
+  na.omit() %>% 
+  group_by(Route, Year)
+big_bird_mini <- unique(big_bird_mini[,])
+big_bird_mini <- big_bird_mini %>% 
+  gather(stop, traffic, Car1:Car50) %>% 
+  arrange(Route)
+big_bird_mini %>% 
+  ggplot(., aes(x = stop, y = traffic)) + geom_boxplot() #mostly zero values
+```
+
+## Is there a lot of variation in noise and traffic between stops across years? (i.e. due to urban sprawl/development). --> by route, all years
+
+```{r}
+big_bird_mini %>% 
+  ggplot(., aes(x = Year, y = traffic, group = Route)) + geom_point()
+```
+
+
+```{r}
+
+bwplot(SpeciesTotal ~ Year, data = subset(big_bird, species == "Barn Swallow"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
