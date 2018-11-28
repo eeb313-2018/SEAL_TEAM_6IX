@@ -1,0 +1,438 @@
+ ---
+title: "Nov 22 Data Analysis"
+author: "Richard"
+date: "November 22, 2018"
+output: html_document
+---
+
+# Load Data
+
+```{r}
+#install.packages("tidyverse")
+library(tidyverse)
+
+swallows <- read_csv("Swallows Data Expanded.csv")
+
+swallows <- swallows[,c(139, 1:138, 140:150)]
+
+# Out of 9703 rows, 9608 have SpeciesTotal <= 100, so adjust >100 to 100 for better heatmap
+swallows1 <- swallows %>% 
+  mutate(SpeciesTotal1 = ifelse(SpeciesTotal > 100, 100, SpeciesTotal))
+
+swallows1 <- swallows1[, c(1, 151, 2:150)]
+head(swallows1)
+
+# write_csv(swallows1, "temp.csv")
+```
+
+## Draw map of Ontario
+
+Region of observations: Longitude between -95 and -74, Latitude between 42 and 53
+
+```{r}
+# install.packages("maps")
+# install.packages("mapdata")
+library(maps)
+library(mapdata)
+
+# Map of the part of Ontario we are interested in
+ontario_map1 <- map_data("world", regions = "Canada") %>% 
+  filter(long > -95 & long < -74) %>% 
+  filter(lat > 42 & lat < 60)
+
+area_map <- ggplot() + 
+  geom_polygon(data = ontario_map1, aes(x = long, y = lat, group = group),
+               fill = "#F5F5F5", color = "black") + 
+  coord_fixed(1.3) 
+
+# Some major Ontario cities
+ont_cities <- canada.cities %>% 
+  filter(long > -95 & long < -74) %>% 
+  filter(lat > 42 & lat < 60) %>% 
+  filter(pop > 110000)
+
+ont_cities %>% arrange(long)
+```
+
+# Make heatmap -- distribution to year
+
+Note: More routes have been observed between 1994-2015 (i.e. >=75).
+
+## Initial Map Overlay
+
+```{r}
+Swallows_temp <- swallows1 %>%
+  filter(Year == 1994, species == "Tree Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,100),
+                       breaks = c(0, 20, 40, 60, 80, 100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, "100 or more")) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+```
+
+## Tree Swallow
+
+```{r}
+# Determine maximum of colour bar
+swallows1 %>% 
+  filter(species == "Tree Swallow") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head()
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Tree Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,100),
+                       breaks = c(0, 20, 40, 60, 80, 100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, "100 or more")) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+## Purple Martin
+
+```{r}
+# Determine maximum of colour bar
+swallows1 %>% 
+  filter(species == "Purple Martin") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head()
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Purple Martin")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,93),
+                       breaks = c(0, 20, 40, 60, 80, 93),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, 93)) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+## Cliff Swallow
+
+```{r}
+# Determine maximum of colour bar
+swallows1 %>% 
+  filter(species == "Cliff Swallow") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head()
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Cliff Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,100),
+                       breaks = c(0, 20, 40, 60, 80, 100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, "100 or more")) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+## Barn Swallow
+
+```{r}
+# Determine maximum of colour bar
+swallows1 %>% 
+  filter(species == "Barn Swallow") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head()
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Barn Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,100),
+                       breaks = c(0, 20, 40, 60, 80, 100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, "100 or more")) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+## Bank Swallow
+
+```{r}
+# Determine maximum of colour bar
+swallows1 %>% 
+  filter(species == "Bank Swallow") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head() 
+  # write_csv("temp.csv")
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Bank Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,100),
+                       breaks = c(0, 20, 40, 60, 80, 100),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 20, 40, 60, 80, "100 or more")) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+## Northern Rough-winged Swallow
+
+```{r}
+swallows1 %>% 
+  filter(species == "Northern Rough-winged Swallow") %>% 
+  arrange(desc(SpeciesTotal)) %>% 
+  head() 
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows1 %>%
+filter(Year == YearNo, species == "Northern Rough-winged Swallow")
+
+# Generate plot title
+Plot_Title <- paste("Ontario", unique(Swallows_temp$species), "Distribution:", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,45),
+                       breaks = c(0, 10, 20, 30, 40, 45),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 10, 20, 30, 40, 45)) +
+  scale_size_continuous(limits = c(0, 100), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste(unique(Swallows_temp$species), unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
+
+# Animate the distributions
+
+Originally planned to use gganimate package, but I finished with windows movie maker instead.
+
+## Installation of gganimate
+
+```{r}
+# install.packages("devtools")
+# library(devtools)
+# 
+# devtools::install_github("dgrtwo/gganimate")
+```
+
