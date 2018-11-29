@@ -1,0 +1,43 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+#Comrade Update
+Alex worked on mutating weather columns to make average values for the weather conditions, and designed linear models, as well as plotting them. Caroline did linear regression for the effect of year and traffic on swallow abundance, as well as plotting. Richard worked on designing the yearly distribution of swallows and managed to overlay a map of Ontario and create an animation for the heatmap.
+
+#More plot ideas
+-Hexbin plots to show distribution of birds
+-Normal distribution of swallows for weather conditions
+
+#Division of Labour
+-Alex: complete the above header of "more plot ideas" and organize the weather codes and linear models
+-Caroline: start compiling information for the report
+-Richard: devise an outline of what we should talk about in the report
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
