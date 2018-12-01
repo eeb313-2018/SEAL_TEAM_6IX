@@ -31,7 +31,7 @@ Region of observations: Longitude between -95 and -74, Latitude between 42 and 5
 
 ```{r}
 # install.packages("maps")
-# install.packages("mapdata")
+install.packages("mapdata")
 library(maps)
 library(mapdata)
 
@@ -125,7 +125,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -179,7 +179,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -233,7 +233,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -287,7 +287,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -342,7 +342,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -395,7 +395,7 @@ plot_temp <- area_map +
                                        NULL)) +
   # Add some points (black) for cities
   geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
-  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0.1) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
   # Themes
   theme_classic() +
   scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
@@ -423,16 +423,59 @@ plot_temp <- area_map +
 
 ```
 
-# Animate the distributions
-
-Originally planned to use gganimate package, but I finished with windows movie maker instead.
-
-## Installation of gganimate
+## All swallows combined (not working yet)
 
 ```{r}
-# install.packages("devtools")
-# library(devtools)
-# 
-# devtools::install_github("dgrtwo/gganimate")
-```
+swallows2 <- swallows1 %>% 
+  group_by(RouteYear) %>% 
+  mutate(TotalBirds = sum(SpeciesTotal))
 
+# write_csv(swallows2, "temp.csv")
+
+swallows2 <- swallows2 %>% 
+  mutate(SpeciesTotal1 = ifelse(SpeciesTotal > 200, 200, SpeciesTotal))
+
+for (YearNo in c(1994:2015)) {
+  
+Swallows_temp <- swallows2 %>%
+filter(Year == YearNo)
+
+# Generate plot title
+Plot_Title <- paste("All Ontario Birds Distribution", unique(Swallows_temp$Year) )
+
+# Generate plot 
+plot_temp <- area_map +
+  # Add bird distribution data
+  geom_point(data = Swallows_temp, aes(x = Longitude, y = Latitude,
+                                       size = SpeciesTotal1,
+                                       color = SpeciesTotal1,
+                                       NULL)) +
+  # Add some points (black) for cities
+  geom_point(data = ont_cities, aes(x = long, y = lat), size = 0.8, color = "#0033cc", alpha = 0.5) +
+  geom_text(data = ont_cities, aes(x = long, y = lat, label = name),hjust=1.2, vjust=0.4, size = 0.8, color = "#0033cc", alpha = 0) +
+  # Themes
+  theme_classic() +
+  scale_color_gradient(guide = guide_colourbar(nbin=100, draw.ulim = FALSE, draw.llim = FALSE),
+                       limits = c(0,200),
+                       breaks = c(0, 40, 80, 120, 160, 200),
+                       low = "#FFF15A", high = "Red",
+                       name = "Birds\nRecorded",
+                       labels = c(0, 40, 80, 120, 160, "200 and more")) +
+  scale_size_continuous(limits = c(0, 200), # Range of number observed
+                        range = c(1, 3), # Range of size of dots
+                        name = "Birds Observed at Route",
+                        guide = "none") +
+
+  labs(x = "Longitude", y = "Latitude", title = Plot_Title) +
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        # legend.key.size = unit(0.5, "cm"),
+        legend.title = element_text(size = 10, vjust = 2),
+        NULL) +
+  NULL
+
+  ggsave(paste("All Ontario Birds Distribution", unique(Swallows_temp$Year), ".png"), plot = plot_temp)
+
+}
+
+```
