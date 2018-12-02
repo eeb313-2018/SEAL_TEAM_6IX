@@ -1,0 +1,83 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+install.packages("hexbin")
+swallows <- read_csv("Swallows Data Expanded.csv")
+library(hexbin)
+```
+
+Hexbin Plot of Temp, Wind, and Sky
+```{r}
+#TEMP
+swallows$StartTemp <- as.numeric(swallows$StartTemp)
+swallows$EndTemp <- as.numeric(swallows$EndTemp)
+
+swallows <- swallows %>% 
+  mutate(AvgTemp = ((StartTemp + EndTemp)/2))
+
+
+ggplot(swallows, aes(AvgTemp, SpeciesTotal, na.rm = T))+
+  geom_hex()
+```
+
+```{r}
+#WIND
+swallows$StartWind <- as.numeric(swallows$StartWind)
+swallows$EndWind <- as.numeric(swallows$EndWind)
+
+swallows <- swallows %>% 
+  mutate(AvgWind = ((StartWind + EndWind)/2))
+
+ggplot(swallows, aes(AvgWind, SpeciesTotal, na.rm = T))+
+  geom_hex()
+```
+
+
+```{r}
+#SKY
+swallows$StartSky <- as.numeric(swallows$StartSky)
+swallows$EndSky <- as.numeric(swallows$EndSky)
+
+swallows <- swallows %>% 
+  mutate(AvgSky = ((StartSky + EndSky)/2))
+
+ggplot(swallows, aes(AvgSky, SpeciesTotal, na.rm = T))+
+  geom_hex()
+```
+
+```{r}
+ggplot(swallows, aes(x = swallows$AvgTemp)) + 
+	geom_histogram(aes(y = ..density..), binwidth = 0.5) + 
+	stat_function(fun=dnorm,
+	              color="red",
+	              lwd = 1,
+	              args=list(mean = mean(swallows$AvgTemp, na.rm = T),
+	                        sd = sd(swallows$AvgTemp, na.rm = T)))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
