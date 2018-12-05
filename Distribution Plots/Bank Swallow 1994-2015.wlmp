@@ -1,178 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="Bank Swallow 1994-2015" themeId="0" version="65540" templateID="SimpleProjectTemplate">
   <MediaItems>
-    <MediaItem id="17" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2010 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="18" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2011 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="1" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1994 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="19" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2012 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="2" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1995 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="20" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2013 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="3" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1996 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="21" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2014 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="4" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1997 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="22" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2015 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="5" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1998 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="6" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 1999 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="7" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2000 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="8" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2001 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="9" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2002 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="10" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2003 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="11" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2004 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="12" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2005 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="13" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2006 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="14" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2007 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="15" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2008 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
-    <MediaItem id="16" filePath="C:\Users\ICW064-PAF\Documents\Heatmap stuff\Bank Swallow 2009 .png" arWidth="96" arHeight="96" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="17" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2010 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="1" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1994 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="18" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2011 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="2" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1995 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="19" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2012 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="3" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1996 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="20" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2013 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="4" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1997 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="21" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2014 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="5" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1998 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="22" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2015 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="6" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 1999 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="7" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2000 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="8" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2001 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="9" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2002 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="10" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2003 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="11" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2004 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="12" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2005 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="13" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2006 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="14" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2007 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="15" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2008 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
+    <MediaItem id="16" filePath="C:\Users\ICW036-PAF\Documents\Heatmap stuff\Bank Swallow 2009 .png" arWidth="1280" arHeight="1280" duration="0" songTitle="" songArtist="" songAlbum="" songCopyrightUrl="" songArtistUrl="" songAudioFileUrl="" stabilizationMode="0" mediaItemType="2" />
   </MediaItems>
   <Extents>
-    <ImageClip extentID="17" gapBefore="0" mediaItemID="13" duration="0.40000000000000002">
+    <ImageClip extentID="17" gapBefore="0" mediaItemID="13" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="18" gapBefore="0" mediaItemID="14" duration="0.40000000000000002">
+    <ImageClip extentID="18" gapBefore="0" mediaItemID="14" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="19" gapBefore="0" mediaItemID="15" duration="0.40000000000000002">
+    <ImageClip extentID="19" gapBefore="0" mediaItemID="15" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="20" gapBefore="0" mediaItemID="16" duration="0.40000000000000002">
+    <ImageClip extentID="20" gapBefore="0" mediaItemID="16" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="21" gapBefore="0" mediaItemID="17" duration="0.40000000000000002">
+    <ImageClip extentID="21" gapBefore="0" mediaItemID="17" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="22" gapBefore="0" mediaItemID="18" duration="0.40000000000000002">
+    <ImageClip extentID="5" gapBefore="0" mediaItemID="1" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="5" gapBefore="0" mediaItemID="1" duration="0.40000000000000002">
+    <ImageClip extentID="22" gapBefore="0" mediaItemID="18" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="23" gapBefore="0" mediaItemID="19" duration="0.40000000000000002">
+    <ImageClip extentID="6" gapBefore="0" mediaItemID="2" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="6" gapBefore="0" mediaItemID="2" duration="0.40000000000000002">
+    <ImageClip extentID="23" gapBefore="0" mediaItemID="19" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="24" gapBefore="0" mediaItemID="20" duration="0.40000000000000002">
+    <ImageClip extentID="7" gapBefore="0" mediaItemID="3" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="7" gapBefore="0" mediaItemID="3" duration="0.40000000000000002">
+    <ImageClip extentID="24" gapBefore="0" mediaItemID="20" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="25" gapBefore="0" mediaItemID="21" duration="0.40000000000000002">
+    <ImageClip extentID="8" gapBefore="0" mediaItemID="4" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="8" gapBefore="0" mediaItemID="4" duration="0.40000000000000002">
+    <ImageClip extentID="25" gapBefore="0" mediaItemID="21" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="26" gapBefore="0" mediaItemID="22" duration="0.40000000000000002">
+    <ImageClip extentID="9" gapBefore="0" mediaItemID="5" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="9" gapBefore="0" mediaItemID="5" duration="0.40000000000000002">
+    <ImageClip extentID="26" gapBefore="0" mediaItemID="22" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="10" gapBefore="0" mediaItemID="6" duration="0.40000000000000002">
+    <ImageClip extentID="10" gapBefore="0" mediaItemID="6" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="11" gapBefore="0" mediaItemID="7" duration="0.40000000000000002">
+    <ImageClip extentID="11" gapBefore="0" mediaItemID="7" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="12" gapBefore="0" mediaItemID="8" duration="0.40000000000000002">
+    <ImageClip extentID="12" gapBefore="0" mediaItemID="8" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="13" gapBefore="0" mediaItemID="9" duration="0.40000000000000002">
+    <ImageClip extentID="13" gapBefore="0" mediaItemID="9" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="14" gapBefore="0" mediaItemID="10" duration="0.40000000000000002">
+    <ImageClip extentID="14" gapBefore="0" mediaItemID="10" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="15" gapBefore="0" mediaItemID="11" duration="0.40000000000000002">
+    <ImageClip extentID="15" gapBefore="0" mediaItemID="11" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
         <BoundPropertyInt Name="rotateStepNinety" Value="0" />
       </BoundProperties>
     </ImageClip>
-    <ImageClip extentID="16" gapBefore="0" mediaItemID="12" duration="0.40000000000000002">
+    <ImageClip extentID="16" gapBefore="0" mediaItemID="12" duration="0.25">
       <Effects />
       <Transitions />
       <BoundProperties>
@@ -231,8 +231,8 @@
     <BoundPlaceholder placeholderID="SingleExtentView" extentID="0" />
     <BoundPlaceholder placeholderID="Main" extentID="1" />
     <BoundPlaceholder placeholderID="SoundTrack" extentID="2" />
-    <BoundPlaceholder placeholderID="Narration" extentID="3" />
     <BoundPlaceholder placeholderID="Text" extentID="4" />
+    <BoundPlaceholder placeholderID="Narration" extentID="3" />
   </BoundPlaceholders>
   <BoundProperties>
     <BoundPropertyFloatSet Name="AspectRatio">
