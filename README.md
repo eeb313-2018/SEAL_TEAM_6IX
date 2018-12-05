@@ -1,5 +1,7 @@
 # SEAL_TEAM_6IX
 
+**Instructors: Please see the folder "Files for Course Instructors" for final report documents and R codes.* *
+
 ## Introduction to the project
 Our project is about the Hirudinidae family which comprises of various species of swallows (birds). We looked at the dataset and found that most of the species in the family are steadily declining, as result, our goal is to plot the data more thoroughly and try to find out why.  
 
