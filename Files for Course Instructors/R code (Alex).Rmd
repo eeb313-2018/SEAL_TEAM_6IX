@@ -1,0 +1,328 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(hexbin)
+swallows <- read_csv("Swallows Data Expanded.csv")
+```
+
+
+Mutating the other weather columns that consist of 'Start' and 'End' to obtain an average weather condition column for both temperature, wind, and sky conditions.
+```{r}
+#Mutating AvgTemp column
+swallows$StartTemp <- as.numeric(swallows$StartTemp)
+swallows$EndTemp <- as.numeric(swallows$EndTemp)
+
+swallows <- swallows %>% 
+  mutate(AvgTemp = ((StartTemp + EndTemp)/2))
+
+#Mutating AvgWind column
+swallows$StartWind <- as.numeric(swallows$StartWind)
+swallows$EndWind <- as.numeric(swallows$EndWind)
+
+swallows <- swallows %>% 
+  mutate(AvgWind = ((StartWind + EndWind)/2))
+
+#Mutating AvgSky column
+swallows$StartSky <- as.numeric(swallows$StartSky)
+swallows$EndSky <- as.numeric(swallows$EndSky)
+
+swallows <- swallows %>% 
+  mutate(AvgSky = ((StartSky + EndSky)/2))
+```
+
+
+Compiled plots of swallows vs both Start and End temp
+```{r warning=FALSE, message=FALSE}
+#This is just to get an idea of the kind of range and distribution of data we are working with 
+ggplot(swallows, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartTemp), colour = "orange")+
+  geom_point(aes(x = EndTemp), colour = "blue", alpha = 0.25)+
+  xlab("Temp")+
+  ylab("Number of Swallows")
+```
+
+
+Compiled plots of swallows vs both Start and End Sky
+```{r}
+ggplot(swallows, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartSky), colour = "blue4")+
+  geom_point(aes(x = EndSky), colour = "cornflowerblue", alpha = 0.25)+
+  xlab("Sky Conditions")+
+  ylab("Number of Swallows")+
+  facet_wrap(~species)
+```
+
+
+Compiled plots of swallows vs both Start and End Wind
+```{r}
+ggplot(swallows, aes(y = SpeciesTotal))+
+  geom_point(aes(x = StartWind), colour = "greenyellow")+
+  geom_point(aes(x = EndWind), colour = "honeydew4", alpha = 0.25)+
+  xlab("Wind Conditions")+
+  ylab("Number of Swallows")+
+  facet_wrap(~species)
+```
+
+
+Out of curiosity, plotted average temperature over time to see if there are any dramatic temperature changes over the years.
+```{r}
+ggplot(swallows, aes(y = AvgTemp))+
+  geom_point(aes(x = Year), colour = "brown2")+
+  xlab("Year")+
+  ylab("Average Temperature (°C)")
+#It would appear the temperature doesn't vary much over the years
+```
+
+
+Made a linear model to see if average weather conditions are significantly affected from year to year.
+```{r}
+#Year-Temp Model
+year_temp_model <- lm(AvgTemp ~ Year, data = swallows)
+summary(year_temp_model)
+```
+
+
+```{r}
+plot(year_temp_model)
+```
+
+
+```{r}
+#Year-Wind Model
+year_wind_model <- lm(AvgWind ~ Year, data = swallows)
+summary(year_wind_model)
+
+#So apparently average wind conditions significantly change from year to year!
+```
+
+
+```{r}
+plot(year_wind_model)
+```
+
+
+```{r}
+#Year-Sky Model
+year_sky_model <- lm(AvgSky ~ Year, data = swallows)
+summary(year_sky_model)
+```
+
+
+```{r}
+plot(year_sky_model)
+```
+
+
+Plot for each Swallow species based on Latitude/Longitude. This graph has potential for making a heat map! Since you can basically almost see the outline of Southern Ontario!
+```{r warning=FALSE, message=FALSE}
+ggplot(swallows, aes(x = Longitude, y = Latitude))+
+  geom_point(aes(colour = species))+
+  facet_wrap(~species)+
+  theme(axis.text.x = element_text(size = 9, angle = 45, hjust = 1))
+```
+
+
+Now looking at our distribution of data to see if the column mutations worked out properly.
+```{r warning=FALSE, message=FALSE}
+#TEMP
+qplot(AvgTemp, SpeciesTotal, data = swallows)+
+  xlab("Average Temperature (°C)")+
+  ylab("Number of Swallows")
+```
+
+
+```{r}
+#WIND
+qplot(AvgWind, SpeciesTotal, data = swallows)+
+  xlab("Average Wind")+
+  ylab("Number of Swallows")
+```
+
+
+```{r}
+#SKY
+qplot(AvgSky, SpeciesTotal, data = swallows)+
+  xlab("Average Sky")+
+  ylab("Number of Swallows")
+```
+
+
+Linear models for Swallows and AvgTemp/Wind
+```{r}
+#TEMP
+swallows_temp_model <- lm(SpeciesTotal ~ AvgTemp, data = swallows)
+summary(swallows_temp_model)
+```
+
+
+```{r}
+plot(swallows_temp_model)
+```
+
+
+```{r}
+#WIND
+swallows_wind_model <- lm(SpeciesTotal ~ AvgWind, data = swallows)
+summary(swallows_wind_model)
+
+#This is backed by our previous linear model that shows there are significant changes in wind from year to year. 
+```
+
+
+```{r}
+plot(swallows_wind_model)
+```
+
+
+#ANOVA
+To test the linear models of temp and wind
+```{r}
+#TEMP
+anova(swallows_temp_model)
+```
+
+
+```{r}
+#WIND
+anova(swallows_wind_model)
+```
+
+
+Sky isn't necessarily a super important variable that we want to look at but I will do a linear model and ANOVA for it out of curiosity to see how it impacts swallows. 
+Linear model for sky conditions
+```{r}
+swallows_sky_model <- lm(SpeciesTotal ~ AvgSky, data = swallows)
+summary(swallows_sky_model)
+```
+
+
+ANOVA of sky conditions
+```{r}
+anova(swallows_sky_model)
+#So apparently sky conditions have some significance to them  -- good thing I looked at it
+```
+
+
+Hexbin Plot of Swallows vs Temp, Wind, and Sky
+```{r warning=FALSE, message=FALSE}
+#TEMP
+ggplot(swallows, aes(AvgTemp, SpeciesTotal, na.rm = T))+
+  geom_hex()+
+  xlab("Average Temperature (°C)")+
+  ylab("Number of Swallows")
+```
+
+
+```{r}
+#WIND
+ggplot(swallows, aes(AvgWind, SpeciesTotal, na.rm = T))+
+  geom_hex()+
+  xlab("Average Wind")+
+  ylab("Number of Swallows")
+```
+
+
+```{r}
+#SKY
+ggplot(swallows, aes(AvgSky, SpeciesTotal, na.rm = T))+
+  geom_hex()+
+  xlab("Average Sky")+
+  ylab("Number of Swallows")
+```
+
+
+Plots showing the normal distribution of the swallows depending on the average weather conditions
+```{r warning=FALSE, message=FALSE}
+ggplot(swallows, aes(x = swallows$AvgTemp)) + 
+	geom_histogram(aes(y = ..density..), binwidth = 0.5) + 
+	stat_function(fun=dnorm,
+	              color="red",
+	              lwd = 1,
+	              args=list(mean = mean(swallows$AvgTemp, na.rm = T),
+	                        sd = sd(swallows$AvgTemp, na.rm = T)))+
+  xlab("Average Temperature (°C)")+
+  ylab("Frequency")
+```
+
+
+```{r warning=FALSE, message=FALSE}
+ggplot(swallows, aes(x = swallows$AvgSky)) + 
+	geom_histogram(aes(y = ..density..), binwidth = 0.5) + 
+	stat_function(fun=dnorm,
+	              color="red",
+	              lwd = 1,
+	              args=list(mean = mean(swallows$AvgSky, na.rm = T),
+	                        sd = sd(swallows$AvgSky, na.rm = T)))+
+  xlab("Average Sky")+
+  ylab("Frequency")
+```
+
+
+```{r warning=FALSE, message=FALSE}
+ggplot(swallows, aes(x = swallows$AvgWind)) + 
+	geom_histogram(aes(y = ..density..), binwidth = 0.5) + 
+	stat_function(fun=dnorm,
+	              color="red",
+	              lwd = 1,
+	              args=list(mean = mean(swallows$AvgWind, na.rm = T),
+	                        sd = sd(swallows$AvgWind, na.rm = T)))+
+  xlab("Average Wind")+
+  ylab("Frequency")
+```
+
+
+```{r}
+swallows_temp_wind_sky_model <- lm(SpeciesTotal ~ AvgTemp + AvgWind + AvgSky, data = swallows)
+summary(swallows_temp_wind_sky_model)
+```
+
+
+```{r}
+anova(swallows_temp_wind_sky_model)
+```
+
+
+```{r}
+plot(swallows_temp_wind_sky_model)
+```
+
+
+Now to visualize and analyze the impact cars have on swallow abundance. Car_Total will be our proxy for human disturbance 
+```{r warning=FALSE, message=FALSE}
+#For some reason it treats Car_Total as a factor
+swallows$Car_Total <- as.numeric(swallows$Car_Total)
+
+swallows %>% 
+  filter(!is.na(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Car_Total, y = SpeciesTotal))+
+  geom_point(alpha = 0.5)+
+  coord_cartesian(ylim = c(0, 500), xlim = c(0,500))+
+  ylab("Number of Swallows")+
+  xlab("Number of Cars")+
+  facet_wrap(~species)
+
+#So it looks like cars might have something to do with swallow numbers since more cars = less swallows
+```
+
+
+```{r}
+swallows_cars_model <- lm(SpeciesTotal ~ Car_Total, data = swallows)
+summary(swallows_cars_model)
+#Apparently traffic does not seem to affect swallows!
+```
+
+
+```{r}
+plot(swallows_cars_model)
+```
+
+
+Run an ANOVA just to see if the linear model's findings are supported
+```{r}
+anova(swallows_cars_model)
+#Cars/human disturbance really don't significantly impact swallows
+```
+
