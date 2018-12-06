@@ -1,0 +1,711 @@
+---
+title: "Untitled"
+output: html_document
+---
+```{r}
+library(plyr)
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(car)
+library(lattice)
+library(RColorBrewer)
+library(Hmisc) # for plotting with stat_summary(fun.data = mean_cl_normal)
+library(lme4)
+library(lmerTest)
+#detach(package:dplyr)
+swallows <- read_csv("Swallows Data Expanded.csv", col_types = cols(Car_Total = "i", SpeciesTotal = "i"))
+```
+
+#Do swallow populations decline?
+
+##General plotting to get an idea of what the decline looks like
+
+```{r}
+ggplot(swallows, aes(Year, SpeciesTotal)) + geom_smooth(method = 'lm') + geom_point() + theme_classic() 
+#Raw data with a regression line for lm(SpeciesTotal ~ Year). Each point shows total seen per route. For all 6 swallow species. Lots of extreme observations
+```
+
+```{r}
+swallows$species <- as.factor(swallows$species)
+swallows %>% 
+  dplyr::group_by(Year, species) %>% 
+  mutate(avg = mean(SpeciesTotal)) %>% 
+  ggplot(aes(x = Year, y = avg, colour = species)) + geom_point() + geom_line() + theme_classic()
+#average number of swallows seen per route. declines are most obvious for Bank swallow, Barn swallow, Purple martin, and Tree swallow. 
+```
+
+```{r}
+swallows %>% 
+  group_by(Year) %>% 
+  mutate(avg = mean(SpeciesTotal)) %>% 
+  ggplot(., aes(x = Year, y = avg)) + geom_point() + theme_classic()
+#Average number of swallows seen per route. Lots of noise early on, the relationship tightens up in more recent years, probably due to more stringent/standardized protocol. all swallows
+```
+
+```{r}
+ggplot(swallows, aes(Year, SpeciesTotal)) + stat_summary(fun.data = mean_cl_normal) + theme_classic()
+#if we were to analyze the data with Year as a discrete variable. For all 6 swallow species.
+```
+
+
+##Check assumptions and statistical tests
+
+```{r}
+#For all swallows species lumped together
+swallow_year_lm <- lm(SpeciesTotal ~ Year, data = swallows)
+summary(swallow_year_lm)
+plot(swallow_year_lm)
+```
+
+We seem to have homogeneity of variance, but the Q-Q plot suggests non-normality. So do the histograms below. I won't try transforming the data - I'll just try analyzing the data for each species separately. **What's Residuals vs Leverage?**
+
+```{r}
+histogram(~ SpeciesTotal, data = swallows)
+# right-skewed data
+```
+
+```{r}
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Barn Swallow"))
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Tree Swallow"))
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Bank Swallow"))
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Northern Rough-winged Swallow"))
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Cliff Swallow"))
+histogram(~ SpeciesTotal, data = subset(swallows, species == "Purple Martin"))
+```
+
+    All right-skewed, but ANOVA is quite robust to departures from normality at high sample sizes (due to Central Limit Therorem), so we might be ok to proceed. 
+
+**Note: in this section I use Barn Swallow data to develop a method of analyzing data for all species. For that reason, I go back and forth between analyzing data for all swallows vs just Barn Swallows**
+
+    There are three ways to go about this:
+    1. linear regression on raw data (each sample is number of swallows seen on each route)
+    2. linear regression on averaged data (each sample is average number of swallows seen per route in any particular     year)
+    3. linear mixed-effect regression with route as a random effect
+
+    Here are the assumptions of linear regression:
+    1. Normality at each X value (or of the residuals)
+    2. Homogeneity of variances at each X
+    3. Fixed X
+    4. Independence of observations
+    5. Correct model specification
+    
+##Method 1
+
+    If we have non-independent data, then I'd be inclined to use the mixed model, obviously. Check to see if observations from the same routes cluster together:
+
+```{r}
+swallows$Route <- as.factor(swallows$Route)
+
+# Function to find polygons
+find_hull <- function(df) df[chull(df$SpeciesTotal, df$Year), ] 
+
+# Identify polygons in data
+hulls <- ddply(swallows, "Route", find_hull) 
+
+colourCount = length(unique(swallows$Route))
+getPalette = colorRampPalette(brewer.pal(9, "Set1"))
+
+# Plot
+ggplot(swallows, aes(x = Year, y = SpeciesTotal, colour = Route)) +
+    geom_point(size = 3) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_manual(values = getPalette(colourCount)) +
+    scale_fill_manual(values = getPalette(colourCount)) +
+    geom_polygon(data=hulls, aes(fill = Route), alpha = 0.2)
+```
+
+    Yes, observations tend to cluster together, so there is non-independence among routes. Some routes consistently yield exceptionally high numbers of swallows, and some routes were only introduced later in the BBS project. Therefore, I will proceed with a linear mixed model with route as a random intercept. 
+
+```{r}
+BARS_lmer_Route_Int <- lmer(SpeciesTotal ~ Year + (1|Route), 
+                            subset(swallows, species == "Barn Swallow"), REML = FALSE)
+summary(BARS_lmer_Route_Int)
+```
+
+    Differences between Routes account for *just over half of the residual variance* after accounting for the fixed effects in the model!
+```{r}
+221.2 / (221.2 + 195.8) * 100
+```
+
+    Let's plot our data with predicted values from our mixed model. Fitted values for each route
+
+```{r}
+BARS <- swallows %>%
+  filter(species == "Barn Swallow")
+BARS$fit_BARS_lmer <- predict(BARS_lmer_Route_Int)
+
+ggplot(BARS, aes(x = Year, y = SpeciesTotal, colour = Route)) +
+    # Add fixed effect regression line (i.e. Year)
+    geom_abline(aes(intercept = `(Intercept)`, slope = Year),
+                size = 2,
+                as.data.frame(t(fixef(BARS_lmer_Route_Int)))) +
+    # Add fitted values (i.e. regression) for each route
+    geom_line(aes(y = fit_BARS_lmer), size = 1) +
+    geom_point(size = 3) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_manual(values = getPalette(colourCount))
+```
+
+    All sloping downward!
+
+    Idea: swallows may be declining faster in some regions/routes than others. I will build an alternate mixed model to allow random slopes for each route. 
+
+```{r}
+BARS_lmer_Route_slope <- lmer(SpeciesTotal ~ Year + (Year|Route), 
+                            subset(swallows, species == "Barn Swallow"), REML = TRUE)
+```
+
+    Problem: the model was unable to converge (whether or not I set REML equal to TRUE or FALSE). I think we have so many routes that the model ran out of degrees of freedom.
+
+    Instead of routes, let's see if swallow observation clump according to another variable with fewer factor levels - this will make it easier to analyze statistically. example: statum (habitat type) or latitude chunk (by dividing routes into arbitrary latitude categories). 
+
+    Note:
+  + Since stratum has fewer than 6 levels it'll have to be a fixed variable
+  + I'll keep latitude chunk as a random variable in a mixed model
+
+```{r}
+histogram(~ Stratum, swallows) # we have 4 different habitat types/strata
+swallows$Stratum <- as.character(swallows$Stratum)
+swallows$Stratum[swallows$Stratum == "16"] <- "Great Lakes Plain"
+swallows$Stratum[swallows$Stratum == "18"] <- "St. Lawrence River Plain"
+swallows$Stratum[swallows$Stratum == "28"] <- "N. Spruce-Hardwoods"
+swallows$Stratum[swallows$Stratum == "29"] <- "Closed Boreal Forest"
+swallows$Stratum <- as.factor(swallows$Stratum)
+
+histogram(~ Latitude, swallows) # mostly southern Ontario with a few northern ontario routes
+swallows$Stratum <- as.factor(swallows$Stratum)
+swallows$latitude_chunk <- ceiling(swallows$Latitude)
+swallows$latitude_chunk <- as.factor(swallows$latitude_chunk)
+
+histogram(~ latitude_chunk, swallows) #11 latitude chunks
+```
+
+```{r}
+ggplot(swallows, aes(x = Latitude, fill = Stratum)) + geom_histogram() #Stratum and latitide are related, so they should be fairly similar
+```
+
+```{r}
+table1 <- swallows %>% 
+  group_by(Year, Route) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table1 <- table1 %>% 
+  group_by(Year) %>% 
+  tally()
+
+table2 <- swallows %>% 
+  group_by(Year, Route) %>% 
+  filter(!is.na(Stratum)) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table2 <- table2 %>% 
+  group_by(Year) %>% 
+  tally()
+
+table3 <- swallows %>% 
+  group_by(Year, Route) %>% 
+  filter(!is.na(latitude_chunk)) %>% 
+  count(Year, Route) %>% 
+  select(Year, Route)
+table3 <- table3 %>% 
+  group_by(Year) %>% 
+  tally()
+
+ggplot() + geom_line(data=table1, aes(x = Year, y = n), colour= "red") + 
+  geom_line(data=table2, aes(x = Year, y = n), colour = "blue") + 
+  geom_line(data=table3, aes(x = Year, y = n), colour = "green") +
+  geom_point(data=table1, aes(x = Year, y = n), colour= "red") +
+  geom_point(data=table2, aes(x = Year, y = n), colour = "blue") + 
+  geom_point(data=table3, aes(x = Year, y = n), colour = "green")
+```
+
+    Above in red is the number of routes surveyed per year (that included at least one swallow obervation). As the project became bigger and recruited more volunteers, more routes were added to the survey. In green is the number of routes for which we actually have strata/latitude data. It's much less than the total! If I choose to do a linear mixed model with statum or latitude_chunk as the random intercept, I'd be excluding lots of samples! Let me try it anyway. I will only include data since 1994 since it's so sparse before then. 
+
+```{r}
+swallows$Route <- as.factor(swallows$Route)
+swallows_1994 <- swallows %>%
+  filter(Year >  1993) %>% 
+  filter(!is.na(Stratum))
+swallows_1994$Stratum <- as.factor(swallows_1994$Stratum)
+
+# Function to find polygons
+find_hull <- function(df) df[chull(df$SpeciesTotal, df$Year), ] 
+
+# Identify polygons in data
+hulls <- ddply(swallows_1994, "Stratum", find_hull) 
+
+# Plot
+plot1 <- {ggplot(swallows_1994, aes(x = Year, y = SpeciesTotal, colour = Stratum)) +
+    geom_point(size = 1.5) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_brewer(palette = "Set1") +
+    scale_fill_brewer(palette = "Set1") +
+    geom_polygon(data = hulls, aes(fill = Stratum), alpha = 0.2)}
+plot1
+plot1 + ylim(0, 60) #zooming in for a moment 
+#(to ignore extreme observations and look at the bulk of the data)
+```
+
+```{r}
+lm_Stratum <- lm(SpeciesTotal ~ Year + species + Stratum, 
+                              subset(swallows_1994))
+summary(lm_Stratum)
+```
+
+```{r}
+plot(lm_Stratum)
+```
+
+    Oh no! This model breaks so many assumptions of linear regression! 
+    YES - 1. Normality at each X value (or of the residuals)
+    No  - 2. Homogeneity of variances at each X
+    Yes - 3. Fixed X
+    Yes - 4. Independence of observations
+    Yes - 5. Correct model specification
+    The residuals plot shows us that we clearly do not have homogeneity of variance. I'm going to try log-transforming the response variable. 
+
+```{r}
+lm_Stratum_log <- lm(log(SpeciesTotal) ~ Year + species + Stratum, 
+                              subset(swallows_1994))
+summary(lm_Stratum_log)
+```
+
+```{r}
+plot(lm_Stratum_log)
+```
+
+    Yikes, we have more normally distributed data now, but the residual plots look terrible! I'm going to try something different. 
+
+```{r}
+lmer_Lat_Stratum <- lmer(SpeciesTotal ~ Year + species + (1|latitude_chunk), 
+                          subset(swallows_1994), REML = FALSE)
+summary(lmer_Lat_Stratum)
+```
+
+```{r}
+plot(lmer_Lat_Stratum)
+```
+
+    Nope, we still have the same problem: we do not have homogeneity of variance (and log-transformations do horrendous things in this case). Perhaps I can alleviate this problem by running analyses separately for each of the six swallow species. Let's test it on the Barn Swallow.
+
+    I don't think we have a reason to suspect an interaction with stratum (since the literature says the decline is so widespread), but I will test it anyway.
+
+```{r}
+BARS_lm_Stratum <- lm(SpeciesTotal ~ Year * Stratum, 
+                              subset(swallows_1994, species == "Barn Swallow"))
+summary(BARS_lm_Stratum)
+```
+
+    Cool! It looks like the St. Lawrence River Plain region is driving the decline in swallows (but Year itself is no longer a significant predictor according to the summary...)
+
+```{r}
+plot(BARS_lm_Stratum)
+plot(residuals(BARS_lm_Stratum))#, col = swallows_1994$Stratum)
+BARS_lm_Stratum_resid = resid(BARS_lm_Stratum)
+BARS <- swallows_1994 %>%
+  filter(species == "Barn Swallow")
+plot(BARS$Year, BARS_lm_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+```
+
+    Why do we have such a weird gap in the residuals vs fitted values plot from the first output? And why is there such a big difference in the residuals plots generated by the three outputs?
+
+    My data are not normal though and the second last plot suggests heteroskedasticity, so I will try a log-transformation. 
+
+```{r}
+BARS_lm_Stratum_log <- lm(log(SpeciesTotal) ~ Year * Stratum, 
+                              subset(swallows_1994, species == "Barn Swallow"))
+summary(BARS_lm_Stratum_log)
+```
+
+```{r}
+plot(BARS_lm_Stratum_log)
+plot(residuals(BARS_lm_Stratum_log))#, col = swallows_1994$Stratum)
+BARS_lm_Stratum_log_resid = resid(BARS_lm_Stratum_log)
+plot(BARS$Year, BARS_lm_Stratum_log_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+```
+
+    The data are more normal now (according to the QQ plot). The last residual plot looks a bit asymmetric across the horizontal line at zero, but I don't think it's asymmetric enough to violate any assumptions. Again, I am ignoring the weird residual vs fitted values plot from the plot() function. I think the assumptions are ok, so I'm proceeding with a test of regression slopes - ANOVA. 
+
+```{r}
+Anova(BARS_lm_Stratum_log, type = 3)
+```
+
+    Let's plot this interaction! 
+
+```{r}
+ggplot(BARS, aes(x = Year, y = log(SpeciesTotal), colour = Stratum)) + geom_point() +
+  ylab("log(Number of Barn Swallows per route)") + 
+  theme_classic() + scale_x_continuous(breaks = seq(from = 1994, to = 2017, by = 4)) +
+  #Closed Boreal Forest (reference factor level)
+  geom_abline(slope = 0.001184, intercept = -1.451207, colour = "red") + 
+  #Great Lakes Plain
+  geom_abline(slope = 0.001184 + 0.009538, intercept = -1.451207 - 16.923405, colour = "darkgreen") + 
+  #N. Spruce-Hardwoods
+  geom_abline(slope = 0.001184 + -0.009790, intercept = -1.451207 + 19.885133, colour = "dodgerblue1") +
+  #St. Lawrence River Plain
+  geom_abline(slope = 0.001184 - 0.045564, intercept = -1.451207 + 93.134669, colour = "purple") 
+```
+
+    The plot above looks really messy!
+
+```{r}
+BARS %>%
+  group_by(Year, Stratum) %>% 
+  mutate(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(aes(x = Year, y = log(mean), colour = Stratum)) + theme_classic() + geom_point() + 
+  ylab("log(Average number of Barn Swallows per route)") + 
+  scale_x_continuous(breaks = seq(from = 1994, to = 2017, by = 4)) + 
+  #Closed Boreal Forest (reference factor level)
+  geom_abline(slope = 0.001184, intercept = -1.451207, colour = "red") + 
+  #Great Lakes Plain
+  geom_abline(slope = 0.001184 + 0.009538, intercept = -1.451207 - 16.923405, colour = "darkgreen") + 
+  #N. Spruce-Hardwoods
+  geom_abline(slope = 0.001184 + -0.009790, intercept = -1.451207 + 19.885133, colour = "skyblue") +
+  #St. Lawrence River Plain
+  geom_abline(slope = 0.001184 -0.045564, intercept = -1.451207 + 93.134669, colour = "purple")
+```
+
+    The plot above looks a bit off because I plotted the regression lines for the raw data with the points of the route averages. 
+
+```{r}
+ggplot(BARS, aes(x = Year, y = log(SpeciesTotal), colour = Stratum)) + geom_blank() +
+  ylab("log(Number of Barn Swallows per route)") + 
+  theme_classic() + scale_x_continuous(breaks = seq(from = 1994, to = 2017, by = 4)) +
+  #Closed Boreal Forest (reference factor level)
+  geom_abline(slope = 0.001184, intercept = -1.451207, colour = "red") + 
+  #Great Lakes Plain
+  geom_abline(slope = 0.001184 + 0.009538, intercept = -1.451207 - 16.923405, colour = "darkgreen") + 
+  #N. Spruce-Hardwoods
+  geom_abline(slope = 0.001184 + -0.009790, intercept = -1.451207 + 19.885133, colour = "dodgerblue1") +
+  #St. Lawrence River Plain
+  geom_abline(slope = 0.001184 - 0.045564, intercept = -1.451207 + 93.134669, colour = "purple")
+```
+
+    I didn't consider this before, but maybe it would be better to run this model on averaged route data instead of the raw data. We might also get fewer statistical problems this way (break fewer violations and not have to log transform the data)
+    
+```{r}
+BARS_strata <- swallows_1994 %>%
+  filter(species == "Barn Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+lm_BARS_Stratum <- lm(avg ~ Year * Stratum, BARS_strata)
+summary(lm_BARS_Stratum)
+```
+
+```{r}
+plot(lm_BARS_Stratum)
+plot(residuals(lm_BARS_Stratum), col = BARS_strata$Stratum)
+lm_BARS_Stratum_resid = resid(lm_BARS_Stratum)
+plot(BARS_strata$Year, lm_BARS_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+```
+
+Looks ok. 
+
+```{r}
+Anova(lm_BARS_Stratum, type = 3)
+```
+
+Let's plot it!
+
+```{r}
+ggplot(BARS_strata, aes(x = Year, y = avg, colour = Stratum)) + geom_point() + 
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 4)) +
+  ylab("Average number of Barn Swallows per route") +
+  #guides(color = guide_legend(override.aes = list(size = 2))) +
+  geom_abline(intercept = -73.22902, 
+              slope = 0.03832, colour = "red") + #Closed Boreal Forest
+  geom_abline(intercept = -73.22902 - 603.68239, 
+              slope = 0.03832 + 0.31245, colour = "darkgreen") + #Great Lakes Plain *
+  geom_abline(intercept = -73.22902 + 178.74188, 
+              slope = 0.03832 - 0.08853, colour = "turquoise4") + #N. Spruce-Hardwoods
+  geom_abline(intercept = -73.22902 + 1864.69370, 
+              slope = 0.03832 - 0.92126, colour = "purple")  #St. Lawrence River Plain ***
+ggsave("BARSstrata.jpeg", height = 4, width = 6, dpi = 300)
+```
+
+    I also wanted to try this model to see how it would compare with the stratum model:
+
+```{r}
+BARS_lmer_Lat_Int <- lmer(SpeciesTotal ~ Year + (1|latitude_chunk), 
+                          subset(swallows_1994, species == "Barn Swallow"), REML = FALSE)
+summary(BARS_lmer_Lat_Int)
+```
+
+```{r}
+BARS <- swallows_1994 %>%
+  filter(species == "Barn Swallow")
+BARS$fit_BARS_lmer <- predict(BARS_lmer_Lat_Int)
+
+ggplot(BARS, aes(x = Year, y = SpeciesTotal, colour = latitude_chunk)) +
+    # Add fixed effect regression line (i.e. Year)
+    geom_abline(aes(intercept = `(Intercept)`, slope = Year),
+                size = 1.5,
+                as.data.frame(t(fixef(BARS_lmer_Lat_Int)))) +
+    # Add fitted values (i.e. regression) for each stratum
+    geom_point(size = 1.5) +
+    geom_line(aes(y = fit_BARS_lmer), size = 1) +
+    theme_classic() +
+    theme(legend.position = "none") +
+    scale_colour_brewer(palette = "Set1")
+```
+
+```{r}
+BARS$fit <- predict(BARS_lmer_Lat_Int)
+BARS %>%
+  group_by(Year, latitude_chunk) %>% 
+  mutate(mean = mean(SpeciesTotal), se = sd(SpeciesTotal)/sqrt(sum(!is.na(SpeciesTotal)))) %>% 
+  ggplot(., aes(x = Year, y = mean, colour = latitude_chunk)) + theme_classic() + geom_point() + 
+  geom_line(aes(y = fit, lty = latitude_chunk), size=0.8) + ylab("Average number of Barn Swallows per route") + 
+  scale_x_continuous(breaks = seq(from = 1994, to = 2017, by = 4))
+```
+
+    Interesting! Some lines (representing different lattitude chunks) overlap to create 4 distinct swallow abundances - perhaps this is reflecting differences in habitat (not necessarily strictly latitude). As well, you can clearly see that relative swallow abundance decreases as you go north. There's a drawback to this model, and it's that I can't test for different slopes between latitudes (a random slope mixed model won't converge). Tha's why I'll stick with my stratum model. 
+
+    Summary of which model works best: I think the model where I look at the effect of Stratum, year, and their interaction on swallow abundance works best - I'll do it separately for each species. 
+    
+```{r}
+#Bank Swallow
+BANS_strata <- swallows_1994 %>%
+  filter(species == "Bank Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+
+#the model
+lm_BANS_Stratum <- lm(log(avg) ~ Year, BANS_strata)
+summary(lm_BANS_Stratum)
+
+#check assumptions
+plot(lm_BANS_Stratum)
+plot(residuals(lm_BANS_Stratum), col = BANS_strata$Stratum)
+lm_BANS_Stratum_resid = resid(lm_BANS_Stratum)
+plot(BANS_strata$Year, lm_BANS_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+
+#anova
+Anova(lm_BANS_Stratum, type = 3)
+
+ggplot(BANS_strata, aes(x = Year, y = log(avg), colour = Stratum)) + geom_point() + 
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 4))
+```
+
+Interaction term not significant
+
+```{r}
+#Cliff Swallow
+CLSW_strata <- swallows_1994 %>%
+  filter(species == "Cliff Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+
+#the model
+lm_CLSW_Stratum <- lm(avg ~ Year * Stratum, CLSW_strata)
+summary(lm_CLSW_Stratum)
+
+#check assumptions
+plot(lm_CLSW_Stratum)
+plot(residuals(lm_CLSW_Stratum), col = CLSW_strata$Stratum)
+lm_CLSW_Stratum_resid = resid(lm_CLSW_Stratum)
+plot(CLSW_strata$Year, lm_CLSW_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+
+#anova
+Anova(lm_CLSW_Stratum, type = 3)
+
+ggplot(CLSW_strata, aes(x = Year, y = log(avg), colour = Stratum)) + geom_point() + 
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 4))
+```
+
+Interaction term not significant
+
+```{r}
+#Tree swallow
+TRES_strata <- swallows_1994 %>%
+  filter(species == "Tree Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+
+#the model
+lm_TRES_Stratum <- lm(log(avg) ~ Year * Stratum, TRES_strata)
+summary(lm_TRES_Stratum)
+
+#check assumptions
+plot(lm_TRES_Stratum)
+plot(residuals(lm_TRES_Stratum), col = TRES_strata$Stratum)
+lm_TRES_Stratum_resid = resid(lm_TRES_Stratum)
+plot(TRES_strata$Year, lm_TRES_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+
+#anova
+Anova(lm_TRES_Stratum, type = 3)
+
+#plot
+ggplot(TRES_strata, aes(x = Year, y = log(avg), colour = Stratum)) + geom_point() + 
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 4)) +
+  ylab("log(Average number of Tree Swallows per route)") +
+  #guides(color = guide_legend(override.aes = list(size = 2))) +
+  geom_abline(intercept = -39.56652, 
+              slope = 0.02025, colour = "red") + #Closed Boreal Forest
+  geom_abline(intercept = -39.56652 + 31.12367, 
+              slope = 0.02025 - 0.01483, colour = "darkgreen") + #Great Lakes Plain
+  geom_abline(intercept = -39.56652 + 126.54005, 
+              slope = 0.02025 - 0.06290, colour = "turquoise4") + #N. Spruce-Hardwoods **
+  geom_abline(intercept = -39.56652 + 207.27955, 
+              slope = 0.02025 - 0.10256, colour = "purple")  #St. Lawrence River Plain ***
+ggsave("TRESstrata.jpeg", height = 4, width = 6, dpi = 300)
+```
+
+```{r}
+#Northern Rough-winged swallow
+NRWS_strata <- swallows_1994 %>%
+  filter(species == "Northern Rough-winged Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+
+#the model
+lm_NRWS_Stratum <- lm(avg ~ Year + Stratum, NRWS_strata)
+summary(lm_NRWS_Stratum)
+
+#check assumptions
+plot(lm_NRWS_Stratum)
+plot(residuals(lm_NRWS_Stratum), col = NRWS_strata$Stratum)
+lm_NRWS_Stratum_resid = resid(lm_NRWS_Stratum)
+plot(NRWS_strata$Year, lm_NRWS_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+
+#Hmm.. I don't think we have enough observations to analyze this way!
+```
+
+
+```{r}
+BANS_strata <- swallows_1994 %>%
+  filter(species == "Bank Swallow") %>% 
+  group_by(Year, Stratum) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+
+#the model
+lm_BANS_Stratum <- lm(log(avg) ~ Year * Stratum, BANS_strata)
+summary(lm_BANS_Stratum)
+
+#check assumptions
+plot(lm_BANS_Stratum)
+plot(residuals(lm_BANS_Stratum), col = BANS_strata$Stratum)
+lm_BANS_Stratum_resid = resid(lm_BANS_Stratum)
+plot(BANS_strata$Year, lm_BANS_Stratum_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+
+#anova
+Anova(lm_BANS_Stratum, type = 3)
+
+#plot
+ggplot(BANS_strata, aes(x = Year, y = avg, colour = Stratum)) + geom_point() + 
+  theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 4)) +
+  ylab("Average number of swallows per route") +
+  #guides(color = guide_legend(override.aes = list(size = 2))) +
+  geom_abline(intercept = -73.22902, 
+              slope = 0.03832, colour = "red") + #Closed Boreal Forest
+  geom_abline(intercept = -73.22902 - 603.68239, 
+              slope = 0.03832 + 0.31245, colour = "darkgreen") + #Great Lakes Plain *
+  geom_abline(intercept = -73.22902 + 178.74188, 
+              slope = 0.03832 - 0.08853, colour = "turquoise4") + #N. Spruce-Hardwoods
+  geom_abline(intercept = -73.22902 + 1864.69370, 
+              slope = 0.03832 - 0.92126, colour = "purple")  #St. Lawrence River Plain ***
+ggsave("BARSstrata.jpeg", height = 7, width = 8, dpi = 300)
+```
+
+##Method 2
+
+    As mentioned before, one problem with using the analysis above is that we pretty much don't have any stratum/coordinate data until 1994 and even then we're throwing a lot of potentially useful data away. In order to get a better understanding of what's happening with swallow populations prior to 1994, I will perform a linear regression on averaged data (Each sample will be the average number of swallows seen per route in any particular year). 
+    
+```{r}
+swallows_avg <- swallows %>% 
+  group_by(Year, species) %>% 
+  dplyr::summarize(avg = mean(SpeciesTotal))
+lm_avg <- lm(log(avg) ~ Year * species, swallows_avg)
+summary(lm_avg)
+```
+
+```{r}
+plot(lm_avg)
+plot(residuals(lm_avg))#, col = swallows_1994$Stratum)
+lm_avg_resid = resid(lm_avg)
+plot(swallows_avg$Year, lm_avg_resid, 
+     ylab="Residuals", xlab="Year")
+abline(0, 0)
+```
+    Log transforming the response variable really helps meet our assumptions of linear regression. Now, the residuals and the QQplot look much better. 
+    YES - 1. Normality at each X value (or of the residuals)
+    YES (generally)  - 2. Homogeneity of variances at each X
+    Yes - 3. Fixed X
+    Yes - 4. Independence of observations
+    Yes - 5. Correct model specification
+    
+```{r}
+Anova(lm_avg, type = 3)
+```
+
+Let's plot it!
+
+```{r}
+ggplot(swallows_avg, aes(x = Year, y = log(avg), colour = species)) + 
+  geom_point(size = 0.5) + theme_classic() +
+  scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 10)) +
+  ylab("log(Average number of swallows per route)") + 
+  guides(color = guide_legend(override.aes = list(size = 2))) +
+  geom_abline(slope = -0.024114, 
+              intercept = 50.878671, colour = "red") + #Bank (reference)
+  geom_abline(slope = -0.024114 + 0.010223, 
+              intercept = 50.878671 - 20.124960, colour = "yellow4") + #Barn 
+  geom_abline(slope = -0.024114 + 0.015946, 
+              intercept = 50.878671 - 32.608606, colour = "darkgreen") + #Cliff
+  geom_abline(slope = -0.024114 + 0.022003, 
+              intercept = 50.878671 - 45.607923, colour = "turquoise4") + #N. rough-winged
+  geom_abline(slope = -0.024114 + 0.004288, 
+              intercept = 50.878671 - 9.322135, colour = "royalblue4") + #Purple Martin
+  geom_abline(slope = -0.024114 + 0.013983, 
+              intercept = 50.878671 - 28.216122, colour = "magenta")   #Tree
+ggsave("avgplot.jpeg", height = 4, width = 6, dpi = 300)
+```
+
+The plot was really messy, so I decreased the size of the points to better see the interaction. 
+
+So the multiple regression above (for the lm_avg <- lm(log(avg) ~ Year * species, swallows_avg) model): 
+
+```{r}
+BARS_avg <- swallows_avg %>% 
+  filter(species == "Barn Swallow")
+ggplot(BARS_avg, aes(x = Year, y = avg)) + geom_point() + geom_smooth(method = "lm") + 
+  theme_classic() + scale_x_continuous(breaks = seq(from = 1967, to = 2017, by = 10)) +
+  ylab("Average number of Barn Swallows per route") 
+ggsave("BARSavg.jpeg", dpi = 300)
+```
+
+
+
+
+
+
+
+
+
